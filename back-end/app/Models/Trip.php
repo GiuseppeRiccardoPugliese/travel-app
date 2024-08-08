@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Trip extends Model
 {
     use HasFactory;
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
+    
+    public function journeyStages(){
+        return $this->hasMany(JourneyStage::class);
+    }
+    
 }
