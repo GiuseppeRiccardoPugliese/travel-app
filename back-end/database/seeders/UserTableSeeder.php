@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Trip;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,7 +24,7 @@ class UserTableSeeder extends Seeder
         Storage::disk('public')->deleteDirectory($directory);
 
 
-        //Una volta cancellata la cartella del LocalStorage, ricrei i 10 utenti con le relative img
+        //Una volta cancellata la cartella del LocalStorage, ricreo i 10 utenti con le relative img
 
         User::factory()->count(10)->make()->each(function($user){
             
@@ -33,19 +34,19 @@ class UserTableSeeder extends Seeder
 
             $imageUrl = "https://xsgames.co/randomusers/avatar.php?g={$gender}&random=";
 
-            // Scarica l'immagine dall'URL
+            // Scarico l'immagine dall'URL
             $imageData = file_get_contents($imageUrl);
 
-            // Genera un nome univoco per il file immagine
+            // Genero un nome univoco per il file immagine
             $fileName = uniqid() . '.jpg';
 
-            // Salva l'immagine scaricata nella directory di archiviazione pubblica
+            // Salvo l'immagine scaricata nella directory di archiviazione pubblica
             Storage::disk('public')->put('images/users_avatars/' . $fileName, $imageData);
 
-            // Costruisci l'URL completo per l'immagine salvata
+            // Costruisco l'URL completo per l'immagine salvata
             $imgPath = 'images/users_avatars/' . $fileName;
 
-            // Assegna l'URL dell'immagine al campo corrispondente nel modello Teacher
+            // Assegno l'URL dell'immagine al campo corrispondente nel modello Teacher
             $user->immagine_url = $imgPath;
 
             // Salvo
