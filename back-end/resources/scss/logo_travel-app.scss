@@ -1,0 +1,70 @@
+.travel-app {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.travel-app span {
+    display: inline-block;
+    opacity: 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.part1 {
+    background: linear-gradient(90deg, #FFA500, #FF4500);
+    /* Gradiente arancione */
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+.part2 {
+    background: linear-gradient(90deg, #32CD32, #228B22);
+    /* Gradiente verde */
+    animation: slideUp 0.8s ease-out forwards 0.5s;
+}
+
+.part3 {
+    background: linear-gradient(90deg, #1E90FF, #0000FF);
+    /* Gradiente blu */
+    animation: slideRight 0.8s ease-out forwards 1s;
+}
+
+.dash {
+    background: linear-gradient(90deg, #FF69B4, #FF1493);
+    /* Gradiente rosa */
+    animation: fadeIn 0.8s ease-out forwards 1.5s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
