@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -36,10 +37,31 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        //Gestione Sesso utente
+        if($request->sessualità == 'other'){
+            $sesso = 'altro';
+        }elseif ($request->sessualità == 'male' ) {
+            $sesso = 'uomo';
+        }else{
+            $sesso = 'donna';
+        }
+
+        // dd($request->hasFile('avatar'));
+        //Gestione immagine
+        if ($request->hasFile('avatar')) {
+            
+            $img_path = $request->file('avatar')->store('images/users_avatars', 'public');
+            
+        } else {
+            $img_path = '';
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'sessualità' => $sesso,
+            'immagine_url' => $img_path,
         ]);
 
         event(new Registered($user));
