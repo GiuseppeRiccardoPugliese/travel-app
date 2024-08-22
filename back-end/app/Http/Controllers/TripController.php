@@ -19,7 +19,7 @@ class TripController extends Controller
         $trips = Trip::whereHas('users', function ($query) {
             $query->where('user_id', Auth::id());
         })->get();
-        
+
 
         return view('trips.index', compact('trips'));
     }
@@ -29,9 +29,9 @@ class TripController extends Controller
      */
     public function create()
     {
-       $trips = Trip::all();
+        $trips = Trip::all();
 
-       return view('trips.create', compact('trips'));
+        return view('trips.create', compact('trips'));
     }
 
     /**
@@ -40,30 +40,30 @@ class TripController extends Controller
     public function store(Request $request)
     {
         // Estraggo tutti i dati dal request
-    $data = $request->all();
+        $data = $request->all();
 
-    // Creo una nuova istanza di Trip e assegna i valori
-    $trip = new Trip();
-    $trip->nome = $data['nome'];
-    $trip->descrizione = $data['descrizione'];
-    $trip->data_inizio = $data['data_inizio'];
-    $trip->data_fine = $data['data_fine'];
-    $trip->destinazione = $data['destinazione'];
+        // Creo una nuova istanza di Trip e assegna i valori
+        $trip = new Trip();
+        $trip->nome = $data['nome'];
+        $trip->descrizione = $data['descrizione'];
+        $trip->data_inizio = $data['data_inizio'];
+        $trip->data_fine = $data['data_fine'];
+        $trip->destinazione = $data['destinazione'];
 
-    // Gestione dell'immagine
-    if ($request->hasFile('immagine')) {
-        $imagePath = $request->file('immagine')->store('images', 'public');
-        $trip->immagine = $imagePath;
-    }
+        // Gestione dell'immagine
+        if ($request->hasFile('immagine')) {
+            $imagePath = $request->file('immagine')->store('images', 'public');
+            $trip->immagine = $imagePath;
+        }
 
-    // Salvo il viaggio nel database
-    $trip->save();
+        // Salvo il viaggio nel database
+        $trip->save();
 
-    // Associo il trip all'utente autenticato
-    $trip->users()->attach(Auth::id());
+        // Associo il trip all'utente autenticato
+        $trip->users()->attach(Auth::id());
 
-    // Reindirizzo alla pagina index con un messaggio di successo
-    return redirect()->route('trip.index')->with('success', 'Viaggio creato con successo!');
+        // Reindirizzo alla pagina index con un messaggio di successo
+        return redirect()->route('trip.index')->with('success', 'Viaggio creato con successo!');
     }
 
     /**
@@ -79,51 +79,60 @@ class TripController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        $trip = Trip::find($id);
+        $trip = Trip::find($request->trip_id);
         return view('trips.edit', compact('trip'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-           // Estraggo tutti i dati dal request
-    $data = $request->all();
+        // Estraggo tutti i dati dal request
+        $data = $request->all();
 
-    
-    $trip = Trip::find($id);
-    $trip->nome = $data['nome'];
-    $trip->descrizione = $data['descrizione'];
-    $trip->data_inizio = $data['data_inizio'];
-    $trip->data_fine = $data['data_fine'];
-    $trip->destinazione = $data['destinazione'];
 
-    // Gestione dell'immagine
-    if ($request->hasFile('immagine')) {
-        $imagePath = $request->file('immagine')->store('images', 'public');
-        $trip->immagine = $imagePath;
-    }
+        $trip = Trip::find($request->trip_id);
+        $trip->nome = $data['nome'];
+        $trip->descrizione = $data['descrizione'];
+        $trip->data_inizio = $data['data_inizio'];
+        $trip->data_fine = $data['data_fine'];
+        $trip->destinazione = $data['destinazione'];
 
-    // Salvo il viaggio nel database
-    $trip->save();
+        // Gestione dell'immagine
+        if ($request->hasFile('immagine')) {
+            $imagePath = $request->file('immagine')->store('images', 'public');
+            $trip->immagine = $imagePath;
+        }
 
-    // Reindirizzo alla pagina index con un messaggio di successo
-    return redirect()->route('trip.index')->with('success', 'Viaggio creato con successo!');
+        // Salvo il viaggio nel database
+        $trip->save();
+
+        // Reindirizzo alla pagina index con un messaggio di successo
+        return redirect()->route('trip.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        $trip = Trip::find($id);
+        $trip = Trip::find($request->trip_id);
 
-        $trip->users()->detach();
+        if ($trip->users()->count() > 1) {
 
-        $trip->delete();
+            $trip->users()->detach(Auth::id());
+
+        } else {
+            $trip->users()->detach();
+
+            $trip->journeyStages()->delete();
+
+
+            $trip->delete();
+        }
 
         return redirect()->route('trip.index');
     }

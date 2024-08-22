@@ -42,16 +42,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/trips/create', [TripController::class, 'store'])->name('trip.store');
 
     //Rotta EDIT TRIPS
-    Route::get('/trips/{id}/edit', [TripController::class, 'edit'])->name('trip.edit');
+    Route::post('/trips/edit', [TripController::class, 'edit'])->name('trip.edit');
 
     //Rotta UPDATE TRIPS
-    Route::put('/trips/{id}/edit', [TripController::class, 'update'])->name('trip.update');
+    Route::put('/trips/edit', [TripController::class, 'update'])->name('trip.update');
 
     //Rotta DESTROY TRIPS
-    Route::delete('/trips/{id}', [TripController::class, 'destroy'])->name('trip.destroy');
+    Route::delete('/trips/delete', [TripController::class, 'destroy'])->name('trip.destroy');
 
 
-    
+
 
 
 });

@@ -14,19 +14,35 @@
 
             <a onclick="submitForm({{$trip->id}})">
                 <h1>Nome viaggio: {{ $trip->nome }}
+                    
                     {{-- Rotta EDIT per i trip --}}
-                    <a href="{{route('trip.edit', $trip->id)}}">Modifica</a></h1>
+                    <a onclick="submitEditForm({{$trip->id}})" class="text-decoration-underline">Modifica</a></h1>
+                    
+                    {{-- EDIT --}}
+                    <form action="{{ route('trip.edit') }}" method="POST" id="EditForm{{$trip->id}}" >
+                        @csrf
+                        @method('POST')
+
+                        <input type="hidden" name="trip_id" value="{{ $trip->id}}">
+
+                    </form>   
+
+
 
                     {{-- Rotta DELETE per i trip --}}
-                    <form action="{{route('trip.destroy', $trip->id)}}" method="POST" style="display: inline;">
+                    <form action="{{route('trip.destroy')}}" method="POST" style="display: inline;" id="DestroyForm{{$trip->id}}">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Elimina</button>
+
+                        <input type="hidden" name="trip_id" value="{{ $trip->id}}">
+
+                        <button onclick="submitDestroyForm(event, {{ $trip->id }})" class="btn btn-danger">Elimina</button>
+
                     </form>
 
             </a>    
             
-            {{-- Rotta show per i trip --}}
+            {{-- Rotta SHOW per i trip --}}
             <form action="{{ route('trip.show') }}" method="POST" id="ShowForm{{$trip->id}}" >
             @csrf
             @method('POST')
@@ -42,7 +58,16 @@
 
 <script>
     function submitForm(id) {
-        console.log(id);
         document.getElementById(`${'ShowForm'}${id}`).submit();
     };
+    function submitDestroyForm(event, id) {
+        event.preventDefault(); // Prevent default form submission
+        if (confirm('Sei sicuro di voler eliminare questo viaggio?')) {
+            document.getElementById(`DestroyForm${id}`).submit();
+        }
+    }
+    function submitEditForm(id) {
+        event.preventDefault(); // Prevent default form submission
+        document.getElementById(`EditForm${id}`).submit();
+    }
 </script>
