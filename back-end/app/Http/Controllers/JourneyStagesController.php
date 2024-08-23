@@ -81,24 +81,56 @@ class JourneyStagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Request $request)
     {
-        //
+        $stage = JourneyStage::findOrFail($request->query('id'));
+        $trip = Trip::findOrFail($stage->trip_id);
+
+        // Verifica che l'utente abbia accesso al viaggio
+        if (!$trip->users->contains(Auth::id())) {
+            return redirect()->route('trip.index');
+        }
+
+        return view('journeyStages.edit', compact('stage', 'trip'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $stage = JourneyStage::findOrFail($request->input('id'));
+
+        // Viaggio associato alla tappa dell'utente
+        $trip = Trip::findOrFail($stage->trip_id);
+
+        if (!$trip->users->contains(Auth::id())) {
+            return redirect()->route('trip.index');
+        }
+
+        $stage->nome = $request->input('nome');
+        $stage->descrizione = $request->input('descrizione');
+        $stage->posizione = $request->input('posizione');
+        $stage->data = $request->input('data');
+        $stage->ordine = $request->input('ordine');
+        $stage->completata = $request->input('completata') ? 1 : 0;
+
+        // Salvo 
+        $stage->save();
+
+        // Reindirizzo alla pagina show del viaggio
+        return redirect()->route('trip.show', $trip->id);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        $id = $request->input('id');
+        $stage = JourneyStage::findOrFail($id);
+        $trip_id = $stage->trip_id;
+        $stage->delete();
+        return redirect()->route('trip.show', ['trip' => $trip_id]);
     }
 }

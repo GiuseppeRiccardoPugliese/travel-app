@@ -29,8 +29,21 @@
                     <strong>{{ $stage->nome }}</strong>: {{ $stage->descrizione }}
                     <br>
                     <h5>Posizione: {{ $stage->posizione }}</h5>
+
                     <em>Data:
-                        {{ \Carbon\Carbon::parse($stage->data)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}</em>
+                        {{ \Carbon\Carbon::parse($stage->data)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
+                    </em>
+
+                    {{-- EDIT --}}
+                    <a class="button" href="{{ route('journeyStages.edit') }}?id={{ $stage->id }}">MODIFICA</a>
+
+                    {{-- DELETE --}}
+                    <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" value="{{ $stage->id }}">
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
                 </li>
             @endforeach
         </ul>

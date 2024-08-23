@@ -64,6 +64,14 @@ Route::middleware('auth')->group(function () {
     //Rotta STORE TAPPE
     Route::post('/trips/{trip}/journey-stages', [JourneyStagesController::class, 'store'])->name('journeyStages.store');
 
+    //Rotta EDIT TAPPE
+    Route::get('journey-stages/edit', [JourneyStagesController::class, 'edit'])->name('journeyStages.edit');
+
+    // Rotta UPDATE TAPPE
+    Route::put('journey-stages/update', [JourneyStagesController::class, 'update'])->name('journeyStages.update');
+
+    //Rotta DELETE TAPPE
+    Route::delete('journey-stages/delete', [JourneyStagesController::class, 'destroy'])->name('journeyStages.destroy');
 });
 
 require __DIR__ . '/auth.php';
