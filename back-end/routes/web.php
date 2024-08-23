@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JourneyStagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TripController;
 use Illuminate\Support\Facades\Route;
@@ -29,9 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    //ROTTE DEI VIAGGI
+
     //Rotta INDEX TRIPS
     Route::get('/trips', [TripController::class, 'index'])->name('trip.index');
-    
+
     //Rotta SHOW TRIPS
     Route::post('/trips', [TripController::class, 'show'])->name('trip.show');
 
@@ -52,8 +55,15 @@ Route::middleware('auth')->group(function () {
 
 
 
+    //ROTTE DELLE TAPPE
 
+
+    //Rotta CREATE TAPPE
+    Route::get('/trips/{trip}/journey-stages/create', [JourneyStagesController::class, 'create'])->name('journeyStages.create');
+
+    //Rotta STORE TAPPE
+    Route::post('/trips/{trip}/journey-stages', [JourneyStagesController::class, 'store'])->name('journeyStages.store');
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -15,6 +15,10 @@
     </p>
 
     {{-- Sezione per gli Stages del Viaggio --}}
+
+    {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
+    <a href="{{ route('journeyStages.create', ['trip' => $trip->id]) }}">Crea una nuova tappa</a>
+
     <h2>Stages del Viaggio</h2>
     @if ($trip->journeyStages->isEmpty())
         <p>Nessun stage disponibile per questo viaggio.</p>
