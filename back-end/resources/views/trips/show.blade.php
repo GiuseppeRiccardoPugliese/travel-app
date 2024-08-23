@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Viaggio</h1>
+    {{-- Sezione dei viaggi --}}
+    <h1>Nome viaggio: {{ $trip->nome }}</h1>
     <h1> Descrizione: {{ $trip->descrizione }}</h1>
+    <h1> Destinazione: {{ $trip->destinazione }}</h1>
+
 
     <p class="card-text">Data inizio:
         {{ \Carbon\Carbon::parse($trip->data_inizio)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
@@ -10,4 +13,22 @@
     <p class="card-text">Data fine:
         {{ \Carbon\Carbon::parse($trip->data_fine)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
     </p>
+
+    {{-- Sezione per gli Stages del Viaggio --}}
+    <h2>Stages del Viaggio</h2>
+    @if ($trip->journeyStages->isEmpty())
+        <p>Nessun stage disponibile per questo viaggio.</p>
+    @else
+        <ul>
+            @foreach ($trip->journeyStages as $stage)
+                <li>
+                    <strong>{{ $stage->nome }}</strong>: {{ $stage->descrizione }}
+                    <br>
+                    <h5>Posizione: {{ $stage->posizione }}</h5>
+                    <em>Data:
+                        {{ \Carbon\Carbon::parse($stage->data)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}</em>
+                </li>
+            @endforeach
+        </ul>
+    @endif
 @endsection

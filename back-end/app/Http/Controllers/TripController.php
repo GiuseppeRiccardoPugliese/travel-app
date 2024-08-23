@@ -71,7 +71,8 @@ class TripController extends Controller
      */
     public function show(Request $request)
     {
-        $trip = Trip::find($request->trip_id);
+        // $trip = Trip::find($request->trip_id);
+        $trip = Trip::with('journeyStages')->findOrFail($request->trip_id);
 
         return view('trips.show', compact('trip'));
     }
