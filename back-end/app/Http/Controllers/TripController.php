@@ -71,6 +71,9 @@ class TripController extends Controller
      */
     public function show(Request $request)
     {
+        $request->session()->forget('codice');
+        $request->session()->forget('trip');
+
         // $trip = Trip::find($request->trip_id);
         $trip = Trip::with('journeyStages')->findOrFail($request->trip_id);
 

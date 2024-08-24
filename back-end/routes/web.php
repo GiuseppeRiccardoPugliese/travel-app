@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
     //ROTTE DELLE TAPPE
 
     //Rotta INDEX TAPPE (Rotta d'appoggio)
-    Route::post('/trips/index', [JourneyStagesController::class, 'index'])->name('returnTrip.index');
+    Route::get('/trips/index', [JourneyStagesController::class, 'ricevuta'])->name('returnTrip.index');
 
     //Rotta CREATE TAPPE
     Route::post('/trips/journey-stages/create', [JourneyStagesController::class, 'create'])->name('journeyStages.create');

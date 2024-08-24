@@ -17,6 +17,14 @@ class JourneyStagesController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function ricevuta()
+    {
+        $codice = session('codice');
+        $trip = session('trip');
+        // Mostra la pagina di riepilogo
+        return view('journeyStages.index', compact('codice', 'trip'));
+    }
     public function index(Request $request)
     {
         // Recupero il viaggio specifico
@@ -69,7 +77,14 @@ class JourneyStagesController extends Controller
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Creazione con la pagina di Appoggio INDEX
         $codice = 1;
 
-        return view('journeyStages.index', compact('trip', 'codice'));
+        // PROVA
+
+        $request->session()->put('trip', $trip);
+
+        $request->session()->put('codice', $codice);
+
+        // return view('journeyStages.index', compact('trip', 'codice'));
+        return redirect()->route('returnTrip.index');
 
 
         // Reindirizza alla pagina di supporto temporaneo che eseguirà il POST
@@ -121,7 +136,11 @@ class JourneyStagesController extends Controller
 
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Modifica con la pagina di Appoggio INDEX
         $codice = 2;
-        return view('journeyStages.index', compact('trip', 'codice'));
+
+        $request->session()->put('trip', $trip);
+
+        $request->session()->put('codice', $codice);
+        return redirect()->route('returnTrip.index');
     }
 
     /**
@@ -139,6 +158,9 @@ class JourneyStagesController extends Controller
 
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Eliminazione con la pagina di Appoggio INDEX
         $codice = 3;
-        return view('journeyStages.index', compact('trip', 'codice'));
+        $request->session()->put('trip', $trip);
+
+        $request->session()->put('codice', $codice);
+        return redirect()->route('returnTrip.index');
     }
 }
