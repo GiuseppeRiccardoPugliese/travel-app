@@ -22,7 +22,7 @@ class JourneyStagesController extends Controller
     {
         $codice = session('codice');
         $trip = session('trip');
-        // Mostra la pagina di riepilogo
+        // Si viene reindirizzati alla pagina di "appoggio" in modo da mostrare il messaggio di conferma.
         return view('journeyStages.index', compact('codice', 'trip'));
     }
     public function index(Request $request)
@@ -77,19 +77,13 @@ class JourneyStagesController extends Controller
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Creazione con la pagina di Appoggio INDEX
         $codice = 1;
 
-        // PROVA
+        // APRO LA SESSIONE PER PASSARE I PARAMETRI ALLA FUNZIONE RICEVUTA
 
         $request->session()->put('trip', $trip);
 
         $request->session()->put('codice', $codice);
 
-        // return view('journeyStages.index', compact('trip', 'codice'));
         return redirect()->route('returnTrip.index');
-
-
-        // Reindirizza alla pagina di supporto temporaneo che eseguirà il POST
-        // return redirect()->route('returnTrip.index')
-        //     ->with(['trip' => $trip, 'codice' => $codice]);
 
     }
 
@@ -137,6 +131,7 @@ class JourneyStagesController extends Controller
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Modifica con la pagina di Appoggio INDEX
         $codice = 2;
 
+        // APRO LA SESSIONE PER PASSARE I PARAMETRI ALLA FUNZIONE RICEVUTA
         $request->session()->put('trip', $trip);
 
         $request->session()->put('codice', $codice);
@@ -158,9 +153,10 @@ class JourneyStagesController extends Controller
 
         // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Eliminazione con la pagina di Appoggio INDEX
         $codice = 3;
+        // APRO LA SESSIONE PER PASSARE I PARAMETRI ALLA FUNZIONE RICEVUTA
         $request->session()->put('trip', $trip);
-
         $request->session()->put('codice', $codice);
+
         return redirect()->route('returnTrip.index');
     }
 }
