@@ -1,0 +1,15 @@
+.search_bar {
+    left: 25%;
+    opacity: 1;
+    z-index: 4;
+}
+.text_title {
+    font-size: 5rem;
+}
+.result-item {
+    padding: 5px;
+}
+.form-control:focus {
+    border-color: unset;
+    box-shadow: none;
+}

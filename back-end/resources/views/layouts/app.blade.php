@@ -12,46 +12,85 @@
 
     {{-- FiveIco --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
-
+    {{-- FONT AWESOME --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <!-- Usando Vite -->
-    @vite(['resources/js/app.js'])
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    {{-- TOMTOM MAP --}}
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps.css">
+
+
+</head>
+<!-- Usando Vite -->
+@vite(['resources/js/app.js'])
+@vite(['resources/js/maps_scripts.js'])
 </head>
 
 <body>
-    <div id="app">
-        
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                <h1 class="travel-app mb-0">
-                    <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
-                        class="part3">APP</span>
-                </h1>
-                
-            </a>
-        </div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-           
+    <div id="app" class="position-relative">
+        <a class="navbar-brand d-flex align-items-center p-3 w-25" href="{{ url('/') }}">
+            <h1 class="travel-app mb-0">
+                <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
+                    class="part3">APP</span>
+            </h1>
+        </a>
+        <section class=" ps-4 text-dark ">
+            <h1 class="text_title ">Esplora nuove avventure!</h1>
+            <p class="fs-2">
+                Digita la tua prossima met&agrave;!
+            </p>
+        </section>
+        <div class="container-fluid p-0 d-flex flex-column ">
 
+            <div class="row w-75 mx-auto">
+                <div class="col-md-4 p-0 ">
+                    @include('search_bar')
+                </div>
+                <div class="col-md-4 p-0">
+                    @include('start_date')
+                </div>
+
+                <div id="results" class="border-1 rounded-4 w-50"></div>
+
+                <div id="city"></div>
+                <div id="map" style="height: 500px;width:500px"></div>
+            </div>
+            {{-- <section class="rounded-4 mt-4">
+                @include('carousel')
+            </section> --}}
+        </div>
+        <nav
+            class="navbar navbar-expand-md navbar-light bg-white shadow-sm flex-column align-items-stretch rounded position-fixed end-0 me-4 rounded-pill shadow">
+            <div class="container flex-column p-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/') }}">{{ __('Home') }}</a>
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item p-3">
+                            <a class="nav-link" href="{{ url('/') }}"><i class="fa-solid fa-earth-europe"></i></a>
                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto flex-column mt-2 mt-md-0">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -66,15 +105,14 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <i class="fa-solid fa-user"></i>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -89,10 +127,18 @@
             </div>
         </nav>
 
+        <!-- Contenuto principale -->
+        <div class="content">
+            <!-- Qui puoi aggiungere il contenuto della tua pagina -->
+        </div>
+
+
+
         <main class="">
             @yield('content')
         </main>
     </div>
 </body>
+<script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
 
 </html>

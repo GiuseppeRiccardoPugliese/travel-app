@@ -1,0 +1,14 @@
+.dropdown-menu[data-bs-popper] {
+    top: 0%;
+    left: -11rem;
+    margin-top: var(--bs-dropdown-spacer);
+}
+.dropdown-toggle::after {
+    content: none;
+}
+.navbar {
+    top: 50%;
+    padding-top: 0;
+    z-index: 99999999;
+}
+

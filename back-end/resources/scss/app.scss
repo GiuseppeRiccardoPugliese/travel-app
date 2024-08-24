@@ -19,10 +19,31 @@
 
 
 * {
-    font-family: "Geist", sans-serif;
+    font-family: "Geist", sans-serif; 
 }
 // WELCOME PAGE
 @import "./welcome_page.scss";
 
 // LOGO TRAVEL-APP
 @import "./logo_travel-app.scss";
+
+// NAV-BAR
+@import "./nav_bar.scss";
+
+// SEARCH-BAR
+@import "./search_bar.scss";
+
+// CAROUSEL
+.owl-carousel .item img {
+    padding: 20px;
+    display: block;
+    width: 80%;
+    height: 35rem; 
+} /*  DA MODIFICARE CON LE MEDIA QUERy - ALTEZZA ( 250px)*/
+div.owl-item> div{
+    display: flex;
+    justify-content: center;
+}
+.owl-dots {
+    display: none;
+    }

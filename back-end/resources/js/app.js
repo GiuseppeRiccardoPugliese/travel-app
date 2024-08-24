@@ -5,3 +5,6 @@ import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
 ])
+
+// RESET BARRA DI RICERCA DESTINAZIONE
+document.getElementById("search_city").value="";
