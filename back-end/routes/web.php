@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/trips', [TripController::class, 'index'])->name('trip.index');
 
     //Rotta SHOW TRIPS
-    Route::post('/trips', [TripController::class, 'show'])->name('trip.show');
+    Route::post('/trips/show', [TripController::class, 'show'])->name('trip.show');
 
     //Rotta CREATE TRIPS
     Route::get('/trips/create', [TripController::class, 'create'])->name('trip.create');
@@ -57,21 +57,23 @@ Route::middleware('auth')->group(function () {
 
     //ROTTE DELLE TAPPE
 
+    //Rotta INDEX TAPPE (Rotta d'appoggio)
+    Route::post('/trips/index', [JourneyStagesController::class, 'index'])->name('returnTrip.index');
 
     //Rotta CREATE TAPPE
-    Route::get('/trips/{trip}/journey-stages/create', [JourneyStagesController::class, 'create'])->name('journeyStages.create');
+    Route::post('/trips/journey-stages/create', [JourneyStagesController::class, 'create'])->name('journeyStages.create');
 
     //Rotta STORE TAPPE
-    Route::post('/trips/{trip}/journey-stages', [JourneyStagesController::class, 'store'])->name('journeyStages.store');
+    Route::post('/trips/journey-stages', [JourneyStagesController::class, 'store'])->name('journeyStages.store');
 
     //Rotta EDIT TAPPE
-    Route::get('journey-stages/edit', [JourneyStagesController::class, 'edit'])->name('journeyStages.edit');
+    Route::post('/journey-stages/edit', [JourneyStagesController::class, 'edit'])->name('journeyStages.edit');
 
     // Rotta UPDATE TAPPE
-    Route::put('journey-stages/update', [JourneyStagesController::class, 'update'])->name('journeyStages.update');
+    Route::put('/journey-stages/update', [JourneyStagesController::class, 'update'])->name('journeyStages.update');
 
     //Rotta DELETE TAPPE
-    Route::delete('journey-stages/delete', [JourneyStagesController::class, 'destroy'])->name('journeyStages.destroy');
+    Route::delete('/journey-stages/delete', [JourneyStagesController::class, 'destroy'])->name('journeyStages.destroy');
 });
 
 require __DIR__ . '/auth.php';

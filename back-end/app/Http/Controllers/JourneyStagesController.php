@@ -8,15 +8,19 @@ use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 
 
+//CODICE 1 == CREAZIONE TAPPA
+//CODICE 2 == MODIFICA TAPPA
+//CODICE 3 == ELIMINAZIONE TAPPA
+
 class JourneyStagesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($trip_id)
+    public function index(Request $request)
     {
         // Recupero il viaggio specifico
-        $trip = Trip::findOrFail($trip_id);
+        $trip = Trip::findOrFail($request->input('trip'));
 
         // Recupero gli stages relativi a quel viaggio
         $stages = $trip->journeyStages;
@@ -28,18 +32,10 @@ class JourneyStagesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request, $trip_id)
+    public function create(Request $request)
     {
         // Trovo il viaggio e verifico che appartenga all'utente autenticato
-        $trip = Trip::where('id', $trip_id)
-            ->whereHas('users', function ($query) {
-                $query->where('user_id', Auth::id());
-            })->first();
-
-        // Se il viaggio non esiste o non appartiene all'utente, lo reinderizzo alla index dei viaggi
-        if (!$trip) {
-            return redirect()->route('trip.index');
-        }
+        $trip = Trip::find($request->trip_id);
 
         return view('journeyStages.create', compact('trip'));
     }
@@ -47,7 +43,7 @@ class JourneyStagesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $trip_id)
+    public function store(Request $request)
     {
         //Form
         $data = $request->all();
@@ -61,12 +57,24 @@ class JourneyStagesController extends Controller
         $journeyStage->ordine = $data['ordine'];
         $journeyStage->completata = isset($data['compleata']) ? 1 : 0;
 
+        $trip_id = $request->trip_id;
+
         $journeyStage->trip_id = $trip_id;
 
         //Salvo
         $journeyStage->save();
 
-        return redirect()->route('trip.show', $trip_id);
+        $trip = Trip::find($request->trip_id);
+
+        // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Creazione con la pagina di Appoggio INDEX
+        $codice = 1;
+
+        return view('journeyStages.index', compact('trip', 'codice'));
+
+
+        // Reindirizza alla pagina di supporto temporaneo che eseguirà il POST
+        // return redirect()->route('returnTrip.index')
+        //     ->with(['trip' => $trip, 'codice' => $codice]);
 
     }
 
@@ -83,13 +91,8 @@ class JourneyStagesController extends Controller
      */
     public function edit(Request $request)
     {
-        $stage = JourneyStage::findOrFail($request->query('id'));
-        $trip = Trip::findOrFail($stage->trip_id);
-
-        // Verifica che l'utente abbia accesso al viaggio
-        if (!$trip->users->contains(Auth::id())) {
-            return redirect()->route('trip.index');
-        }
+        $stage = JourneyStage::findOrFail($request->stage_id);
+        $trip = Trip::findOrFail($request->trip_id);
 
         return view('journeyStages.edit', compact('stage', 'trip'));
     }
@@ -99,27 +102,26 @@ class JourneyStagesController extends Controller
      */
     public function update(Request $request)
     {
-        $stage = JourneyStage::findOrFail($request->input('id'));
+        $stage = JourneyStage::findOrFail($request->stage_id);
 
         // Viaggio associato alla tappa dell'utente
-        $trip = Trip::findOrFail($stage->trip_id);
-
-        if (!$trip->users->contains(Auth::id())) {
-            return redirect()->route('trip.index');
-        }
+        $trip = Trip::findOrFail($request->trip_id);
 
         $stage->nome = $request->input('nome');
         $stage->descrizione = $request->input('descrizione');
         $stage->posizione = $request->input('posizione');
         $stage->data = $request->input('data');
         $stage->ordine = $request->input('ordine');
-        $stage->completata = $request->input('completata') ? 1 : 0;
+
+        // dd($request->input('completata'));
+        $stage->completata = $request->input('completata') == null ? '0' : '1';
 
         // Salvo 
         $stage->save();
 
-        // Reindirizzo alla pagina show del viaggio
-        return redirect()->route('trip.show', $trip->id);
+        // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Modifica con la pagina di Appoggio INDEX
+        $codice = 2;
+        return view('journeyStages.index', compact('trip', 'codice'));
     }
 
     /**
@@ -127,10 +129,16 @@ class JourneyStagesController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = $request->input('id');
-        $stage = JourneyStage::findOrFail($id);
-        $trip_id = $stage->trip_id;
+        $trip_id = $request->trip_id;
+        $stage = JourneyStage::findOrFail($request->stage_id);
+
+        $stage->trip()->dissociate();
+        $trip = Trip::find($trip_id);
+
         $stage->delete();
-        return redirect()->route('trip.show', ['trip' => $trip_id]);
+
+        // Reindirizzo alla pagina show del viaggio DOPO aver mostrato il messaggio di Eliminazione con la pagina di Appoggio INDEX
+        $codice = 3;
+        return view('journeyStages.index', compact('trip', 'codice'));
     }
 }

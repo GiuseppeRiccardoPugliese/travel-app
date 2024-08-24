@@ -45,11 +45,11 @@
             <!-- Completata -->
             <div class="form-group">
                 <label for="completata">Completata</label>
-                <input type="checkbox" id="completata" name="completata" value="1"
-                    {{ old('completata', $stage->completata) ? 'checked' : '' }}>
+                <input type="checkbox" id="completata" name="completata" value="{{ $stage->completata }}"
+                    @checked($stage->completata ? true : false)>
             </div>
 
-            <input type="hidden" name="id" value="{{ $stage->id }}">
+            <input type="hidden" name="stage_id" value="{{ $stage->id }}">
             <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
             <!-- Submit Button -->

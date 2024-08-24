@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Crea una nuova Tappa per il Viaggio: {{ $trip->nome }}</h1>
 
-        <form action="{{ route('journeyStages.store', $trip->id) }}" method="POST">
+        <form action="{{ route('journeyStages.store') }}" method="POST">
             @csrf
             @method('POST')
 
@@ -37,6 +37,8 @@
                 <input type="checkbox" class="form-check-input" id="completata" name="completata">
                 <label class="form-check-label" for="completata">Completata</label>
             </div>
+
+            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
             <button type="submit" class="btn btn-primary">Crea Tappa</button>
         </form>
