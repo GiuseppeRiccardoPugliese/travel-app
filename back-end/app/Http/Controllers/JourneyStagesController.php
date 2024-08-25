@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\JourneyStage;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\JourneyStageRequest;
+
 
 
 //CODICE 1 == CREAZIONE TAPPA
@@ -51,7 +53,7 @@ class JourneyStagesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JourneyStageRequest $request)
     {
         //Form
         $data = $request->all();
@@ -109,7 +111,7 @@ class JourneyStagesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(JourneyStageRequest $request)
     {
         $stage = JourneyStage::findOrFail($request->stage_id);
 

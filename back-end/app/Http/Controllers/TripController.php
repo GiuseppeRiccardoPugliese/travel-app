@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\TripRequest;
 
 class TripController extends Controller
 {
@@ -37,7 +38,7 @@ class TripController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TripRequest $request)
     {
         // Estraggo tutti i dati dal request
         $data = $request->all();
@@ -92,7 +93,7 @@ class TripController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(TripRequest $request)
     {
         // Estraggo tutti i dati dal request
         $data = $request->all();

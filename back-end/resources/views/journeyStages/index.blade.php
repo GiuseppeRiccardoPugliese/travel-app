@@ -36,7 +36,7 @@
     document.addEventListener("DOMContentLoaded", (event) => {
         setTimeout(() => {
             document.getElementById('ShowForm').submit();
-        }, 10000); // Invia il form dopo 2 secondi
+        }, 3000); // Invia il form dopo 2 secondi
     });
 </script>
 
