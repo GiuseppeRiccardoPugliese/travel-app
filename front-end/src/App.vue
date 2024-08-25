@@ -1,10 +1,10 @@
 <script>
-import Trips from './components/Trips.vue'
+// import Trips from './components/Trips.vue'
 
 export default{
 
   components: {
-    Trips,
+    // Trips,
   },
   data() {
     return {
@@ -19,7 +19,15 @@ export default{
 </script>
 
 <template>
-  <Trips/>
+ 
+ <!-- Rotte (Trips, NotFound) -->
+ <main>
+    <router-view>
+      
+    </router-view>
+  </main>
+  
+      
 </template>
 
 <style lang="scss">
