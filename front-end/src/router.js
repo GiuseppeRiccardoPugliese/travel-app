@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import NotFound from "./pages/NotFound.vue";
-import Trips from "./components/Trips.vue";
+import Trips from "./pages/Trips.vue";
 
 const router = createRouter({
     history: createWebHistory(),
