@@ -21,7 +21,7 @@ export default{
 <template>
  
  <!-- Rotte (Trips, NotFound) -->
- <main>
+ <main class="h-100">
     <router-view>
       
     </router-view>

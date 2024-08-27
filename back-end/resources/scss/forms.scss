@@ -1,0 +1,75 @@
+.custom-form {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.custom-label {
+    font-weight: bold;
+}
+
+.custom-input {
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.custom-error {
+    color: red;
+    margin-top: 5px;
+}
+
+.custom-small-text {
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.custom-small-text-center {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.custom-submit-button {
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.animated-title,
+.animated-title-create {
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.animated-title h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1E90FF;
+    position: relative;
+    animation: slideIn 2s ease-out;
+}
+
+.animated-title-create h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #32CD32;
+    position: relative;
+    animation: slideIn 2s ease-out;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
