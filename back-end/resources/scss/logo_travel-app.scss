@@ -1,9 +1,27 @@
-.travel-app {
+.site-header {
+    background-color: #f8f9fa; /* Colore di sfondo chiaro */
+    padding: 20px 0; /* Spaziatura verticale */
+    text-align: center; /* Allinea il contenuto al centro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+}
+
+/* Optional: ridurre la spaziatura interna della navbar-brand */
+.navbar-brand {
+    padding: 0;
+}
+
+/* Stile per il logo */
+.logo {
+    display: inline-block;
+}
+
+/* Applica le stesse animazioni e stili al logo nel contesto dell'header */
+.site-header .travel-app {
     display: inline-block;
     font-weight: bold;
 }
 
-.travel-app span {
+.site-header .travel-app span {
     display: inline-block;
     opacity: 0;
     background-clip: text;
@@ -11,27 +29,24 @@
     color: transparent;
 }
 
-.part1 {
+/* Parti del testo con gradienti e animazioni */
+.site-header .part1 {
     background: linear-gradient(90deg, #FFA500, #FF4500);
-    /* Gradiente arancione */
     animation: slideUp 0.8s ease-out forwards;
 }
 
-.part2 {
+.site-header .part2 {
     background: linear-gradient(90deg, #32CD32, #228B22);
-    /* Gradiente verde */
     animation: slideUp 0.8s ease-out forwards 0.5s;
 }
 
-.part3 {
+.site-header .part3 {
     background: linear-gradient(90deg, #1E90FF, #0000FF);
-    /* Gradiente blu */
     animation: slideRight 0.8s ease-out forwards 1s;
 }
 
-.dash {
+.site-header .dash {
     background: linear-gradient(90deg, #FF69B4, #FF1493);
-    /* Gradiente rosa */
     animation: fadeIn 0.8s ease-out forwards 1.5s;
 }
 

@@ -1,0 +1,100 @@
+.dropdown-menu[data-bs-popper] {
+    top: 0%;
+    left: -12rem;
+    margin-top: var(--bs-dropdown-spacer);
+    opacity: 0; /* Inizialmente invisibile */
+    transform: scaleY(0); /* Comprimi verticalmente il menu */
+    transform-origin: top; /* Punto di origine della trasformazione in alto */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transizione fluida */
+    display: block; /* Assicura che il menu sia sempre blocco, ma invisibile */
+    visibility: hidden; /* Nascondi completamente dal layout */
+}
+.dropdown-menu {
+    top: 0%;
+    left: -12rem;
+    margin-top: var(--bs-dropdown-spacer);
+    opacity: 0; /* Inizialmente invisibile */
+    transform: scaleY(0); /* Comprimi verticalmente il menu */
+    transform-origin: top; /* Punto di origine della trasformazione in alto */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Transizione fluida */
+    display: block; /* Assicura che il menu sia sempre blocco, ma invisibile */
+    visibility: hidden; /* Nascondi completamente dal layout */
+    padding: 10px 10px; /* Spaziatura interna */
+    border-radius: 10px; /* Bordo arrotondato */
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombra */
+}
+
+.dropdown-menu.show {
+    opacity: 1; /* Rendi il menu visibile */
+    transform: scaleY(1); /* Espandi il menu verticalmente */
+    visibility: visible; /* Mostra nel layout */
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+.navbar {
+    top: 50%;
+    padding-top: 0;
+    z-index: 99999999;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.icon {
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.icon-text {
+    position: absolute;
+    right: 120%; /* Posizionata a destra dell'icona */
+    top: 50%;
+    transform: translateY(-50%) scaleY(0); /* Comprimi verticalmente il testo */
+    transform-origin: top; /* Punto di origine della trasformazione */
+    margin-left: 20px; /* Distanza dall'icona */
+    opacity: 0; /* Nasconde il testo inizialmente */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    color: black;
+    padding: 10px 30px; /* Spaziatura interna */
+    border-radius: 10px; /* Bordo arrotondato */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombra */
+    font-family: Arial, sans-serif; /* Font */
+    font-size: 16px; /* Dimensione del testo */
+    white-space: nowrap; /* Evita che il testo vada a capo */
+}
+
+.nav-item:hover .icon-text {
+    opacity: 1; /* Mostra il testo al passaggio del mouse */
+    transform: translateY(-50%) scaleY(1); /* Effetto di espansione verticale */
+}
+
+.multi-colored-border {
+    position: relative;
+    padding: 8px; /* Spazio interno */
+    border-radius: 10px; /* Angoli arrotondati per un aspetto più moderno */
+    overflow: hidden; /* Assicura che il bordo esterno non sporga oltre il contenitore */
+}
+
+.multi-colored-border::before {
+    content: "";
+    position: absolute;
+    top: -4px; /* Sposta il bordo fuori dal contenitore */
+    left: -40px; /* Sposta il bordo fuori dal contenitore */
+    right: -98px; /* Sposta il bordo fuori dal contenitore */
+    bottom: -4px; /* Sposta il bordo fuori dal contenitore */
+    background: linear-gradient(
+        to right,
+        #ffa500 0%,
+        #ffa500 33.1%,
+        #ff4500 33%,
+        #ff4500 61.8%,
+        #32cd32 6%,
+        #32cd32 100%
+    );
+    border-radius: 10px; /* Angoli arrotondati per il bordo esterno */
+    z-index: -1; /* Assicura che il bordo sia sotto il contenuto */
+}
