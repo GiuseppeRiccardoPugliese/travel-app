@@ -52,7 +52,12 @@
                     </h1>
                 </a>
             </div>
-            <h3>Benvenuta, {{ auth()->user()->name }}</h3>
+
+            @auth
+                <h3>{{ auth()->user()->sessualità == 'donna' ? 'Benvenuta ' : 'Benvenuto ' }}{{ auth()->user()->name }}!
+                </h3>
+            @endauth
+
         </header>
         <section class=" ps-4 text-dark ">
             <h1 class="text_title fw-bold">Pianifica il tuo viaggio!</h1>
