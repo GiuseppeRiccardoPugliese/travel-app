@@ -37,42 +37,84 @@
 <!-- Usando Vite -->
 @vite(['resources/js/app.js'])
 @vite(['resources/js/maps_scripts.js'])
+@vite(['resources/js/search_city_image.js'])
+@vite(['resources/js/scroll_page.js'])
 </head>
 
 <body>
     <div id="app" class="position-relative">
-        <a class="navbar-brand d-flex align-items-center p-3 w-25" href="{{ url('/') }}">
-            <h1 class="travel-app mb-0">
-                <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
-                    class="part3">APP</span>
-            </h1>
-        </a>
+        <header class="site-header">
+            <div class="container d-flex justify-content-center align-items-center py-3">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <h1 class="travel-app mb-0">
+                        <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
+                            class="part3">APP</span>
+                    </h1>
+                </a>
+            </div>
+            <h3>Benvenuta, {{ auth()->user()->name }}</h3>
+        </header>
         <section class=" ps-4 text-dark ">
-            <h1 class="text_title ">Esplora nuove avventure!</h1>
-            <p class="fs-2">
-                Digita la tua prossima met&agrave;!
-            </p>
+            <h1 class="text_title fw-bold">Pianifica il tuo viaggio!</h1>
         </section>
-        <div class="container-fluid p-0 d-flex flex-column ">
+        <div class="container p-0 d-flex flex-column ">
 
-            <div class="row w-75 mx-auto">
-                <div class="col-md-4 p-0 ">
+            <div class="row w-75 mx-auto multi-colored-border justify-content-center">
+                <div class="col-md-4 p-0 border border-0 ">
                     @include('search_bar')
                 </div>
-                <div class="col-md-4 p-0">
-                    @include('start_date')
+
+                @include('start_date')
+
+
+                <div class="col-md-12 pe-1">
+                    <div id="results" class="border-1 border-black border-0 bg-white pe-1 rounded-2"></div>
                 </div>
 
-                <div id="results" class="border-1 rounded-4 w-50"></div>
-
-                <div id="city"></div>
-                <div id="map" style="height: 500px;width:500px"></div>
             </div>
+            <div class="row w-75 mx-auto ">
+
+
+                <div class="col-6 d-flex">
+                    <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="w-100">
+                        <div id="map" style="height: 400px; width: 100%;" class="mt-3 flex-fill"></div>
+                    </a>
+                </div>
+
+
+                <div class="col-6 d-flex">
+                    <div id="photo-container"
+                        class="mt-3 flex-fill bg-light d-flex justify-content-center align-items-center">
+                        <p>Immagine della destinazione <br> non disponibile!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ModalSearchedCity">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-0">
+                            <!-- Mappa che riempie la larghezza e altezza del modale -->
+                            <div id="map_modal" class="w-100" style="height: 600px;"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
             {{-- <section class="rounded-4 mt-4">
                 @include('carousel')
             </section> --}}
         </div>
-        <nav
+        <div class="ps-4 typing-container">
+            <h3 class="text_title fw-bold">Lasciati ispirare!</h3>
+        </div>
+        <nav id="nav_bar"
             class="navbar navbar-expand-md navbar-light bg-white shadow-sm flex-column align-items-stretch rounded position-fixed end-0 me-4 rounded-pill shadow">
             <div class="container flex-column p-0">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -86,6 +128,7 @@
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item p-3">
                             <a class="nav-link" href="{{ url('/') }}"><i class="fa-solid fa-earth-europe"></i></a>
+                            <span class="icon-text">Viaggi</span>
                         </li>
                     </ul>
 
@@ -116,7 +159,8 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>

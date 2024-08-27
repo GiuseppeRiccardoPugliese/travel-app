@@ -4,7 +4,7 @@
     z-index: 4;
 }
 .text_title {
-    font-size: 5rem;
+    font-size: 3rem;
 }
 .result-item {
     padding: 5px;
@@ -12,4 +12,11 @@
 .form-control:focus {
     border-color: unset;
     box-shadow: none;
+}
+.custom_offset_search_bar {
+    margin-left: 12.7%;
+}
+
+.input-group-text {
+    border: none;
 }
