@@ -127,7 +127,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav flex-column">
                         <li class="nav-item p-3">
-                            <a class="nav-link" href="{{ url('/') }}"><i class="fa-solid fa-earth-europe"></i></a>
+                            <a class="nav-link" href="{{ route('trip.index') }}"><i
+                                    class="fa-solid fa-earth-europe"></i></a>
                             <span class="icon-text">Viaggi</span>
                         </li>
                     </ul>
@@ -152,11 +153,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
-                                    <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                                    {{-- <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a> --}}
+                                    <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Esci') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
