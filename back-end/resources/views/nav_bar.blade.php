@@ -8,23 +8,27 @@
 
         <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
+            @auth
             <ul class="navbar-nav flex-column">
                 <li class="nav-item p-3">
                     <a class="nav-link" href="{{ route('trip.index') }}"><i class="fa-solid fa-earth-europe"></i></a>
                     <span class="icon-text">Viaggi</span>
                 </li>
             </ul>
+            @endauth
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto flex-column mt-2 mt-md-0">
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <li class="nav-item p-3 pb-1">
+                        <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-user-lock"></i></a>
+                        <span class="icon-text">Accedi</span>
                     </li>
                     @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <li class="nav-item p-3 pb-2">
+                            <a class="nav-link" href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i></a>
+                            <span class="icon-text">Registrati</span>
                         </li>
                     @endif
                 @else

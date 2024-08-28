@@ -20,9 +20,6 @@
     font-family: "Geist", sans-serif;
 }
 
-// WELCOME PAGE
-@import "./welcome_page.scss";
-
 // LOGO TRAVEL-APP
 @import "./logo_travel-app.scss";
 
@@ -122,4 +119,7 @@ div.owl-item>div {
     /* Inizia invisibile */
     animation: dropIn-image-city 1s ease-out forwards;
     /* Durata di 1 secondo */
+}
+body{
+
 }

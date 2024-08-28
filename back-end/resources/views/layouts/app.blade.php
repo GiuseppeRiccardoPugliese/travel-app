@@ -41,8 +41,8 @@
 @vite(['resources/js/scroll_page.js'])
 </head>
 
-<body>
-    <div id="app" class="position-relative">
+<body class="vh-100">
+    <div id="app" class="d-flex flex-column h-100">
         <header class="site-header">
             <div class="container d-flex justify-content-center align-items-center py-3">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -58,19 +58,17 @@
 
 
 
-        <main>
+        <main class="mb-4 flex-grow-1">
             @yield('content')
         </main>
 
 
-        <footer>
-            @include('footer')
-        </footer>
+
+        @include('footer')
+
 
     </div>
 
-    {{-- Footer --}}
-    @include('footer')
 </body>
 
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>

@@ -1,4 +1,4 @@
-<footer class="footer text-white mt-3 ">
+<footer class="footer text-white ">
     <div class="container text-center flex-wrap justify-content-between align-items-center">
         <div class="row">
             <div class="col-md-6 mb-3 mb-md-0">

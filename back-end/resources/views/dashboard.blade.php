@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
-@section('welcome_message')
-{{auth()->user()->sessualità == 'donna' ? 'Benvenuta' : 'Benvenuto'}}, {{ auth()->user()->name }}
-@endsection
+@auth
+    @section('welcome_message')
+        {{ auth()->user()->sessualità == 'donna' ? 'Benvenuta' : 'Benvenuto' }}, {{ auth()->user()->name }}
+    @endsection
+@endauth
 @section('content')
     @include('search_bar')
     <div class="ps-4 typing-container">
