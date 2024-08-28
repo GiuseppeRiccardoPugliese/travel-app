@@ -4,6 +4,7 @@
         <!-- Aggiungi altre slide se necessario -->
     </div>
 </div>
+
 <script>
     $(document).ready(function() {
         getImage();
