@@ -32,6 +32,9 @@
 // SEARCH-BAR
 @import "./search_bar.scss";
 
+// FORM DEI VIAGGI E TAPPE ( Create - Edit )
+@import "./forms.scss";
+
 // CAROUSEL
 .owl-carousel .item img {
     padding: 20px;
@@ -120,7 +123,3 @@ div.owl-item>div {
     animation: dropIn-image-city 1s ease-out forwards;
     /* Durata di 1 secondo */
 }
-
-
-// FROM DEI VIAGGI E TAPPE ( Create - Edit )
-@import "./forms.scss";

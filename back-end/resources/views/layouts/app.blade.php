@@ -188,7 +188,11 @@
             @yield('content')
         </main>
     </div>
+
+    {{-- Footer --}}
+    @include('footer')
 </body>
+
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
 
 </html>

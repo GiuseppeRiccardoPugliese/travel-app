@@ -6,7 +6,7 @@ export default {
 
 <template>
     
-    <div class="container">
+    <div class="container mt-5">
         <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnFnbDdzMmxsMW5tNTJrN3ZrMHprbjBxaThwemgycGt4bWdjaGRmZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oFyD9bC0N65oZv53q/giphy.webp"
             alt="notFoundImg">
         <h1>404</h1>
