@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@section('welcome_message')
+ {{ auth()->user()->name }}
+@endsection
     {{-- @unless (Auth::check())
         <div class="welcome-container">
             <h1 class="welcome-text">BENVENUTO SU TRAVEL-APP</h1>
