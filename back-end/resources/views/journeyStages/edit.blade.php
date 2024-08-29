@@ -69,9 +69,7 @@
                     value="{{ $stage->completata }}" @checked($stage->completata ? true : false)>
             </div>
 
-            <input type="hidden" name="stage_id" value="{{ $stage->id }}">
-            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
-
+            {{-- VOTAZIONE --}}
             <div class="form-group mb-3 d-flex">
                 @foreach (range(1, 5) as $i)
                     <label class="star-container" id="star-container-{{ $i }}">
@@ -83,6 +81,10 @@
                     </label>
                 @endforeach
             </div>
+
+            {{-- INPUT NASCOSTI PER PASSARE I DATI IN POST --}}
+            <input type="hidden" name="stage_id" value="{{ $stage->id }}">
+            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
             <input type="hidden" name="valutazione" id="valutazione" value="{{ $stage->votazione }}">
 
             <!-- Submit Button -->
@@ -93,13 +95,21 @@
         <small class="custom-small-text-center">I campi contrassegnati con * sono <b>obbligatori</b>!</small>
     </div>
 @endsection
+
+{{-- upload file stars.js contenente codice js delle stelline per la valutazione --}}
 <script src="http://www.localhost:5173/resources/js/stars.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+        // Colorazione delle stelline quando carica il documento
         coloredStars();
+
         document.getElementById('editTappaForm').addEventListener('submit', function(event) {
+
+            // Calcolo valutazione finale - conteggio stelline
             votazione();
+
             let hasError = false;
 
             document.querySelectorAll('.custom-error').forEach(function(element) {

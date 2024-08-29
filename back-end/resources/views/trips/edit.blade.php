@@ -95,9 +95,11 @@
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-sm custom-submit-button">MODIFICA</button>
             </div>
-            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
+            {{-- INPUT NASCOSTI PER PASSARE I DATI IN POST --}}
+            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
             <input type="hidden" name="valutazione" id="valutazione" value="{{ $trip->votazione }}">
+            
         </form>
         <small class="custom-small-text-center">I campi contrassegnati con * sono
             <b>obbligatori</b>!</small>
@@ -105,14 +107,21 @@
 
 
 @endsection
+
+{{-- upload file stars.js contenente codice js delle stelline per la valutazione --}}
 <script src="http://www.localhost:5173/resources/js/stars.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
+        // Colorazione delle stelline quando carica il documento
         coloredStars();
+
         document.getElementById('myForm').addEventListener('submit', function(event) {
 
+            // Calcolo valutazione finale - conteggio stelline
             votazione();
+
             // Reset error messages
             let isValid = true;
             resetErrors();
@@ -167,8 +176,6 @@
                 }
             }
 
-
-
             // Prevent form submission if validation fails
             if (!isValid) {
                 event.preventDefault(); // Blocca l'invio del form
@@ -191,4 +198,3 @@
 
     });
 </script>
-
