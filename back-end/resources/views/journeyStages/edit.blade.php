@@ -50,8 +50,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data">Data</label>
                 <input type="date" id="data" name="data" class="form-control custom-input"
-                    value="{{ old('data', $stage->data) }}" min="{{ $data_inizio }}" max="{{ $data_fine }}"
-                    value="{{ $data_inizio }}">
+                    min="{{ $data_inizio }}" max="{{ $data_fine }}" value="{{ $data_inizio }}">
                 <div id="dataError" class="custom-error"></div>
             </div>
 
@@ -151,11 +150,11 @@
         // CAMBIARE GIORNO DALLA DATA
         const dataTappa = document.getElementById('data');
         dataTappa.addEventListener('change', changeOrNotDay);
-        
+
         // CAMBIARE DATA DAL GIORNO
         const ordineTappa = document.getElementById('ordine');
         ordineTappa.addEventListener('change', changeDateorNot);
-        
+
         // Colorazione delle stelline quando carica il documento
         coloredStars();
 
