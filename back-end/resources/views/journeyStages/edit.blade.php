@@ -72,6 +72,19 @@
             <input type="hidden" name="stage_id" value="{{ $stage->id }}">
             <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
+            <div class="form-group mb-3 d-flex">
+                @foreach (range(1, 5) as $i)
+                    <label class="star-container" id="star-container-{{ $i }}">
+                        <input type="checkbox" id="star{{ $i }}" name="votazione"
+                            value="{{ $i <= $stage->votazione ? '1' : '0' }}" style="display: none;">
+                        <!-- Stelle per la selezione -->
+                        <i class="fas fa-star" data-value="{{ $i }}"
+                            onclick="colorStar({{ $i }}, 'star-container-{{ $i }}')"></i>
+                    </label>
+                @endforeach
+            </div>
+            <input type="hidden" name="valutazione" id="valutazione" value="{{ $stage->votazione }}">
+
             <!-- Submit Button -->
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-sm custom-submit-button">Aggiorna Tappa</button>
@@ -80,10 +93,13 @@
         <small class="custom-small-text-center">I campi contrassegnati con * sono <b>obbligatori</b>!</small>
     </div>
 @endsection
+<script src="http://www.localhost:5173/resources/js/stars.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        coloredStars();
         document.getElementById('editTappaForm').addEventListener('submit', function(event) {
+            votazione();
             let hasError = false;
 
             document.querySelectorAll('.custom-error').forEach(function(element) {

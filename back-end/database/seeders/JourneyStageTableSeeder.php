@@ -42,6 +42,7 @@ class JourneyStageTableSeeder extends Seeder
                 'posizione' => $stageData['posizione'],
                 'data' => $stageData['data'],
                 'ordine' => $stageData['ordine'],
+                'votazione' => $stageData['votazione'],
                 'completata' => $stageData['completata'],
                 'created_at' => $stageData['created_at'],
                 'updated_at' => $stageData['updated_at'],

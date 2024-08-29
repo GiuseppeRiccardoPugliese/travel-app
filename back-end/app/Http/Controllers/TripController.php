@@ -98,14 +98,13 @@ class TripController extends Controller
         // Estraggo tutti i dati dal request
         $data = $request->all();
 
-
         $trip = Trip::find($request->trip_id);
         $trip->nome = $data['nome'];
         $trip->descrizione = $data['descrizione'];
         $trip->data_inizio = $data['data_inizio'];
         $trip->data_fine = $data['data_fine'];
         $trip->destinazione = $data['destinazione'];
-
+        $trip->votazione= $data['valutazione'];
         // Gestione dell'immagine
         if ($request->hasFile('immagine')) {
             $imagePath = $request->file('immagine')->store('images', 'public');

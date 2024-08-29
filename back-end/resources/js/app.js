@@ -2,6 +2,7 @@ import './bootstrap';
 import '~resources/scss/app.scss';
 import '~icons/bootstrap-icons.scss';
 import * as bootstrap from 'bootstrap';
+
 import.meta.glob([
     '../img/**'
 ])
@@ -23,3 +24,4 @@ document.getElementById("map").parentElement.parentElement.classList.add('d-none
 $("#exampleModal").on("hidden.bs.modal", function () {
     document.getElementById('nav_bar').style.display='block';
 });
+

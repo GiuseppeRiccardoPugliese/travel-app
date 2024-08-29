@@ -123,7 +123,7 @@ class JourneyStagesController extends Controller
         $stage->posizione = $request->input('posizione');
         $stage->data = $request->input('data');
         $stage->ordine = $request->input('ordine');
-
+        $stage->votazione= $request->input('valutazione');
         // dd($request->input('completata'));
         $stage->completata = $request->input('completata') == null ? '0' : '1';
 

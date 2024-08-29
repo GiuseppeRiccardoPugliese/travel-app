@@ -18,8 +18,9 @@ return new class extends Migration
             $table->text('descrizione')->nullable(); 
             $table->string('posizione');            
             $table->date('data')->nullable();      
-            $table->integer('ordine')->default(0); 
+            $table->integer('ordine')->default(1); //giorno
             $table->boolean('completata')->default(false);
+            $table->tinyInteger('votazione')->nullable();
 
             $table->timestamps();
         });

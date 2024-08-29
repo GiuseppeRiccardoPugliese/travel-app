@@ -71,6 +71,19 @@
                 <div id="immagineError" class="custom-error"></div>
                 <small class="custom-small-text">Accetta solo file JPEG, JPG e PNG</small>
             </div>
+            {{-- VOTO --}}
+            <div class="form-group mb-3 d-flex">
+                @foreach (range(1, 5) as $i)
+                    <label class="star-container" id="star-container-{{ $i }}">
+                        <input type="checkbox" id="star{{ $i }}" name="votazione"
+                            value="{{ $i <= $trip->votazione ? '1' : '0' }}" style="display: none;">
+                        <!-- Stelle per la selezione -->
+                        <i class="fas fa-star" data-value="{{ $i }}"
+                            onclick="colorStar({{ $i }}, 'star-container-{{ $i }}')"></i>
+                    </label>
+                @endforeach
+            </div>
+
 
             {{-- Visualizzazione IMG inserita --}}
             <div class="form-group text-center mb-3">
@@ -84,6 +97,7 @@
             </div>
             <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
+            <input type="hidden" name="valutazione" id="valutazione" value="{{ $trip->votazione }}">
         </form>
         <small class="custom-small-text-center">I campi contrassegnati con * sono
             <b>obbligatori</b>!</small>
@@ -91,11 +105,14 @@
 
 
 @endsection
-
-
+<script src="http://www.localhost:5173/resources/js/stars.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
+        coloredStars();
         document.getElementById('myForm').addEventListener('submit', function(event) {
+
+            votazione();
             // Reset error messages
             let isValid = true;
             resetErrors();
@@ -150,6 +167,8 @@
                 }
             }
 
+
+
             // Prevent form submission if validation fails
             if (!isValid) {
                 event.preventDefault(); // Blocca l'invio del form
@@ -169,5 +188,7 @@
                 element.innerText = '';
             });
         }
+
     });
 </script>
+

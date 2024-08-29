@@ -35,10 +35,13 @@
 
 </head>
 <!-- Usando Vite -->
-@vite(['resources/js/app.js'])
-@vite(['resources/js/maps_scripts.js'])
-@vite(['resources/js/search_city_image.js'])
-@vite(['resources/js/scroll_page.js'])
+@vite([
+    'resources/js/app.js',
+    'resources/js/maps_scripts.js',
+    'resources/js/search_city_image.js',
+    'resources/js/scroll_page.js',
+    'resources/js/stars.js',
+])
 </head>
 
 <body class="vh-100">

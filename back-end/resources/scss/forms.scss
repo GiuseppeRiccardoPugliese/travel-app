@@ -73,3 +73,37 @@
         transform: translateY(0);
     }
 }
+
+// STELLINE VOTAZIONE
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.star-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.star-container input[type="checkbox"] {
+    display: none;
+    /* Nasconde i checkbox */
+}
+
+.fa-star {
+    font-size: 2rem;
+    color: grey;
+    /* Colore delle stelline non selezionate */
+    transition: color 0.3s;
+}
+
+.selected {
+    color: gold;
+    /* Colore delle stelline selezionate */
+}
+
+.fa-star:hover {
+    color: gold;
+    /* Colore delle stelline su hover */
+}

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Models\User;
 use App\Models\Trip;
-
+use Carbon\Carbon;
 
 class TripTableSeeder extends Seeder
 {
@@ -26,6 +26,11 @@ class TripTableSeeder extends Seeder
         // Inserisco ogni viaggio nella tabella trips
         foreach ($trips as $tripData) {
 
+            // DIFFERENZA tra data fine e inizio per calcolo durata del viaggio
+            $date1 = Carbon::parse($tripData['data_fine']);
+            $date2 = Carbon::parse($tripData['data_inizio']);
+
+            $diffInDays = $date1->diffInDays($date2);
             // Inserisco il viaggio e ottieni l'istanza del modello Trip
             $trip = Trip::create([
                 'nome' => $tripData['nome'],
@@ -33,7 +38,9 @@ class TripTableSeeder extends Seeder
                 'data_inizio' => $tripData['data_inizio'],
                 'data_fine' => $tripData['data_fine'],
                 'destinazione' => $tripData['destinazione'],
+                'votazione' => $tripData['votazione'],
                 'immagine' => $tripData['immagine'],
+                'durata_viaggio' => $diffInDays,
                 'created_at' => $tripData['created_at'],
                 'updated_at' => $tripData['updated_at'],
             ]);
@@ -44,6 +51,6 @@ class TripTableSeeder extends Seeder
             // Associo il viaggio all'utente
             $trip->users()->attach($user->id);
         }
-       
+
     }
 }

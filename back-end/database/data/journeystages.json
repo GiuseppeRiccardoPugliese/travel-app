@@ -5,10 +5,11 @@
         "posizione": "Campo Base",
         "data": "2024-09-02",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 1
+        "trip_id": 1,
+        "votazione": 5
     },
     {
         "nome": "Osservazione della Fauna Selvatica",
@@ -19,7 +20,8 @@
         "completata": false,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 2
+        "trip_id": 2,
+        "votazione": 4
     },
     {
         "nome": "Tour della Torre Eiffel",
@@ -27,10 +29,11 @@
         "posizione": "Parigi",
         "data": "2024-11-02",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 3
+        "trip_id": 3,
+        "votazione": 3
     },
     {
         "nome": "Navigazione sul Rio delle Amazzoni",
@@ -38,10 +41,11 @@
         "posizione": "Fiume Amazzoni",
         "data": "2024-12-03",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 4
+        "trip_id": 4,
+        "votazione": 5
     },
     {
         "nome": "Visita alla Banchisa Polare",
@@ -52,7 +56,8 @@
         "completata": false,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 5
+        "trip_id": 5,
+        "votazione": 4
     },
     {
         "nome": "Immersione nei Coralli",
@@ -60,10 +65,11 @@
         "posizione": "Fiji",
         "data": "2025-02-02",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 6
+        "trip_id": 6,
+        "votazione": 5
     },
     {
         "nome": "Visita al Tempio di Fushimi Inari",
@@ -74,7 +80,8 @@
         "completata": false,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 7
+        "trip_id": 7,
+        "votazione": 4
     },
     {
         "nome": "Trekking nel Deserto",
@@ -82,10 +89,11 @@
         "posizione": "Sahara",
         "data": "2025-04-03",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 8
+        "trip_id": 8,
+        "votazione": 3
     },
     {
         "nome": "Escursione all'Ayers Rock",
@@ -96,7 +104,8 @@
         "completata": false,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 9
+        "trip_id": 9,
+        "votazione": 4
     },
     {
         "nome": "Escursione al Matterhorn",
@@ -104,9 +113,10 @@
         "posizione": "Matterhorn",
         "data": "2025-06-03",
         "ordine": 1,
-        "completata": false,
+        "completata": true,
         "created_at": "2024-08-10T00:00:00",
         "updated_at": "2024-08-10T00:00:00",
-        "trip_id": 10
+        "trip_id": 10,
+        "votazione": 5
     }
 ]
