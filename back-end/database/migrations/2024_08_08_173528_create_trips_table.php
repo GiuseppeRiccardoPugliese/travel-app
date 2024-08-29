@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('destinazione');
             $table->string('immagine')->nullable();
             $table->tinyInteger('votazione')->nullable();
-            $table->tinyInteger('durata_viaggio');
+            $table->tinyInteger('durata_viaggio')->default(1);
 
             $table->timestamps();
         });

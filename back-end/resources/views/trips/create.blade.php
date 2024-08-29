@@ -39,14 +39,14 @@
             <!-- Data Inizio -->
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_inizio">Data Inizio*</label>
-                <input type="date" id="data_inizio" name="data_inizio" class="form-control custom-input">
+                <input type="date" id="data_inizio" name="data_inizio" class="form-control custom-input" min="{{$dateToday}}" value="{{$dateToday}}">
                 <div id="dataInizioError" class="custom-error"></div>
             </div>
 
             <!-- Data Fine -->
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_fine">Data Fine</label>
-                <input type="date" id="data_fine" name="data_fine" class="form-control custom-input">
+                <input type="date" id="data_fine" name="data_fine" class="form-control custom-input" min="{{$dateToday}}" value="{{$dateToday}}">
                 <div id="dataFineError" class="custom-error"></div>
             </div>
 

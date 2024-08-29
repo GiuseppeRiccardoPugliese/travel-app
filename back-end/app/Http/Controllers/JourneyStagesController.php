@@ -46,8 +46,11 @@ class JourneyStagesController extends Controller
     {
         // Trovo il viaggio e verifico che appartenga all'utente autenticato
         $trip = Trip::find($request->trip_id);
-
-        return view('journeyStages.create', compact('trip'));
+        $data_inizio= $trip->data_inizio;
+        $data_fine= $trip->data_fine;
+        $durata_viaggio = $trip->durata_viaggio;
+        
+        return view('journeyStages.create', compact('trip','durata_viaggio','data_inizio','data_fine'));
     }
 
     /**
@@ -104,8 +107,11 @@ class JourneyStagesController extends Controller
     {
         $stage = JourneyStage::findOrFail($request->stage_id);
         $trip = Trip::findOrFail($request->trip_id);
-
-        return view('journeyStages.edit', compact('stage', 'trip'));
+        $data_inizio= $trip->data_inizio;
+        $data_fine= $trip->data_fine;
+        $durata_viaggio = $trip->durata_viaggio;
+        
+        return view('journeyStages.edit', compact('stage', 'trip','durata_viaggio','data_inizio','data_fine'));
     }
 
     /**

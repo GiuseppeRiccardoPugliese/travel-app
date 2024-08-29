@@ -44,7 +44,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_inizio">Data Inizio*</label>
                 <input type="date" id="data_inizio" name="data_inizio" class="form-control custom-input"
-                    value="{{ $trip->data_inizio }}">
+                    value="{{ $trip->data_inizio }}" min="{{$data_inizio}}" max="{{$data_fine}}">
                 <div id="dataInizioError" class="custom-error"></div>
             </div>
 
@@ -52,7 +52,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_fine">Data Fine</label>
                 <input type="date" id="data_fine" name="data_fine" class="form-control custom-input"
-                    value="{{ $trip->data_fine }}">
+                    value="{{ $trip->data_fine }}"  min="{{$data_inizio}}" >
                 <div id="dataFineError" class="custom-error"></div>
             </div>
 

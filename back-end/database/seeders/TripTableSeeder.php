@@ -30,7 +30,11 @@ class TripTableSeeder extends Seeder
             $date1 = Carbon::parse($tripData['data_fine']);
             $date2 = Carbon::parse($tripData['data_inizio']);
 
-            $diffInDays = $date1->diffInDays($date2);
+            $diffInSeconds = $date1->diffInSeconds($date2);
+
+            // Converto i secondi in giorni (1 giorno = 86400 secondi)
+            $diffInDays = $diffInSeconds / 86400;
+
             // Inserisco il viaggio e ottieni l'istanza del modello Trip
             $trip = Trip::create([
                 'nome' => $tripData['nome'],
@@ -40,7 +44,7 @@ class TripTableSeeder extends Seeder
                 'destinazione' => $tripData['destinazione'],
                 'votazione' => $tripData['votazione'],
                 'immagine' => $tripData['immagine'],
-                'durata_viaggio' => $diffInDays,
+                'durata_viaggio' => $diffInDays+1,
                 'created_at' => $tripData['created_at'],
                 'updated_at' => $tripData['updated_at'],
             ]);

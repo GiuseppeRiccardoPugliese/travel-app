@@ -47,14 +47,16 @@
             {{-- Data --}}
             <div class="form-group mb-3">
                 <label class="custom-label" for="data">Data</label>
-                <input type="date" class="form-control custom-input" id="data" name="data">
+                <input type="date" class="form-control custom-input" id="data" name="data"
+                    min="{{ $data_inizio }}" max="{{ $data_fine }}" value="{{ $data_inizio }}">
                 <div id="dataError" class="custom-error"></div>
             </div>
 
             {{-- Ordine --}}
             <div class="form-group mb-3">
-                <label class="custom-label" for="ordine">Ordine*</label>
-                <input type="number" class="form-control custom-input" id="ordine" name="ordine">
+                <label class="custom-label" for="ordine">Giorno*</label>
+                <input type="number" class="form-control custom-input" id="ordine" name="ordine" min="1"
+                    max="{{ $durata_viaggio }}" value="1">
                 <div id="ordineError" class="custom-error"></div>
             </div>
 
@@ -75,7 +77,58 @@
     </div>
 @endsection
 <script>
+    function changeOrNotDay(event) {
+        let minGiorno = '{{ $data_inizio }}';
+        let maxGiorno = '{{ $data_fine }}';
+        // Converto le stringhe di data in oggetti Date
+        let dataInizio = new Date(maxGiorno);
+        let dataFine = new Date(minGiorno);
+
+        let dataSelezionata = document.getElementById('data').value;
+
+        let selectedDate = new Date(dataSelezionata);
+        let startTime = selectedDate.getTime();
+        let endTime = dataFine.getTime();
+
+        let giornInMillis = startTime - endTime;
+
+        // Converto la differenza in giorni
+        let differenceInDays = Math.floor(giornInMillis / (1000 * 60 * 60 * 24));
+        console.log(document.getElementById('ordine').value = differenceInDays + 1)
+    }
+
+    function changeDateorNot(event) {
+
+        let dataInizio = '{{ $data_inizio }}'
+        // Numero di giorni da aggiungere
+        let giorniDaAggiungere = document.getElementById('ordine').value - 1;
+
+        // Converti giorni in secondi
+        let secondiInGiorni = giorniDaAggiungere * 24 * 60 * 60; // giorni * ore/giorno * minuti/ora * secondi/minuto
+
+        // Converti la data iniziale in millisecondi
+        let startDate = new Date(dataInizio);
+        let startDateInMillis = startDate.getTime();
+
+        // Aggiungi i secondi convertiti in millisecondi
+        let nuovaDataInMillis = startDateInMillis + (secondiInGiorni * 1000);
+
+        // Converti la nuova data in formato Date
+        let nuovaData = new Date(nuovaDataInMillis);
+
+        // Converti la nuova data in formato YYYY-MM-DD
+        let nuovaDataFormato = nuovaData.toISOString().split('T')[0];
+
+        document.getElementById('data').value = nuovaDataFormato  ;
+    }
     document.addEventListener('DOMContentLoaded', function() {
+        // CAMBIARE GIORNO DALLA DATA
+        const dataTappa = document.getElementById('data');
+        dataTappa.addEventListener('change', changeOrNotDay);
+
+        // CAMBIARE DATA DAL GIORNO
+        const ordineTappa = document.getElementById('ordine');
+        ordineTappa.addEventListener('change', changeDateorNot);
         document.getElementById('tappaForm').addEventListener('submit', function(event) {
 
             // Reset error messages
@@ -111,11 +164,16 @@
                 hasError = true;
             }
 
+
             // Validazione Ordine
+
+            // variabile per determinare il max dei giorni da mettere nel campo
+            let maxGiorni = "{{ $durata_viaggio }}";
+
             let ordine = document.getElementById('ordine').value;
-            if (ordine === '' || ordine < 0) {
+            if (ordine === '' || ordine < 1) {
                 document.getElementById('ordineError').textContent =
-                    'Il campo "Ordine" deve essere un numero positivo.';
+                    `Il campo "Giorno" deve essere un numero compreso 1 e ${maxGiorni}`;
                 document.getElementById('ordineError').style.display = 'block';
                 hasError = true;
             }
