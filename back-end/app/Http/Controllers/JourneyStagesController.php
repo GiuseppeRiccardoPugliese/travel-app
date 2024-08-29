@@ -68,7 +68,7 @@ class JourneyStagesController extends Controller
         $journeyStage->posizione = $data['posizione'];
         $journeyStage->data = $data['data'];
         $journeyStage->ordine = $data['ordine'];
-        $journeyStage->completata = isset($data['compleata']) ? 1 : 0;
+        $journeyStage->completata = $request->completata == "on"? 1 : 0;
 
         $trip_id = $request->trip_id;
 
