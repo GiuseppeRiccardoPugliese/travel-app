@@ -50,7 +50,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data">Data</label>
                 <input type="date" id="data" name="data" class="form-control custom-input"
-                    min="{{ $data_inizio }}" max="{{ $data_fine }}" value="{{ $data_inizio }}">
+                    min="{{ $data_inizio }}" max="{{ $data_fine }}" value="{{ $stage->data }}">
                 <div id="dataError" class="custom-error"></div>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="ordine">Giorno*</label>
                 <input type="number" id="ordine" name="ordine" class="form-control custom-input"
-                    value="{{ old('ordine', $stage->ordine) }}">
+                    value="{{ old('ordine', $stage->ordine) }}" min="1" max="{{$durata_viaggio}}">
                 <div id="ordineError" class="custom-error"></div>
             </div>
 
