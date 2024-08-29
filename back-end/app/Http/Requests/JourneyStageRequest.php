@@ -28,7 +28,7 @@ class JourneyStageRequest extends FormRequest
             'posizione' => 'required|string|max:255',
             'data' => 'nullable|after_or_equal:today',
             'ordine' => 'required|integer|min:1',
-            'completata' => 'boolean',
+            'completata' => 'nullable',
         ];
     }
 
@@ -46,7 +46,6 @@ class JourneyStageRequest extends FormRequest
             'ordine.required' => 'Il campo giorno è obbligatorio.',
             'ordine.integer' => 'Il campo giorno deve essere un numero intero.',
             'ordine.min' => 'Il campo giorno deve essere almeno 1.',
-            'completata.boolean' => 'Il campo completata deve essere vero o falso.',
         ];
     }
 
