@@ -1,5 +1,5 @@
-<section class=" ps-4 text-dark ">
-    <h2 class="text_title fw-bold">Pianifica il tuo viaggio!</h2>
+<section class="text-dark ">
+    <h2 class="text_title fw-bold text-center mb-3">Pianifica il tuo viaggio!</h2>
 </section>
 <div class="container p-0 d-flex flex-column mb-4">
 
@@ -43,7 +43,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalSearchedCity">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="scrollPage()"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="scrollPage()"></button>
                 </div>
                 <div class="modal-body p-0">
                     <!-- Mappa che riempie la larghezza e altezza del modale -->
@@ -59,11 +60,12 @@
     function noScrollPage() {
 
         console.log('asdasd');
-        document.getElementById('main-body').style.overflowY='clip';
+        document.getElementById('main-body').style.overflowY = 'clip';
 
     }
-    function scrollPage(){
-        document.getElementById('main-body').style.overflowY='auto';
+
+    function scrollPage() {
+        document.getElementById('main-body').style.overflowY = 'auto';
 
     }
 </script>
