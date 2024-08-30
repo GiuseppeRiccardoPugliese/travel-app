@@ -1,8 +1,14 @@
 <script>
 import axios from "axios";
 
+//Import del carosello
+import Carousel from '../components/Carousel.vue';
+
 export default{
   name: "Trips",
+  components: {
+    Carousel,
+  },
   data() {
     return {
       trips : [], //Array per i viaggi
@@ -37,6 +43,10 @@ export default{
 
 <template>
   <div>
+
+    <!-- Carosello -->
+    <Carousel/>
+
     <!-- VIAGGI -->
     <div class="trips-container">
       <h1 class="trips-heading">Elenco dei Viaggi</h1>

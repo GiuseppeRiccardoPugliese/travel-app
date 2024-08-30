@@ -20,7 +20,7 @@ export default {
             <!-- Prima Card Autore -->
             <div class="col-lg-4 col-md-6 col-10 mb-4 d-flex">
                 <div class="card author-card flex-fill">
-                    <img src="../../public/IMG-20240309-WA0193.jpg" class="card-img-top"
+                    <img src="../../public/Giuseppe.jpg" class="card-img-top"
                         alt="Giuseppe Riccardo Pugliese" />
                     <div class="card-body text-center d-flex flex-column">
                         <h5 class="card-title">Giuseppe Riccardo Pugliese</h5>
