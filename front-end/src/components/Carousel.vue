@@ -26,8 +26,8 @@ export default {
 <template>
     <div class="carousel-container">
         <swiper
-            :spaceBetween="30"
-            :centeredSlides="true"
+            :spaceBetween="15"
+            :centeredSlides="false"
             :autoplay="{
                 delay: 2500,
                 disableOnInteraction: false,
@@ -37,6 +37,10 @@ export default {
             :navigation="true"
             :modules="modules"
             :breakpoints="{
+                '1800': {
+                    slidesPerView: 5,
+                    spaceBetween: 70,
+                },
                 '1300': {
                     slidesPerView: 4,
                     spaceBetween: 30,
@@ -47,11 +51,15 @@ export default {
                 },
                 '768': {
                     slidesPerView: 2,
-                    spaceBetween: 15,
+                    spaceBetween: 5,
                 },
                 '576': {
                     slidesPerView: 1,
                     spaceBetween: 10,
+                },
+                '0': {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
                 }
             }"
             class="mySwiper my-4"
@@ -99,13 +107,6 @@ img {
 .carousel-container {
     height: 100%;
     padding: 24px 0;
-}
-
-@media screen and (max-width: 900px) {
-    img {
-        width: 100%;
-        height: 100%;
-    }
 }
 
 @media screen and (min-width: 1400px) {
