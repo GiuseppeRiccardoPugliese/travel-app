@@ -76,7 +76,7 @@
                         <input type="checkbox" id="star{{ $i }}" name="votazione"
                             value="{{ $i <= $stage->votazione ? '1' : '0' }}" style="display: none;">
                         <!-- Stelle per la selezione -->
-                        <i class="fas fa-star" data-value="{{ $i }}"
+                        <i class="fas fa-star forms" data-value="{{ $i }}"
                             onclick="colorStar({{ $i }}, 'star-container-{{ $i }}')"></i>
                     </label>
                 @endforeach

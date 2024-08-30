@@ -35,16 +35,10 @@
 
 </head>
 <!-- Usando Vite -->
-@vite([
-    'resources/js/app.js',
-    'resources/js/maps_scripts.js',
-    'resources/js/search_city_image.js',
-    'resources/js/scroll_page.js',
-    'resources/js/stars.js',
-])
+@vite(['resources/js/app.js', 'resources/js/maps_scripts.js', 'resources/js/search_city_image.js', 'resources/js/scroll_page.js', 'resources/js/stars.js'])
 </head>
 
-<body class="vh-100">
+<body class="vh-100 slide-element">
     <div id="app" class="d-flex flex-column h-100">
         <header class="site-header">
             <div class="container d-flex justify-content-center align-items-center py-3">
@@ -61,7 +55,7 @@
 
 
 
-        <main class="mb-4 flex-grow-1">
+        <main class="flex-grow-1" id="main-body">
             @yield('content')
         </main>
 

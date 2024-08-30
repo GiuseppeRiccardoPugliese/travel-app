@@ -11,7 +11,7 @@ class TripApiController extends Controller
 {
     public function index()
     {
-        $trips = Trip::all();
+        $trips = Trip::with('users')->get();
 
         return response()->json($trips);
     }

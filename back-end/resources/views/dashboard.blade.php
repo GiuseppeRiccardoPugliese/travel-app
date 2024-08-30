@@ -8,7 +8,12 @@
 @section('content')
     @include('search_bar')
     <div class="ps-4 typing-container">
-        <h3 class="text_title fw-bold">Lasciati ispirare!</h3>
+        <h4 class="fw-bold mb-0">Lasciati ispirare!</h4>
     </div>
     @include('carousel')
+    <div class="ps-4 typing-container2 my-4">
+        <h4 class="fw-bold mb-0">Oppure guarda i nostri utenti dove sono andati...</h4>
+    </div>
+
+    @include('card_carousel')
 @endsection

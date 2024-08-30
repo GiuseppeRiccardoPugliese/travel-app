@@ -43,5 +43,5 @@ function coloredStars() {
 
 
 }
-console.log('stars.js loaded');
+
 

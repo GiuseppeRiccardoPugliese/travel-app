@@ -1,16 +1,18 @@
-let scrollAmount = 100; // Altezza dello scroll in pixel per ogni scatto
-let scrollDuration = 300; // Durata dello scroll in millisecondi
+let scrollAmount = 100;
+let scrollDuration = 300;
 
-function smoothScrollBy(amount) {
-    let start = window.scrollY;
-    let startTime = null;
+function smoothScrollBy(element, amount) {
+    const start = element.scrollTop;
+    const startTime = performance.now();
 
     function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        let timeElapsed = currentTime - startTime;
-        let progress = Math.min(timeElapsed / scrollDuration, 1);
-        window.scrollTo(0, start + amount * easeInOutQuad(progress));
-        if (timeElapsed < scrollDuration) {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / scrollDuration, 1);
+        const ease = easeInOutQuad(progress);
+
+        element.scrollTo(0, start + amount * ease);
+
+        if (elapsedTime < scrollDuration) {
             requestAnimationFrame(animation);
         }
     }
@@ -22,16 +24,14 @@ function smoothScrollBy(amount) {
     requestAnimationFrame(animation);
 }
 
-// Funzione che gestisce lo scroll a scatti e fluido
 function scrollHandler(event) {
-    event.preventDefault(); // Previene lo scroll standard
-    let delta = Math.sign(event.deltaY); // Determina la direzione dello scroll
-    smoothScrollBy(delta * scrollAmount); // Esegue lo scroll a scatti con animazione
+    event.preventDefault();
+    const delta = Math.sign(event.deltaY);
+    const main = document.querySelector('main');
+    smoothScrollBy(main, delta * scrollAmount);
 }
 
-// Aggiungi l'evento di scroll del mouse alla pagina
-window.addEventListener('wheel', scrollHandler);
-
+document.querySelector('main').addEventListener('wheel', scrollHandler);
 
 document.addEventListener('DOMContentLoaded', function () {
     const dropdown = document.querySelector('.nav-item.dropdown');
