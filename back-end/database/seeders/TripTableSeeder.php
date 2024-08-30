@@ -69,11 +69,13 @@ class TripTableSeeder extends Seeder
     {
         $client_id = 'QngG7sfBVMWvG3kVsWuLqkCRWftkIHIqNHRRsI6fp0I';
         // Effettua una richiesta GET a Unsplash per la destinazione
-        $response = Http::get('https://api.unsplash.com/search/photos', [
-            'query' => $destination,
-            'per_page' => 1, // Richiedi solo una immagine
-            'client_id' => $client_id
-        ]);
+        $response = Http::withOptions([
+            'verify' => false,
+        ])->get('https://api.unsplash.com/search/photos', [
+                    'query' => $destination,
+                    'per_page' => 1,
+                    'client_id' => $client_id,
+                ]);
 
 
         // Controlla se la richiesta è andata a buon fine
@@ -85,9 +87,9 @@ class TripTableSeeder extends Seeder
 
                 $imageUrl = $imageData['urls']['regular'];
 
-               
+
             } else {
-                $imageUrl='https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=';
+                $imageUrl = 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=';
                 $this->command->info("Nessuna immagine trovata per $destination.");
             }
             // Scarica l'immagine
