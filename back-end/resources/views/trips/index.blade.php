@@ -216,7 +216,7 @@
 /* Regole per schermi medi e superiori */
 @media (min-width: 768px) {
     .card-img-top {
-        max-height: 20rem;
+        max-height: 10rem;
         /* Altezza massima per schermi medi e superiori */
     }
 
@@ -239,7 +239,7 @@
     }
 
     .card-img-top {
-        max-height: 20rem;
+        max-height: 10rem;
         /* Altezza massima per schermi medi e superiori */
     }
 
@@ -257,7 +257,7 @@
 
 @media (min-width: 1200px) {
     .card-img-top {
-        max-height: 12rem;
+        max-height: 10rem;
         /* Altezza massima per schermi extra-grandi */
 
     }

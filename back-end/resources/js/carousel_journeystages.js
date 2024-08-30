@@ -50,12 +50,18 @@ async function carousel(id) {
     // DEBUG
     // console.log(cardsData);
 
-    for (let i = 0; i < cardsData.length ; i++) {
-        if (cardsData[i].trip.immagine == null && cardsData[i].votazione != null) {
+    for (let i = 0; i <= Object.keys(cardsData).length; i++) {
+        if(cardsData[i] == null){
+            continue;
+        }
+        if (
+            cardsData[i].trip.immagine == null &&
+            cardsData[i].votazione != null
+        ) {
             continue;
         }
         // DEBUG
-        // console.log(cardsData[i].name)
+        // console.log(cardsData[i].trip.immagine);
 
         const cardHTML = `
         
@@ -70,33 +76,36 @@ async function carousel(id) {
                    
                 </div>
                `;
-        
+
         const div = document.createElement("div");
         div.classList.add("d-flex", "flex-column", "align-items-center");
         div.innerHTML = cardHTML;
         carosello.append(div);
     }
-    const itemsToShow = (cardsData.length > 1) ? {
-        0: {
-            items: 1, // Mostra 1 elemento per schermi piccoli
-        },
-        600: {
-            items: Math.min(cardsData.length, 2), // Mostra 2 elementi per schermi medi, o meno se non ci sono 2 elementi
-        },
-        1000: {
-            items: Math.min(cardsData.length, 4), // Mostra fino a 4 elementi per schermi grandi, o meno se non ci sono 4 elementi
-        }
-    } : {
-        0: {
-            items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
-        },
-        600: {
-            items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
-        },
-        1000: {
-            items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
-        }
-    };
+    const itemsToShow =
+        Object.keys(cardsData).length > 1
+            ? {
+                0: {
+                    items: 1, // Mostra 1 elemento per schermi piccoli
+                },
+                600: {
+                    items: Math.max(1, Math.min(Object.keys(cardsData).length, 2)), // Mostra almeno 2 elementi per schermi medi, fino a 2 se disponibili
+                },
+                1000: {
+                    items: Math.max(1, Math.min(Object.keys(cardsData).length, 4)), // Mostra tra 2 e 4 elementi per schermi grandi, a seconda della disponibilità
+                },
+              }
+            : {
+                  0: {
+                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                  },
+                  600: {
+                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                  },
+                  1000: {
+                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                  },
+              };
     // Inizializza Owl Carousel
     carosello.owlCarousel({
         loop: true, // Attiva lo scorrimento infinito
@@ -106,6 +115,6 @@ async function carousel(id) {
         autoplayTimeout: 4000, // Durata di ogni slide in millisecondi
         mouseDrag: false, // Disattiva il drag con il mouse
         touchDrag: false, // Disattiva il drag con il tocco
-        responsive: itemsToShow
+        responsive: itemsToShow,
     });
 }
