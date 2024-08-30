@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    @if ($trips != null)
+    @if (count($trips) > 0)
         <div class="ps-4 typing-container">
             <h4 class="fw-bold mb-0">Viaggi Passati</h4>
         </div>
@@ -131,8 +131,11 @@
 
             </div>
         </div>
+    @else
+        <div class="ps-4 typing-container">
+            <h4 class="fw-bold mb-0">Nessun viaggio trovato. Crea il tuo primo viaggio!</h4>
+        </div>
     @endif
-
 
 @endauth
 @endsection
