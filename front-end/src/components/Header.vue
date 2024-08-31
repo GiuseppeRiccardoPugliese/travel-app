@@ -42,18 +42,17 @@ export default {
         <!-- Off-canvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header border-bottom border-1">
-                <div class="site-header">
-                    <h1 class="travel-app mb-0">
-                        <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
-                            class="part3">APP</span>
-                    </h1>
-                </div>
+
+                <span class="typing-container">Area riservata</span>
+
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
+
                 <a href="http://localhost:8000/register" class="offcanvas-link d-block mb-3"
                     id="offcanvasRightLabel">Registrati!</a>
                 <a href="http://localhost:8000/login" class="offcanvas-link" id="offcanvasRightLabel">Accedi!</a>
+
             </div>
         </div>
     </header>
@@ -126,6 +125,52 @@ export default {
 .offcanvas-link:active {
     background-color: #0fb0b8;
     transform: translateY(0);
+}
+
+//TYPING INSIDE OFFCANVAS 
+.typing-container {
+    display: inline-block;
+    font-size: 24px;
+    color: #333;
+    border-right: 2px solid #333;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+
+    50% {
+        width: 14%;
+    }
+
+    75% {
+        width: 50%;
+        border-right: none;
+    }
+
+    /* Pause with border removed */
+    100% {
+        width: 100%;
+        border-right: none;
+    }
+
+    /* Maintain the final state */
+}
+
+@keyframes blink-caret {
+
+    from,
+    to {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: #333;
+    }
 }
 
 
