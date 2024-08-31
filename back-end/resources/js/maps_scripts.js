@@ -44,7 +44,8 @@ function selectCity(city) {
     fetchCityPhotos(city.address.freeformAddress);
     document.getElementById("search_city").value = city.address.freeformAddress;
     // PER IL MODALE(NOME)
-    document.getElementById("ModalSearchedCity").innerHTML = city.address.freeformAddress;
+    document.getElementById("ModalSearchedCity").innerHTML =
+        city.address.freeformAddress;
     document.getElementById("results").innerHTML = "";
     document.getElementById("results").classList.remove("mt-2");
     document
@@ -69,7 +70,7 @@ function selectCity(city) {
         map_modal.setCenter([city.position.lon, city.position.lat]);
     }
     $("#exampleModal").on("shown.bs.modal", function () {
-        document.getElementById('nav_bar').style.display='none';
+        document.getElementById("nav_bar").style.display = "none";
         if (map_modal) {
             // Ricalcola la dimensione della mappa nel modale
             map_modal.resize();

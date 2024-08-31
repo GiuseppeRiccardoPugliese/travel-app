@@ -43,13 +43,13 @@ async function carousel() {
 
         const cardHTML = `
         
-                <div class="item d-flex flex-column align-items-center px-3" style="height: 480px;">
+                <div class="item d-flex flex-column align-items-center px-3" style="height: 480px;width:430px;">
                      <div class="profile-container mb-2">
             <img src="/storage/${cardsData[i].users[0].immagine_url}" alt="Profile Picture" class=" rounded-circle w-auto">
             <span class="profile-name">${cardsData[i].users[0].name}</span>
         </div>
-                    <div class="card travel-card">
-                        <img src="/storage/${cardsData[i].immagine}" class="card-img-top travel-card-img" alt="${cardsData[i].nome}">
+                    <div class="card travel-card w-75">
+                        <img src="/storage/${cardsData[i].immagine}" class="card-img-top travel-card-img" alt="${cardsData[i].nome} ">
                         <div class="card-body travel-card-body">
                             <h5 class="card-title">${cardsData[i].nome}</h5>
                             <p class="card-text">${cardsData[i].descrizione}</p>
