@@ -31,4 +31,7 @@ Route::group(['prefix' => 'v1'], function () {
     //ROTTA API TAPPE
     Route::get('/journey-stages', [JourneyStagesApiController::class, 'index']);
 
+    //Rotta api per prendere le tappe con id specifico
+    Route::get('/journey-stages-by-trip', [JourneyStagesApiController::class, 'getStagesByTripId']);
+
 });

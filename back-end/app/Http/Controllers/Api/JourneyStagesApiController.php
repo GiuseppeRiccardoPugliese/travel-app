@@ -42,4 +42,15 @@ class JourneyStagesApiController extends Controller
         // Restituisci le tappe con votazione superiore alla media come JSON
         return response()->json($aboveAverageStages);
     }
+
+    //Func per le tappe con id specifico nel front
+    public function getStagesByTripId(Request $request)
+    {
+        $tripId = $request->query('trip_id');
+
+        // Ttappe per il viaggio specificato
+        $stages = JourneyStage::where('trip_id', $tripId)->get();
+
+        return response()->json($stages);
+    }
 }
