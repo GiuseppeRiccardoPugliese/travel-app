@@ -59,11 +59,20 @@ class TripController extends Controller
 
         // Converto i secondi in giorni (1 giorno = 86400 secondi)
         $diffInDays = $diffInSeconds / 86400;
-        $trip->durata_viaggio = $diffInDays+1;
+        $trip->durata_viaggio = $diffInDays + 1;
 
         // Gestione dell'immagine
         if ($request->hasFile('immagine')) {
-            $imagePath = $request->file('immagine')->store('images', 'public');
+            $imagePath = $request->file('immagine')->store('images/tripsDefault/', 'public');
+            $trip->immagine = $imagePath;
+        } else {
+            $path = 'https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=';
+            $imageContent = file_get_contents($path);
+            $imageName = uniqid() . '.jpg';
+
+            // Salva l'immagine nel filesystem
+            Storage::disk('public')->put('images/tripsDefault/' . $imageName, $imageContent);
+            $imagePath = 'images/tripsDefault/' . $imageName;
             $trip->immagine = $imagePath;
         }
 
@@ -125,10 +134,10 @@ class TripController extends Controller
 
         // Converto i secondi in giorni (1 giorno = 86400 secondi)
         $diffInDays = $diffInSeconds / 86400;
-        $trip->durata_viaggio = $diffInDays+1;
+        $trip->durata_viaggio = $diffInDays + 1;
         // Gestione dell'immagine
         if ($request->hasFile('immagine')) {
-            $imagePath = $request->file('immagine')->store('images', 'public');
+            $imagePath = $request->file('immagine')->store('images/tripsDefault/', 'public');
             $trip->immagine = $imagePath;
         }
 
