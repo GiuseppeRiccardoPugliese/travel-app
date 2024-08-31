@@ -41,7 +41,7 @@ export default {
 
         <!-- Off-canvas -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-            <div class="offcanvas-header border-bottom border-1">
+            <div class="offcanvas-header border-bottom border-1" style="padding: 20px;">
 
                 <span class="typing-container">Area riservata</span>
 
