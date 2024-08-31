@@ -4,15 +4,15 @@ import axios from "axios";
 //Import del carosello
 import Carousel from '../components/Carousel.vue';
 
-export default{
+export default {
   name: "Trips",
   components: {
     Carousel,
   },
   data() {
     return {
-      trips : [], //Array per i viaggi
-      stages : [], //Array per le tappe
+      trips: [], //Array per i viaggi
+      stages: [], //Array per le tappe
     }
   },
   mounted() {
@@ -45,7 +45,7 @@ export default{
   <div>
 
     <!-- Carosello -->
-    <Carousel/>
+    <Carousel :trips="trips" />
 
     <!-- VIAGGI -->
     <div class="trips-container">
@@ -77,7 +77,7 @@ export default{
       <p v-else class="loading-message">Caricamento delle tappe in corso...</p>
     </div>
   </div>
-  
+
 </template>
 
 <style scoped lang="scss">
@@ -157,5 +157,4 @@ export default{
   font-size: 1rem;
   color: #6c757d;
 }
-
 </style>

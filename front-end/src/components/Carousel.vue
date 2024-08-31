@@ -15,6 +15,18 @@ export default {
         Swiper,
         SwiperSlide,
     },
+    props: {
+        trips: {
+            type: Array,
+            required: true,
+        },
+    },
+    methods: {
+        getImageUrl(imagePath) {
+            // Verifica se l'immagine è un path relativo e costruisci l'URL completo
+            return `http://localhost:8000/storage/${imagePath}`;
+        },
+    },
     setup() {
         return {
             modules: [Autoplay, Pagination, Navigation],
@@ -25,73 +37,39 @@ export default {
 
 <template>
     <div class="carousel-container">
-        <swiper
-            :spaceBetween="15"
-            :centeredSlides="false"
-            :autoplay="{
-                delay: 2500,
-                disableOnInteraction: false,
-            }"
-            :slidesPerView="4"
-            :loop="true"
-            :navigation="true"
-            :modules="modules"
-            :breakpoints="{
-                '1800': {
-                    slidesPerView: 5,
-                    spaceBetween: 70,
-                },
-                '1300': {
-                    slidesPerView: 4,
-                    spaceBetween: 30,
-                },
-                '1024': {
-                    slidesPerView: 3,
-                    spaceBetween: 20,
-                },
-                '768': {
-                    slidesPerView: 2,
-                    spaceBetween: 5,
-                },
-                '576': {
-                    slidesPerView: 1,
-                    spaceBetween: 10,
-                },
-                '0': {
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                }
-            }"
-            class="mySwiper my-4"
-        >
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 1" />
-                <span>Viaggio 1</span>
-            </swiper-slide>
-
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 2" />
-                <span>Viaggio 2</span>
-            </swiper-slide>
-
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 3" />
-                <span>Viaggio 3</span>
-            </swiper-slide>
-
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 4" />
-                <span>Viaggio 4</span>
-            </swiper-slide>
-
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 5" />
-                <span>Viaggio 5</span>
-            </swiper-slide>
-
-            <swiper-slide class="d-flex flex-column justify-content-center align-items-center">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMVL_uoAuufBNjJTcfBrqAkhexO0oMtG84qg&s" alt="Viaggio 6" />
-                <span>Viaggio 6</span>
+        <swiper :spaceBetween="15" :centeredSlides="false" :autoplay="{
+            delay: 2500,
+            disableOnInteraction: false,
+        }" :slidesPerView="4" :loop="true" :navigation="true" :modules="modules" :breakpoints="{
+            '1800': {
+                slidesPerView: 5,
+                spaceBetween: 70,
+            },
+            '1300': {
+                slidesPerView: 4,
+                spaceBetween: 30,
+            },
+            '1024': {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            },
+            '768': {
+                slidesPerView: 2,
+                spaceBetween: 5,
+            },
+            '576': {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
+            '0': {
+                slidesPerView: 1,
+                spaceBetween: 0,
+            }
+        }" class="mySwiper my-4">
+            <swiper-slide v-for="trip in trips" :key="trip.id"
+                class="d-flex flex-column justify-content-center align-items-center">
+                <img :src="getImageUrl(trip.immagine)" :alt="trip.nome" />
+                <span>{{ trip.nome }}</span>
             </swiper-slide>
         </swiper>
     </div>
