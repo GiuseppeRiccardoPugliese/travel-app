@@ -48,16 +48,15 @@ async function carousel(id) {
     carosello.empty();
 
     // DEBUG
-    // console.log(cardsData);
+    console.log(Object.keys(cardsData).length);
 
-    for (let i = 0; i <= Object.keys(cardsData).length; i++) {
-        if(cardsData[i] == null){
-            continue;
-        }
+    for (let i = 0; i < Object.keys(cardsData).length; i++) {
+        console.log(cardsData[i]);
         if (
             cardsData[i].trip.immagine == null &&
             cardsData[i].votazione != null
         ) {
+            delete cardsData[i];
             continue;
         }
         // DEBUG
@@ -82,18 +81,25 @@ async function carousel(id) {
         div.innerHTML = cardHTML;
         carosello.append(div);
     }
+    console.log(Object.keys(cardsData).length);
     const itemsToShow =
         Object.keys(cardsData).length > 1
             ? {
-                0: {
-                    items: 1, // Mostra 1 elemento per schermi piccoli
-                },
-                600: {
-                    items: Math.max(1, Math.min(Object.keys(cardsData).length, 2)), // Mostra almeno 2 elementi per schermi medi, fino a 2 se disponibili
-                },
-                1000: {
-                    items: Math.max(1, Math.min(Object.keys(cardsData).length, 4)), // Mostra tra 2 e 4 elementi per schermi grandi, a seconda della disponibilità
-                },
+                  0: {
+                      items: 1, // Mostra 1 elemento per schermi piccoli
+                  },
+                  600: {
+                      items: Math.max(
+                          1,
+                          Math.min(Object.keys(cardsData).length, 2)
+                      ), // Mostra almeno 2 elementi per schermi medi, fino a 2 se disponibili
+                  },
+                  1000: {
+                      items: Math.max(
+                          1,
+                          Math.min(Object.keys(cardsData).length, 4)
+                      ), // Mostra tra 2 e 4 elementi per schermi grandi, a seconda della disponibilità
+                  },
               }
             : {
                   0: {
