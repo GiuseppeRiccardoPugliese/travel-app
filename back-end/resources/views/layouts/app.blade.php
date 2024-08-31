@@ -42,7 +42,7 @@
     <div id="app" class="d-flex flex-column h-100">
         <header class="site-header">
             <div class="container d-flex justify-content-center align-items-center py-3">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('http://localhost:5174/') }}">
                     <h1 class="travel-app mb-0">
                         <span class="part1">TRA</span><span class="part2">VEL</span><span class="dash">-</span><span
                             class="part3">APP</span>

@@ -5,12 +5,22 @@
         <div class="navbar-collapse flex-column" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             @auth
+                {{-- HOME --}}
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item pt-2 px-3">
+                        <a class="nav-link" href="{{ url('/') }}"><i class="fa-solid fa-house"></i></a>
+                        <span class="icon-text bg-white">Home</span>
+                    </li>
+                </ul>
+
+                {{-- VIAGGI --}}
                 <ul class="navbar-nav flex-column">
                     <li class="nav-item p-3">
                         <a class="nav-link" href="{{ route('trip.index') }}"><i class="fa-solid fa-earth-europe"></i></a>
                         <span class="icon-text bg-white">Viaggi</span>
                     </li>
                 </ul>
+
             @endauth
 
             <!-- Right Side Of Navbar -->
