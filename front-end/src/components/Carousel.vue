@@ -66,11 +66,12 @@ export default {
                 spaceBetween: 0,
             }
         }" class="mySwiper my-4">
-            <swiper-slide v-for="trip in trips" :key="trip.id"
-                class="d-flex flex-column justify-content-center align-items-center">
-                <img :src="getImageUrl(trip.immagine)" :alt="trip.nome" />
-                <div class="overlay">
-                    <span>{{ trip.nome }}</span>
+            <swiper-slide v-for="trip in trips" :key="trip.id" class="swiper-slide">
+                <div class="image-wrapper">
+                    <img :src="getImageUrl(trip.immagine)" :alt="trip.nome" />
+                    <div class="overlay">
+                        <span>{{ trip.nome }}</span>
+                    </div>
                 </div>
             </swiper-slide>
         </swiper>
@@ -78,12 +79,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-img {
-    width: 300px;
-    height: 200px;
-    border-radius: 20px;
-}
-
 .carousel-container {
     height: 100%;
     padding: 24px 0;
@@ -91,16 +86,22 @@ img {
 
 .swiper-slide {
     position: relative;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 300px;
+    height: 200px;
 
     img {
-        transition: filter 0.3s ease;
-        width: 300px;
-        height: 200px;
+        width: 100%;
+        height: 100%;
         border-radius: 20px;
+        transition: filter 0.3s ease;
     }
 
     .overlay {
@@ -128,10 +129,6 @@ img {
     }
 
     &:hover {
-        img {
-            filter: blur(4px);
-        }
-
         .overlay {
             opacity: 1;
         }
@@ -140,11 +137,9 @@ img {
 
 @media screen and (min-width: 1400px) {
     .swiper-slide {
-        img {
+        .image-wrapper {
             width: 300px;
             height: 200px;
-            margin-left: 20px;
-            margin-right: 20px;
         }
     }
 }
