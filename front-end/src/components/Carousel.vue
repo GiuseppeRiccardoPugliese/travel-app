@@ -69,7 +69,9 @@ export default {
             <swiper-slide v-for="trip in trips" :key="trip.id"
                 class="d-flex flex-column justify-content-center align-items-center">
                 <img :src="getImageUrl(trip.immagine)" :alt="trip.nome" />
-                <span>{{ trip.nome }}</span>
+                <div class="overlay">
+                    <span>{{ trip.nome }}</span>
+                </div>
             </swiper-slide>
         </swiper>
     </div>
@@ -87,12 +89,63 @@ img {
     padding: 24px 0;
 }
 
-@media screen and (min-width: 1400px) {
+.swiper-slide {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     img {
+        transition: filter 0.3s ease;
         width: 300px;
         height: 200px;
-        margin-left: 20px;
-        margin-right: 20px;
+        border-radius: 20px;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        text-align: center;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 20px;
+
+        span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    }
+
+    &:hover {
+        img {
+            filter: blur(4px);
+        }
+
+        .overlay {
+            opacity: 1;
+        }
+    }
+}
+
+@media screen and (min-width: 1400px) {
+    .swiper-slide {
+        img {
+            width: 300px;
+            height: 200px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
     }
 }
 </style>
