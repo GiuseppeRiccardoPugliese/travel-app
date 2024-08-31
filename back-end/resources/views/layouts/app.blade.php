@@ -9,7 +9,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link
 
+      rel="stylesheet"
+
+      type="text/css"
+
+      href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css"
+
+    />
     {{-- FiveIco --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
     {{-- FONT AWESOME --}}

@@ -7,9 +7,9 @@
 
             <h2 class="">Viaggio a: {{ $trip->nome }}</h2 class="mx-auto">
         </div>
-        <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="w-100" onclick="noScrollPage()">
+        <a class="w-100" >
             <div id="map-trip" style="height: 400px; width: 100%;position: relative;" class="mt-3 flex-fill">
-                <div id="searchBox" style="position: absolute; top: 10px; left: 10px; z-index: 10;"></div>
+                <div id="searchBox" ></div>
             </div>
 
 
@@ -171,31 +171,35 @@
 
             document.getElementById("map-trip").classList.add("drop-in-image");
 
-            // Aggiungi la barra di ricerca alla mappa
-            const searchBox = new tt.SearchBox({
-                key: 'JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96',
-                container: 'searchBox',
-                options: {
-                    language: 'en'
-                }
-            });
+            var options = {
 
-            searchBox.on('result', function(event) {
-                const result = event.result;
-                const latLng = result.position;
+                searchOptions: {
 
-                // Centra la mappa sul risultato della ricerca
-                map.setCenter([latLng.lon, latLng.lat]);
-                map.setZoom(14); // Zoom sul risultato
+                    key: "JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96",
 
-                // Aggiungi un marker al risultato della ricerca
-                new tt.Marker()
-                    .setLngLat([latLng.lon, latLng.lat])
-                    .addTo(map);
-            });
+                    language: "it-IT",
 
-            // Inizializza la ricerca
-            searchBox.init();
+                    limit: 5,
+
+                },
+
+                autocompleteOptions: {
+
+                    key: "JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96",
+
+                    language: "it-IT",
+
+                },
+
+            }
+
+            var ttSearchBox = new tt.plugins.SearchBox(tt.services, options)
+
+            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+
+            document.getElementById('searchBox').append(searchBoxHTML);
+
+
         } else {
             // Aggiorna la posizione e lo zoom se la mappa è già inizializzata
             map.setCenter([city.position.lon, city.position.lat]);
@@ -209,7 +213,39 @@
         if (marker_modal) {
             marker_modal.remove();
         }
+        ttSearchBox.on('tomtom.searchbox.resultselected', function(event) {
+            var result = event.data.result;
+            var lat = result.position.lat;
+            var lon = result.position.lng;
+            console.log(result);
+            // Aggiorna la mappa principale
+            map.setCenter([lon, lat]);
+            map.setZoom(18);
 
+            // Aggiorna la mappa del modale
+            map_modal.setCenter([lon, lat]);
+            map_modal.setZoom(10);
+
+            // Rimuovi il marker esistente, se presente
+            if (marker) marker.remove();
+            if (marker_modal) marker_modal.remove();
+
+            // Aggiungi un nuovo marker
+            marker = new tt.Marker()
+                .setLngLat([lon, lat])
+                .addTo(map);
+
+            marker_modal = new tt.Marker()
+                .setLngLat([lon, lat])
+                .addTo(map_modal);
+
+            // Aggiungi evento di click al marker
+            marker.getElement().addEventListener("click", () => {
+                console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+                const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+                window.open(googleMapsUrl, "_blank");
+            });
+        });
         // Aggiungi un nuovo marker
         marker = new tt.Marker()
             .setLngLat([city.position.lon, city.position.lat])
@@ -282,7 +318,7 @@
         /* Distanza dal bordo superiore della mappa */
         left: 10px;
         /* Distanza dal bordo sinistro della mappa */
-        width: 300px;
+        width: 500px;
         /* Larghezza della barra di ricerca */
         z-index: 1000;
         /* Assicurati che sia sopra la mappa */
