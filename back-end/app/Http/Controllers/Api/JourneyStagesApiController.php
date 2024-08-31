@@ -32,10 +32,11 @@ class JourneyStagesApiController extends Controller
 
         // Calcola la media di tutte le votazioni delle tappe
         $averageRating = $stages->avg('votazione');
+        // dd($averageRating);
 
         // Filtra le tappe con votazione superiore alla media
         $aboveAverageStages = $stages->filter(function ($stage) use ($averageRating) {
-            return $stage->votazione > $averageRating;
+            return $stage->votazione >= $averageRating;
         });
 
         // Restituisci le tappe con votazione superiore alla media come JSON

@@ -22,7 +22,7 @@
             </div>
             <div class="col-1 nav-item d-flex flex-column align-items-center gap-4">
                 <a href="{{ route('trip.create') }}" class="fs-3"><i class="fa-regular fa-calendar-plus"></i></a>
-                <span class="icon-text">Aggiungi un nuovo viaggio</span>
+                <span class="icon-text small">Aggiungi un nuovo viaggio</span>
             </div>
         </div>
     </div>
@@ -202,6 +202,9 @@
     }
 }
 
+.icon-text.small{
+    font-size: 12px;
+}
 .card-img-top {
     object-fit: cover;
     /* Mantiene le proporzioni dell'immagine */
