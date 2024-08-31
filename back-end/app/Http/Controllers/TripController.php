@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Trip;
@@ -31,8 +32,8 @@ class TripController extends Controller
     public function create()
     {
         $trips = Trip::all();
-
-        return view('trips.create', compact('trips'));
+        $dateToday = Carbon::now()->format('Y-m-d');
+        return view('trips.create', compact('trips', 'dateToday'));
     }
 
     /**
@@ -50,6 +51,15 @@ class TripController extends Controller
         $trip->data_inizio = $data['data_inizio'];
         $trip->data_fine = $data['data_fine'];
         $trip->destinazione = $data['destinazione'];
+
+        $date1 = Carbon::parse($data['data_fine']);
+        $date2 = Carbon::parse($data['data_inizio']);
+
+        $diffInSeconds = $date1->diffInSeconds($date2);
+
+        // Converto i secondi in giorni (1 giorno = 86400 secondi)
+        $diffInDays = $diffInSeconds / 86400;
+        $trip->durata_viaggio = $diffInDays+1;
 
         // Gestione dell'immagine
         if ($request->hasFile('immagine')) {
@@ -87,7 +97,9 @@ class TripController extends Controller
     public function edit(Request $request)
     {
         $trip = Trip::find($request->trip_id);
-        return view('trips.edit', compact('trip'));
+        $data_inizio = $trip->data_inizio;
+        $data_fine = $trip->data_fine;
+        return view('trips.edit', compact('trip', 'data_inizio', 'data_fine'));
     }
 
     /**
@@ -98,14 +110,22 @@ class TripController extends Controller
         // Estraggo tutti i dati dal request
         $data = $request->all();
 
-
         $trip = Trip::find($request->trip_id);
         $trip->nome = $data['nome'];
         $trip->descrizione = $data['descrizione'];
         $trip->data_inizio = $data['data_inizio'];
         $trip->data_fine = $data['data_fine'];
         $trip->destinazione = $data['destinazione'];
+        $trip->votazione = $data['valutazione'];
 
+        $date1 = Carbon::parse($data['data_fine']);
+        $date2 = Carbon::parse($data['data_inizio']);
+
+        $diffInSeconds = $date1->diffInSeconds($date2);
+
+        // Converto i secondi in giorni (1 giorno = 86400 secondi)
+        $diffInDays = $diffInSeconds / 86400;
+        $trip->durata_viaggio = $diffInDays+1;
         // Gestione dell'immagine
         if ($request->hasFile('immagine')) {
             $imagePath = $request->file('immagine')->store('images', 'public');

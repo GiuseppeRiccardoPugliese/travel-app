@@ -1,20 +1,16 @@
 <nav id="nav_bar"
     class="navbar navbar-expand-md navbar-light bg-white shadow-sm flex-column align-items-stretch rounded position-fixed end-0 me-4 rounded-pill shadow">
     <div class="container flex-column p-0">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+        <div class="navbar-collapse flex-column" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             @auth
-            <ul class="navbar-nav flex-column">
-                <li class="nav-item p-3">
-                    <a class="nav-link" href="{{ route('trip.index') }}"><i class="fa-solid fa-earth-europe"></i></a>
-                    <span class="icon-text">Viaggi</span>
-                </li>
-            </ul>
+                <ul class="navbar-nav flex-column">
+                    <li class="nav-item p-3">
+                        <a class="nav-link" href="{{ route('trip.index') }}"><i class="fa-solid fa-earth-europe"></i></a>
+                        <span class="icon-text bg-white">Viaggi</span>
+                    </li>
+                </ul>
             @endauth
 
             <!-- Right Side Of Navbar -->
@@ -38,7 +34,7 @@
                             <i class="fa-solid fa-user"></i>
                         </a>
 
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {{-- <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a> --}}
                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

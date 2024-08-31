@@ -7,7 +7,8 @@
         "destinazione": "Himalaya",
         "immagine": "mountains.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 5
     },
     {
         "nome": "Safari Africano",
@@ -17,7 +18,8 @@
         "destinazione": "Serengeti",
         "immagine": "safari.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 4
     },
     {
         "nome": "Tour delle Città Europee",
@@ -27,7 +29,8 @@
         "destinazione": "Parigi, Roma, Berlino",
         "immagine": "europe.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 3
     },
     {
         "nome": "Avventura in Amazzonia",
@@ -37,7 +40,8 @@
         "destinazione": "Amazzonia",
         "immagine": "amazon.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 5
     },
     {
         "nome": "Esplorazione Artica",
@@ -47,7 +51,8 @@
         "destinazione": "Artico",
         "immagine": "arctic.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 4
     },
     {
         "nome": "Viaggio alle Isole del Pacifico",
@@ -57,7 +62,8 @@
         "destinazione": "Fiji",
         "immagine": "pacific_islands.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 5
     },
     {
         "nome": "Tour del Giappone",
@@ -67,7 +73,8 @@
         "destinazione": "Tokyo, Kyoto",
         "immagine": "japan.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 4
     },
     {
         "nome": "Esplorazione del Deserto del Sahara",
@@ -77,7 +84,8 @@
         "destinazione": "Sahara",
         "immagine": "sahara.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 3
     },
     {
         "nome": "Viaggio in Australia",
@@ -87,7 +95,8 @@
         "destinazione": "Sydney, Outback",
         "immagine": "australia.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 4
     },
     {
         "nome": "Escursione alle Alpi Svizzere",
@@ -97,6 +106,7 @@
         "destinazione": "Alpi Svizzere",
         "immagine": "swiss_alps.jpg",
         "created_at": "2024-08-10T00:00:00",
-        "updated_at": "2024-08-10T00:00:00"
+        "updated_at": "2024-08-10T00:00:00",
+        "votazione": 5
     }
 ]

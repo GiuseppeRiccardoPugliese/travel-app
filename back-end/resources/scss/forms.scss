@@ -73,3 +73,34 @@
         transform: translateY(0);
     }
 }
+
+
+// STELLINE VOTAZIONE
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.star-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.star-container input[type="checkbox"] {
+    display: none;
+}
+
+.fa-star {
+    font-size: 2rem;
+    color: grey;
+    transition: color 0.3s;
+}
+
+.selected {
+    color: gold;
+}
+
+.fa-star.forms:hover {
+    color: gold;
+}

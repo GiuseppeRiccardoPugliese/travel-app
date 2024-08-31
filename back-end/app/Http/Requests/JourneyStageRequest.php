@@ -21,13 +21,14 @@ class JourneyStageRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'nome' => 'required|string|max:255',
             'descrizione' => 'nullable|string',
             'posizione' => 'required|string|max:255',
             'data' => 'nullable|after_or_equal:today',
-            'ordine' => 'required|integer|min:0',
-            'completata' => 'boolean',
+            'ordine' => 'required|integer|min:1',
+            'completata' => 'nullable',
         ];
     }
 
@@ -42,10 +43,9 @@ class JourneyStageRequest extends FormRequest
             'posizione.string' => 'Il campo posizione deve essere una stringa.',
             'posizione.max' => 'Il campo posizione non può superare i 255 caratteri.',
             'data.after_or_equal' => 'Il campo data deve essere una data odierna o futura.',
-            'ordine.required' => 'Il campo ordine è obbligatorio.',
-            'ordine.integer' => 'Il campo ordine deve essere un numero intero.',
-            'ordine.min' => 'Il campo ordine deve essere almeno 0.',
-            'completata.boolean' => 'Il campo completata deve essere vero o falso.',
+            'ordine.required' => 'Il campo giorno è obbligatorio.',
+            'ordine.integer' => 'Il campo giorno deve essere un numero intero.',
+            'ordine.min' => 'Il campo giorno deve essere almeno 1.',
         ];
     }
 

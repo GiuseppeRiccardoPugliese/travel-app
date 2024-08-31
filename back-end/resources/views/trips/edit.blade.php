@@ -44,7 +44,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_inizio">Data Inizio*</label>
                 <input type="date" id="data_inizio" name="data_inizio" class="form-control custom-input"
-                    value="{{ $trip->data_inizio }}">
+                    value="{{ $trip->data_inizio }}" min="{{$data_inizio}}" max="{{$data_fine}}">
                 <div id="dataInizioError" class="custom-error"></div>
             </div>
 
@@ -52,7 +52,7 @@
             <div class="form-group mb-3">
                 <label class="custom-label" for="data_fine">Data Fine</label>
                 <input type="date" id="data_fine" name="data_fine" class="form-control custom-input"
-                    value="{{ $trip->data_fine }}">
+                    value="{{ $trip->data_fine }}"  min="{{$data_inizio}}" >
                 <div id="dataFineError" class="custom-error"></div>
             </div>
 
@@ -71,6 +71,19 @@
                 <div id="immagineError" class="custom-error"></div>
                 <small class="custom-small-text">Accetta solo file JPEG, JPG e PNG</small>
             </div>
+            {{-- VOTO --}}
+            <div class="form-group mb-3 d-flex">
+                @foreach (range(1, 5) as $i)
+                    <label class="star-container" id="star-container-{{ $i }}">
+                        <input type="checkbox" id="star{{ $i }}" name="votazione"
+                            value="{{ $i <= $trip->votazione ? '1' : '0' }}" style="display: none;">
+                        <!-- Stelle per la selezione -->
+                        <i class="fas fa-star forms" data-value="{{ $i }}"
+                            onclick="colorStar({{ $i }}, 'star-container-{{ $i }}')"></i>
+                    </label>
+                @endforeach
+            </div>
+
 
             {{-- Visualizzazione IMG inserita --}}
             <div class="form-group text-center mb-3">
@@ -82,8 +95,11 @@
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-sm custom-submit-button">MODIFICA</button>
             </div>
-            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
+            {{-- INPUT NASCOSTI PER PASSARE I DATI IN POST --}}
+            <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+            <input type="hidden" name="valutazione" id="valutazione" value="{{ $trip->votazione }}">
+            
         </form>
         <small class="custom-small-text-center">I campi contrassegnati con * sono
             <b>obbligatori</b>!</small>
@@ -92,10 +108,20 @@
 
 @endsection
 
+{{-- upload file stars.js contenente codice js delle stelline per la valutazione --}}
+<script src="http://www.localhost:5173/resources/js/stars.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
+        // Colorazione delle stelline quando carica il documento
+        coloredStars();
+
         document.getElementById('myForm').addEventListener('submit', function(event) {
+
+            // Calcolo valutazione finale - conteggio stelline
+            votazione();
+
             // Reset error messages
             let isValid = true;
             resetErrors();
@@ -169,5 +195,6 @@
                 element.innerText = '';
             });
         }
+
     });
 </script>

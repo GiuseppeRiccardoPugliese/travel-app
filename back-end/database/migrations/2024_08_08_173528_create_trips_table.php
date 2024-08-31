@@ -20,6 +20,8 @@ return new class extends Migration
             $table->date('data_fine')->nullable();  
             $table->string('destinazione');
             $table->string('immagine')->nullable();
+            $table->tinyInteger('votazione')->nullable();
+            $table->tinyInteger('durata_viaggio')->default(1);
 
             $table->timestamps();
         });
