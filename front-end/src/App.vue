@@ -52,12 +52,10 @@ export default {
     <!-- Footer -->
     <Footer />
 
-  </div>
-
-
-  <!-- Freccia che compare quando scrolli di 100px -->
-  <div v-if="showScrollTop" @click="scrollToTop" class="scroll-top-arrow show">
-    <i class="fa-solid fa-circle-up"></i>
+    <!-- Freccia che compare quando scrolli di 100px -->
+    <div v-if="showScrollTop" @click="scrollToTop" class="scroll-top-arrow show">
+      <i class="fa-solid fa-circle-up"></i>
+    </div>
   </div>
 </template>
 
