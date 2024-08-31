@@ -1,8 +1,14 @@
 <nav id="nav_bar"
     class="navbar navbar-expand-md navbar-light bg-white shadow-sm flex-column align-items-stretch rounded position-fixed end-0 me-4 rounded-pill shadow">
-    <div class="container flex-column p-0">
+    <div class="container-fluid p-0">
+        <!-- Hamburger Menu Button -->
+        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="navbar-collapse flex-column" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             @auth
                 {{-- HOME --}}
@@ -20,7 +26,6 @@
                         <span class="icon-text bg-white">Viaggi</span>
                     </li>
                 </ul>
-
             @endauth
 
             <!-- Right Side Of Navbar -->
@@ -45,7 +50,6 @@
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {{-- <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a> --}}
                             <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
