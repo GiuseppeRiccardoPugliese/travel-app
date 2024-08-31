@@ -1,5 +1,5 @@
 <div class="bg-black mt-2">
-    <div class="owl-carousel opacity-25 position-relative" id="carosello">
+    <div class="owl-carousel opacity-25 position-relative custom" id="carosello">
 
         <!-- Aggiungi altre slide se necessario -->
     </div>
@@ -10,6 +10,17 @@
     $(document).ready(function() {
         getImage();
     });
-
-    
 </script>
+
+<style>
+    .custom .item {
+        position: relative;
+    }
+
+    .custom .item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+</style>
