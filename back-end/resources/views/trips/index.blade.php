@@ -34,7 +34,7 @@
             <div class="row mt-4">
                 @foreach ($trips as $trip)
                     <div class=" col-md-4  col-6 mb-4">
-                        <a onclick="submitForm({{ $trip->id }})" class="text-decoration-none" style="cursor: pointer;">
+                        <a onclick="submitForm({{ $trip->id }})" class="text-decoration-none text-break" style="cursor: pointer;">
                             <div class="card h-100 position-relative">
                                 <img src="{{  asset('storage/' . $trip->immagine) }}"
                                     class="card-img-top img-fluid" alt="Immagine Viaggio">

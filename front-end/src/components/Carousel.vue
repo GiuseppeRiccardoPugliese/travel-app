@@ -70,7 +70,7 @@ export default {
                 <div class="image-wrapper">
                     <img :src="getImageUrl(trip.immagine)" :alt="trip.nome" />
                     <div class="overlay">
-                        <span>{{ trip.nome }}</span>
+                        <span class="text-break">{{ trip.nome }}</span>
                     </div>
                 </div>
             </swiper-slide>
