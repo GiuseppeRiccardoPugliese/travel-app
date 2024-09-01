@@ -48,39 +48,43 @@ async function carousel(id) {
 
     // DEBUG
     // console.log(Object.keys(cardsData).length);
+    Object.keys(cardsData).forEach((key) => {
 
-    for (let i = 0; i < Object.keys(cardsData).length; i++) {
-        // console.log(cardsData[i]);
-        if (
-            cardsData[i].trip.immagine == null &&
-            cardsData[i].votazione != null
-        ) {
-            delete cardsData[i];
-            continue;
+        // Accedo all'oggetto corrente
+        const card = cardsData[key];
+
+        // DEBUG: verifica dell'oggetto corrente
+        // console.log(card);
+
+        // Condizione per eliminare l'elemento
+        if (card.trip.immagine == null && card.votazione != null) {
+            delete cardsData[key];
+            return; // Continua al prossimo elemento
         }
-        // DEBUG
-        // console.log(cardsData[i].trip.immagine);
 
+        //  Card html
         const cardHTML = `
-        
-                <div class="item d-flex flex-column align-items-center px-3 py-3" style="height: 480px;">
-                    <div class="card travel-card">
-                        <img src="/storage/${cardsData[i].trip.immagine}" class="card-img-top travel-card-img" alt="${cardsData[i].nome}">
-                        <div class="card-body travel-card-body">
-                            <h5 class="card-title">${cardsData[i].nome}</h5>
-                            <p class="card-text">${cardsData[i].descrizione}</p>
-                        </div>
+            <div class="item d-flex flex-column align-items-center px-3 py-3" style="height: 480px;">
+                <div class="card travel-card">
+                    <img src="/storage/${card.trip.immagine}" class="card-img-top travel-card-img" alt="${card.nome}">
+                    <div class="card-body travel-card-body">
+                        <h5 class="card-title">${card.nome}</h5>
+                        <p class="card-text">${card.descrizione}</p>
                     </div>
-                   
                 </div>
-               `;
+            </div>
+        `;
 
+        // Creo del div contenitore
         const div = document.createElement("div");
         div.classList.add("d-flex", "flex-column", "align-items-center");
         div.innerHTML = cardHTML;
+
+        // Aggiunta del div al carosello
         carosello.append(div);
-    }
-    // console.log(Object.keys(cardsData).length);
+    });
+
+    console.log(Object.keys(cardsData).length);
     const itemsToShow =
         Object.keys(cardsData).length > 1
             ? {

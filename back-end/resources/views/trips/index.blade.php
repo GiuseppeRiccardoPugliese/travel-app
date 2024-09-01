@@ -7,7 +7,7 @@
 @auth
     <div class="container">
         {{-- Rotta Create per i trip --}}
-        <div class="row justify-content-between" id="calendar_row">
+        <div class="row justify-content-between gap-2" id="calendar_row">
             <div class="col-auto">
                 <div class="icon-container" style="cursor: default;">
                     <h6 class="me-1">Se desideri aggiungere un nuovo viaggio, clicca sul calendario
@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-right-long"></i>
                 </div>
             </div>
-            <div class="col-1 nav-item d-flex flex-column align-items-center gap-4">
+            <div class="col-3 col-md-2 nav-item d-flex flex-column align-items-center gap-4 p-3">
                 <a href="{{ route('trip.create') }}" class="fs-3"><i class="fa-regular fa-calendar-plus"></i></a>
                 <span class="icon-text small">Aggiungi un nuovo viaggio</span>
             </div>
@@ -215,17 +215,17 @@
         max-height: 10rem;
     }
 
-    #calendar_row .col-1 {
+    #calendar_row .col-3 {
         margin: none;
     }
 }
 
 @media (max-width: 768px) {
-    #calendar_row .col-1 {
+    #calendar_row .col-3 {
         margin: 10px auto;
     }
 
-    #calendar_row .col-1 i {
+    #calendar_row .col-3 i {
         font-size: 4rem;
     }
 
@@ -262,17 +262,17 @@
     right: 10px;
 }
 
-.col-1>span:nth-child(2) {
+.col-3>span:nth-child(2) {
     position: unset;
     margin: 0;
 }
 
-.col-1:hover {
+.col-3:hover {
     color: black;
     box-shadow: #333;
 }
 
-.col-1>a {
+.col-3>a {
     color: #333;
 }
 
