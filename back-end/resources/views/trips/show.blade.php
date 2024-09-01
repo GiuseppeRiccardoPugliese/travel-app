@@ -146,7 +146,7 @@
             .then((response) => response.json())
             .then((data) => {
 
-                console.log(data.results[0]);
+                // console.log(data.results[0]);
                 selectCity(data.results[0]);
             })
             .catch((error) => {
@@ -156,7 +156,7 @@
     let map, map_modal, marker, marker_modal;
 
     function selectCity(city) {
-        // Inizializza la mappa solo se non esiste già
+        // Inizializzazione della mappa solo se non esiste già
         if (!map) {
             map = tt.map({
                 key: "JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96",
@@ -204,12 +204,12 @@
 
 
         } else {
-            // Aggiorna la posizione e lo zoom se la mappa è già inizializzata
+            // Aggiorno la posizione e lo zoom se la mappa è già inizializzata
             map.setCenter([city.position.lon, city.position.lat]);
             map_modal.setCenter([city.position.lon, city.position.lat]);
         }
 
-        // Rimuovi il marker esistente, se presente
+        // Rimuovo il marker esistente, se presente
         if (marker) {
             marker.remove();
         }
@@ -220,20 +220,20 @@
             var result = event.data.result;
             var lat = result.position.lat;
             var lon = result.position.lng;
-            console.log(result);
-            // Aggiorna la mappa principale
+            // console.log(result);
+            // Aggiorno la mappa principale
             map.setCenter([lon, lat]);
             map.setZoom(18);
 
-            // Aggiorna la mappa del modale
+            // Aggiorno la mappa del modale
             map_modal.setCenter([lon, lat]);
             map_modal.setZoom(10);
 
-            // Rimuovi il marker esistente, se presente
+            // Rimuovo il marker esistente, se presente
             if (marker) marker.remove();
             if (marker_modal) marker_modal.remove();
 
-            // Aggiungi un nuovo marker
+            // Aggiungo un nuovo marker
             marker = new tt.Marker()
                 .setLngLat([lon, lat])
                 .addTo(map);
@@ -242,14 +242,14 @@
                 .setLngLat([lon, lat])
                 .addTo(map_modal);
 
-            // Aggiungi evento di click al marker
+            // Aggiungo evento di click al marker
             marker.getElement().addEventListener("click", () => {
-                console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+                // console.log(`Latitude: ${lat}, Longitude: ${lon}`);
                 const googleMapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
                 window.open(googleMapsUrl, "_blank");
             });
         });
-        // Aggiungi un nuovo marker
+        // Aggiungo un nuovo marker
         marker = new tt.Marker()
             .setLngLat([city.position.lon, city.position.lat])
             .addTo(map);
@@ -258,20 +258,20 @@
             .setLngLat([city.position.lon, city.position.lat])
             .addTo(map_modal);
 
-        // Aggiungi un evento di click al marker
+        // Aggiungo un evento di click al marker
         marker.getElement().addEventListener("click", () => {
             const latitude = city.position.lat;
             const longitude = city.position.lon;
-            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            // console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
             const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
             window.open(googleMapsUrl, "_blank");
         });
 
-        // Gestisci la visibilità del nav_bar quando il modale è mostrato
+        // Gestisco la visibilità del nav_bar quando il modale è mostrato
         $("#exampleModal").on("shown.bs.modal", function() {
             document.getElementById("nav_bar").style.display = "none";
             if (map_modal) {
-                // Ricalcola la dimensione della mappa nel modale
+                // Ricalcolo la dimensione della mappa nel modale
                 map_modal.resize();
             }
         });
@@ -302,7 +302,7 @@
 
     function noScrollPage() {
 
-        console.log('asdasd');
+        // console.log('asdasd');
         document.getElementById('main-body').style.overflowY = 'clip';
 
     }
@@ -316,15 +316,10 @@
 <style>
     #searchBox {
         position: absolute;
-        /* Posizionamento sopra la mappa */
         top: 10px;
-        /* Distanza dal bordo superiore della mappa */
         left: 10px;
-        /* Distanza dal bordo sinistro della mappa */
         width: 500px;
-        /* Larghezza della barra di ricerca */
         z-index: 1000;
-        /* Assicurati che sia sopra la mappa */
     }
 
     /* Stile del campo di input della SearchBox */
@@ -332,63 +327,48 @@
         width: 100%;
         padding: 10px;
         border: 2px solid #007bff;
-        /* Bordo del campo di ricerca */
         border-radius: 4px;
-        /* Angoli arrotondati del campo di ricerca */
         font-size: 16px;
-        /* Dimensione del testo */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        /* Ombra leggera */
         transition: border-color 0.3s ease;
-        /* Transizione morbida per il colore del bordo */
     }
 
     /* Stile del campo di input al focus */
     .tt-search-box input:focus {
-        border-color: #0056b3;
-        /* Colore del bordo al focus */
+        border-color: #0056b3; 
         outline: none;
-        /* Rimuove l'outline predefinito */
     }
 
     /* Stile del pulsante di ricerca (se presente) */
     .tt-search-box button {
         background-color: #007bff;
-        /* Colore di sfondo del pulsante */
         color: #fff;
-        /* Colore del testo del pulsante */
         border: none;
         padding: 10px 15px;
         border-radius: 4px;
-        /* Angoli arrotondati del pulsante */
         cursor: pointer;
         font-size: 16px;
         transition: background-color 0.3s ease;
-        /* Transizione morbida per il colore di sfondo */
     }
 
     /* Stile del pulsante di ricerca al hover */
     .tt-search-box button:hover {
         background-color: #0056b3;
-        /* Colore di sfondo al hover */
     }
 
     /* Stile dei suggerimenti della ricerca (dropdown) */
     .tt-suggestion {
         padding: 10px;
         border: 1px solid #ddd;
-        /* Bordo dei suggerimenti */
         border-top: none;
         background-color: #fff;
         max-height: 200px;
         overflow-y: auto;
-        /* Scroll verticale se ci sono molti suggerimenti */
     }
 
     /* Stile di un suggerimento della ricerca */
     .tt-suggestion:hover {
         background-color: #f8f9fa;
-        /* Colore di sfondo del suggerimento al hover */
     }
 
 

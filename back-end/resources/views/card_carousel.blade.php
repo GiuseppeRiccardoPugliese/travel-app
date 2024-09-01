@@ -1,7 +1,7 @@
 <div class="mt-2 mb-4">
     <div class="owl-carousel  position-relative" id="carosello-card">
 
-        <!-- Aggiungi altre slide se necessario -->
+        
     </div>
     <span></span>
 </div>

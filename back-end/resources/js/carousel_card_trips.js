@@ -1,20 +1,20 @@
 async function fetchTrips() {
     try {
-        // Effettua la richiesta GET all'API
+        // Effettuo la richiesta GET all'API
         const response = await fetch('http://localhost:8000/api/v1/trips');
 
-        // Verifica se la risposta è ok
+        // Verifico se la risposta è ok
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
 
-        // Estraggo i dati JSON dalla risposta
+        // Dati JSON dalla risposta
         const data = await response.json();
 
-        return data; // Restituisce i dati
+        return data;
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
-        return []; // Restituisce un array vuoto in caso di errore
+        return []; // Array vuoto in caso di errore
     }
 }
 
@@ -78,24 +78,24 @@ async function carousel() {
 
 
 
-    // Inizializza Owl Carousel
+    // Owl Carousel
     carosello.owlCarousel({
-        loop: true, // Attiva lo scorrimento infinito
+        loop: true, // Attivo lo scorrimento infinito
         margin: 20, // Spazio tra le slide
-        nav: false, // Disattiva le frecce di navigazione
-        autoplay: true, // Attiva la riproduzione automatica
-        autoplayTimeout: 4000, // Durata di ogni slide in millisecondi
-        mouseDrag: false, // Disattiva il drag con il mouse
-        touchDrag: false, // Disattiva il drag con il tocco
+        nav: false, // Disattivo le frecce di navigazione
+        autoplay: true, // Attivo la riproduzione automatica
+        autoplayTimeout: 4000, // Durato di ogni slide in millisecondi
+        mouseDrag: false, // Disattivo il drag con il mouse
+        touchDrag: false, // Disattivo il drag con il tocco
         responsive: {
             0: {
-                items: 1 // Mostra 1 elemento per schermi piccoli
+                items: 1 // 1 elemento per schermi piccoli
             },
             600: {
-                items: 2 // Mostra 2 elementi per schermi medi
+                items: 2 // 2 elementi per schermi medi
             },
             1000: {
-                items: 4 // Mostra 4 elementi per schermi grandi
+                items: 4 // 4 elementi per schermi grandi
             }
         }
     });

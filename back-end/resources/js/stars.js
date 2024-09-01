@@ -1,9 +1,9 @@
 function colorStar(value, containerId) {
-    console.log(containerId);
-    // Ottieni il contenitore delle stelline
+    // console.log(containerId);
+    // Ottengo il contenitore delle stelline
     var container = document.getElementById(`${containerId}`);
 
-    // Ottieni tutte le stelline all'interno del contenitore
+    // Ottengo tutte le stelline all'interno del contenitore
     var star = container.children[1];;
 
     if (star.classList.contains('selected')) {
@@ -29,12 +29,12 @@ function votazione() {
     document.getElementById('valutazione').value = valutazione;
 }
 function coloredStars() {
-    console.log(document.getElementById(`star1`).value);
+    // console.log(document.getElementById(`star1`).value);
     for (let i = 1; i <= 5; i++) {
 
         var container = document.getElementById(`star-container-${i}`);
         var input = document.getElementById(`star${i}`);
-        console.log(input.value)
+        // console.log(input.value)
         var stars = container.children[1];
         if (input.value == '1') {
             stars.classList.add('selected');

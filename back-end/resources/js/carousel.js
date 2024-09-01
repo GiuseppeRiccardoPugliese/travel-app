@@ -25,12 +25,12 @@ function getImage() {
                     // DEBUG
                     // console.log(element.tags[1].title)
                 }
-                // Crea un nuovo elemento div con classe 'item'
+                // Nuovo elemento div con classe 'item'
                 const newItem = document.createElement('div');
                 newItem.className = 'item';
                 newItem.classList.add('position-relative')
 
-                // Crea un nuovo elemento img
+                // Nuovo elemento img
                 const newImg = document.createElement('img');
                 newImg.src = url;
                 newImg.alt = 'Image';
@@ -41,42 +41,42 @@ function getImage() {
                 'text-white');
                 titleDestination.style='font-size : 20px;'
                 newItem.appendChild(titleDestination);
-                // Aggiungi l'immagine all'elemento div
+                // appendo l'immagine all'elemento div
                 newItem.appendChild(newImg);
 
-                // Aggiungi il nuovo div al frammento di documento
+                // nuovo div al frammento di documento
                 fragment.appendChild(newItem);
             });
 
             function capitalizeFirstLetter(str) {
-                if (str.length === 0) return str; // Gestisci il caso di una stringa vuota
+                if (str.length === 0) return str; // Gestione caso di una stringa vuota
                 return str.charAt(0).toUpperCase() + str.slice(1);
             }
 
 
 
 
-            // Aggiungi il frammento di documento al contenitore
+            // Aggiungo il frammento di documento al contenitore
             carosello.appendChild(fragment);
 
-            // Inizializza Owl Carousel dopo aver aggiunto tutte le immagini
+            // Owl Carousel dopo aver aggiunto tutte le immagini
             $(carosello).owlCarousel({
-                loop: true, // Attiva lo scorrimento infinito
+                loop: true, // Attivo lo scorrimento infinito
                 margin: 20, // Spazio tra le slide
-                nav: false, // Attiva le frecce di navigazione
-                autoplay: true, // Attiva la riproduzione automatica
+                nav: false, // Attivo le frecce di navigazione
+                autoplay: true, // Attivo la riproduzione automatica
                 autoplayTimeout: 3000, // Durata di ogni slide in millisecondi
-                mouseDrag: false, // Abilita il drag con il mouse
-                touchDrag: false, // Abilita il drag con il tocco
+                mouseDrag: false, // Abilito il drag con il mouse
+                touchDrag: false, // Abilito il drag con il tocco
                 responsive: {
                     0: {
-                        items: 1 // Mostra 1 elemento per schermi piccoli
+                        items: 1 // 1 elemento per schermi piccoli
                     },
                     600: {
-                        items: 1 // Mostra 1 elemento per schermi medi
+                        items: 1 // 1 elemento per schermi medi
                     },
                     1000: {
-                        items: 1 // Mostra 1 elemento per schermi grandi
+                        items: 1 // 1 elemento per schermi grandi
                     }
                 }
             });

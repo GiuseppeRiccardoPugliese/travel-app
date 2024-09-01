@@ -1,11 +1,10 @@
 .site-header {
-    background-color: #f8f9fa; /* Colore di sfondo chiaro */
-    padding: 20px 10px; /* Spaziatura verticale */
-    text-align: center; /* Allinea il contenuto al centro */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Leggera ombra */
+    background-color: #f8f9fa;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Optional: ridurre la spaziatura interna della navbar-brand */
 .navbar-brand {
     padding: 0;
 }
@@ -15,7 +14,6 @@
     display: inline-block;
 }
 
-/* Applica le stesse animazioni e stili al logo nel contesto dell'header */
 .site-header .travel-app {
     display: inline-block;
     font-weight: bold;

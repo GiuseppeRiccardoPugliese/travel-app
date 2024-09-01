@@ -1,6 +1,6 @@
 async function fetchCityPhotos(city) {
-    console.log(city);
-    const accessKey = "QngG7sfBVMWvG3kVsWuLqkCRWftkIHIqNHRRsI6fp0I"; // Sostituisci con la tua chiave API
+    // console.log(city);
+    const accessKey = "QngG7sfBVMWvG3kVsWuLqkCRWftkIHIqNHRRsI6fp0I";
     const url = `https://api.unsplash.com/search/photos?query=${city}`;
     try {
         const response = await fetch(`${url}&client_id=${accessKey}`);
@@ -16,12 +16,12 @@ async function fetchCityPhotos(city) {
 
 function displayPhotos(photos, city) {
     const container = document.getElementById("photo-container");
-    container.innerHTML = ""; // PULISCE IL CONTENITORE
-    container.parentElement.classList.remove('d-none'); //RIMUOVE IL DISPLAY NONE
-    console.log("search_city.js" + photos);
+    container.innerHTML = ""; // Clean container
+    container.parentElement.classList.remove('d-none'); //RIMUOVO IL DISPLAY NONE
+    // console.log("search_city.js" + photos);
 
     let numberCasual = Math.round(getRandomDecimal(0, photos.length - 1));
-    console.log(numberCasual);
+    // console.log(numberCasual);
     if (
         (photos[numberCasual].description &&
             photos[numberCasual].description.toLowerCase().includes("city")) ||

@@ -117,7 +117,7 @@
 
         // Converto la differenza in giorni
         let differenceInDays = Math.floor(giornInMillis / (1000 * 60 * 60 * 24));
-        console.log(document.getElementById('ordine').value = differenceInDays + 1)
+        // console.log(document.getElementById('ordine').value = differenceInDays + 1)
     }
 
     function changeDateorNot(event) {
@@ -126,20 +126,20 @@
         // Numero di giorni da aggiungere
         let giorniDaAggiungere = document.getElementById('ordine').value - 1;
 
-        // Converti giorni in secondi
+        // Converto giorni in secondi
         let secondiInGiorni = giorniDaAggiungere * 24 * 60 * 60; // giorni * ore/giorno * minuti/ora * secondi/minuto
 
-        // Converti la data iniziale in millisecondi
+        // Converto la data iniziale in millisecondi
         let startDate = new Date(dataInizio);
         let startDateInMillis = startDate.getTime();
 
-        // Aggiungi i secondi convertiti in millisecondi
+        // Aggiungo i secondi convertiti in millisecondi
         let nuovaDataInMillis = startDateInMillis + (secondiInGiorni * 1000);
 
-        // Converti la nuova data in formato Date
+        // Converto la nuova data in formato Date
         let nuovaData = new Date(nuovaDataInMillis);
 
-        // Converti la nuova data in formato YYYY-MM-DD
+        // Converto la nuova data in formato YYYY-MM-DD
         let nuovaDataFormato = nuovaData.toISOString().split('T')[0];
 
         document.getElementById('data').value = nuovaDataFormato;

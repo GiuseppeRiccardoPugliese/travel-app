@@ -50,18 +50,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 500); // Il timeout deve corrispondere alla durata della transizione
     }
 
-    // Mostra il menu a discesa al passaggio del mouse
+    // Menu a discesa al passaggio del mouse
     dropdown.addEventListener('mouseenter', function () {
         dropdownMenu.style.visibility = 'visible';
         showMenu();
     });
 
-    // Nasconde il menu a discesa quando il mouse esce
+    // Menu a discesa quando il mouse esce
     dropdown.addEventListener('mouseleave', function () {
         hideMenu();
     });
 
-    // Gestisci la fine della transizione per rimuovere la visibilità dopo l'animazione
+    // Gestione fine della transizione per rimuovere la visibilità dopo l'animazione
     dropdownMenu.addEventListener('transitionend', function (event) {
         if (!dropdownMenu.classList.contains('show')) {
             dropdownMenu.style.visibility = 'hidden';

@@ -89,7 +89,7 @@ function selectCity(city) {
     marker.getElement().addEventListener("click", () => {
         const latitude = city.position.lon;
         const longitude = city.position.lat;
-        console.log(latitude);
+        // console.log(latitude);
         const googleMapsUrl = `https://www.google.com/maps?q=${longitude},${latitude}`;
         window.open(googleMapsUrl, "_blank");
     });

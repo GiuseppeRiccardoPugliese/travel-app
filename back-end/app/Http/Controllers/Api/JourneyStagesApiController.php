@@ -20,26 +20,26 @@ class JourneyStagesApiController extends Controller
     {
         $userId = $request->user_id;
 
-        // Trova tutti i viaggi associati all'utente
+        // Trovo tutti i viaggi associati all'utente
         $journeys = Trip::whereHas('users', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })->get();
 
-        // Prendi tutti gli stage dei viaggi dell'utente
+        // Stage dei viaggi dell'utente
         $stages = JourneyStage::with('trip') // Carica anche il trip associato
             ->whereIn('trip_id', $journeys->pluck('id'))
             ->get();
 
-        // Calcola la media di tutte le votazioni delle tappe
+        // Media di tutte le votazioni delle tappe
         $averageRating = $stages->avg('votazione');
         // dd($averageRating);
 
-        // Filtra le tappe con votazione superiore alla media
+        // Tappe con votazione superiore alla media
         $aboveAverageStages = $stages->filter(function ($stage) use ($averageRating) {
             return $stage->votazione >= $averageRating;
         });
 
-        // Restituisci le tappe con votazione superiore alla media come JSON
+        // Tappe con votazione superiore alla media come JSON
         return response()->json($aboveAverageStages);
     }
 
@@ -48,7 +48,7 @@ class JourneyStagesApiController extends Controller
     {
         $tripId = $request->query('trip_id');
 
-        // Ttappe per il viaggio specificato
+        // Tappe per il viaggio specificato
         $stages = JourneyStage::where('trip_id', $tripId)->get();
 
         return response()->json($stages);

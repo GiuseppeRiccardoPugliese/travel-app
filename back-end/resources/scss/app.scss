@@ -64,23 +64,23 @@ main{
 @keyframes dropIn-image-city {
     from {
         transform: translateY(-100vh);
-        /* Inizia sopra lo schermo */
+        /* Start sopra lo schermo */
         opacity: 0;
-        /* Inizia invisibile */
+        /* Start invisibile */
     }
 
     to {
         transform: translateY(0);
-        /* Termina nella posizione originale */
+        /* End nella posizione originale */
         opacity: 1;
-        /* Termina visibile */
+        /* End visibile */
     }
 }
 
 /* Applica l'animazione alle immagini */
 .drop-in-image {
     opacity: 0;
-    /* Inizia invisibile */
+    /* Start invisibile */
     animation: dropIn-image-city 1s ease-out forwards;
     /* Durata di 1 secondo */
 }

@@ -84,7 +84,7 @@ async function carousel(id) {
         carosello.append(div);
     });
 
-    console.log(Object.keys(cardsData).length);
+    // console.log(Object.keys(cardsData).length);
     const itemsToShow =
         Object.keys(cardsData).length > 1
             ? {
