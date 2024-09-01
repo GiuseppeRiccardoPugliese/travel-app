@@ -1,11 +1,13 @@
 <script>
 import axios from "axios";
 import Carousel from '../components/Carousel.vue';
+import Jumbo from '../components/Jumbo.vue';
 
 export default {
   name: "Trips",
   components: {
     Carousel,
+    Jumbo,
   },
   data() {
     return {
@@ -52,8 +54,8 @@ export default {
 
 <template>
   <div>
-    <!-- Carosello -->
-    <Carousel :trips="trips" />
+    <!-- Jumbotron -->
+    <Jumbo />
 
     <!-- VIAGGI -->
     <div v-if="!selectedTrip" class="container">
@@ -109,13 +111,16 @@ export default {
       </div>
       <p v-else class="loading-message">Caricamento delle tappe in corso...</p>
     </div>
+
+    <!-- Carosello -->
+    <Carousel :trips="trips" />
   </div>
 </template>
 
 
 
 <style scoped lang="scss">
-@use '../style/style.scss' as *;
+// @use '../style/style.scss' as *;
 //CSS CARD
 @use '../style/trip_cards.scss' as *;
 </style>
