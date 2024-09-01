@@ -1,6 +1,6 @@
 async function getTopRatedStages(userId) {
     try {
-        // Esegui la chiamata alla tua API
+        //Chiamata API
         const response = await fetch(
             "http://localhost:8000/api/v1/favorites-journey-stages",
             {
@@ -8,28 +8,27 @@ async function getTopRatedStages(userId) {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                // Invia l'ID dell'utente nel corpo della richiesta
+                // Invio l'ID dell'utente nella richiesta
                 body: JSON.stringify({
                     user_id: userId,
                 }),
             }
         );
 
-        // Logga il codice di stato e il testo della risposta
-        console.log("Status:", response.status);
-        console.log("Status Text:", response.statusText);
+        // console.log("Status:", response.status);
+        // console.log("Status Text:", response.statusText);
 
-        // Verifica se la risposta è ok
+        // Verifico la risposta
         if (!response.ok) {
             throw new Error(
                 `Network response was not ok: ${response.statusText}`
             );
         }
 
-        // Ottieni i dati JSON dalla risposta
+        // Dati JSON dalla risposta
         const data = await response.json();
 
-        // Logga i dati nella console o gestiscili come preferisci
+        // Log dati nella console
         // console.log(data);
         return data;
     } catch (error) {
@@ -39,7 +38,7 @@ async function getTopRatedStages(userId) {
 async function carousel(id) {
     // RECUPERO i dati delle card
     const cardsData = await getTopRatedStages(id);
-    console.log(cardsData);
+    // console.log(cardsData);
 
     // RECUPERO l'elemento contenitore
     const carosello = $("#carosello-journey-card");
@@ -48,10 +47,10 @@ async function carousel(id) {
     carosello.empty();
 
     // DEBUG
-    console.log(Object.keys(cardsData).length);
+    // console.log(Object.keys(cardsData).length);
 
     for (let i = 0; i < Object.keys(cardsData).length; i++) {
-        console.log(cardsData[i]);
+        // console.log(cardsData[i]);
         if (
             cardsData[i].trip.immagine == null &&
             cardsData[i].votazione != null
@@ -81,46 +80,46 @@ async function carousel(id) {
         div.innerHTML = cardHTML;
         carosello.append(div);
     }
-    console.log(Object.keys(cardsData).length);
+    // console.log(Object.keys(cardsData).length);
     const itemsToShow =
         Object.keys(cardsData).length > 1
             ? {
                   0: {
-                      items: 1, // Mostra 1 elemento per schermi piccoli
+                      items: 1, // Mostro 1 elemento per schermi piccoli
                   },
                   600: {
                       items: Math.max(
                           1,
                           Math.min(Object.keys(cardsData).length, 2)
-                      ), // Mostra almeno 2 elementi per schermi medi, fino a 2 se disponibili
+                      ), // Mostro almeno 2 elementi per schermi medi, fino a 2 se disponibili
                   },
                   1000: {
                       items: Math.max(
                           1,
                           Math.min(Object.keys(cardsData).length, 4)
-                      ), // Mostra tra 2 e 4 elementi per schermi grandi, a seconda della disponibilità
+                      ), // Mostro tra 2 e 4 elementi per schermi grandi, a seconda della disponibilità
                   },
               }
             : {
                   0: {
-                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                      items: 1, // Mostro 1 elemento per tutti i casi se ne hai solo 1
                   },
                   600: {
-                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                      items: 1, // Mostro 1 elemento per tutti i casi se ne hai solo 1
                   },
                   1000: {
-                      items: 1, // Mostra 1 elemento per tutti i casi se ne hai solo 1
+                      items: 1, // Mostro 1 elemento per tutti i casi se ne hai solo 1
                   },
               };
-    // Inizializza Owl Carousel
+    //Owl Carousel
     carosello.owlCarousel({
-        loop: true, // Attiva lo scorrimento infinito
+        loop: true, // Scorrimento infinito
         margin: 20, // Spazio tra le slide
-        nav: false, // Disattiva le frecce di navigazione
-        autoplay: true, // Attiva la riproduzione automatica
+        nav: false, // Disattivo le frecce di navigazione
+        autoplay: true, // Attivo la riproduzione automatica
         autoplayTimeout: 4000, // Durata di ogni slide in millisecondi
-        mouseDrag: false, // Disattiva il drag con il mouse
-        touchDrag: false, // Disattiva il drag con il tocco
+        mouseDrag: false, // Disattivo il drag con il mouse
+        touchDrag: false, // Disattivo il drag con il tocco
         responsive: itemsToShow,
     });
 }

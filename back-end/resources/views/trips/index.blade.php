@@ -3,11 +3,6 @@
 @section('welcome_message')
     {{ auth()->user()->name }}
 @endsection
-{{-- @unless (Auth::check())
-        <div class="welcome-container">
-            <h1 class="welcome-text">BENVENUTO SU TRAVEL-APP</h1>
-        </div>
-    @endunless --}}
 
 @auth
     <div class="container">
@@ -34,12 +29,13 @@
             <div class="row mt-4">
                 @foreach ($trips as $trip)
                     <div class=" col-md-4  col-6 mb-4">
-                        <a onclick="submitForm({{ $trip->id }})" class="text-decoration-none text-break" style="cursor: pointer;">
+                        <a onclick="submitForm({{ $trip->id }})" class="text-decoration-none text-break"
+                            style="cursor: pointer;">
                             <div class="card h-100 position-relative">
-                                <img src="{{  asset('storage/' . $trip->immagine) }}"
-                                    class="card-img-top img-fluid" alt="Immagine Viaggio">
+                                <img src="{{ asset('storage/' . $trip->immagine) }}" class="card-img-top img-fluid"
+                                    alt="Immagine Viaggio">
                                 <div class="card-body card_show_trip d-flex flex-column align-items-center">
-                                    <h5 class="card-title mb-4">{{ $trip->nome }}</h5>
+                                    <h5 class="card-title mb-4 text-center">{{ $trip->nome }}</h5>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <a onclick="submitEditForm({{ $trip->id }})" style="cursor: pointer;"
                                             class="flex-grow-1">
@@ -122,6 +118,7 @@
             </div>
 
         </div>
+        {{-- @if ($trip->journeyStages()->count() > 0) --}}
         <div class="ps-4 typing-container">
             <h4 class="fw-bold mb-0">Riscopri le tue tappe preferite!</h4>
         </div>
@@ -131,6 +128,7 @@
 
             </div>
         </div>
+        {{-- @endif --}}    
     @else
         <div class="ps-4 typing-container">
             <h4 class="fw-bold mb-0">Nessun viaggio trovato. Crea il tuo primo viaggio!</h4>
@@ -155,18 +153,18 @@
         return new Date(date).toLocaleDateString('it-IT', options);
     }
     document.addEventListener('DOMContentLoaded', function() {
-        // Seleziona tutti gli elementi <span> con la classe "dateSpan"
+        // Seleziono tutti gli elementi <span> con la classe "dateSpan"
         const dateSpans = document.querySelectorAll('.dateSpan');
 
-        // Itera su tutti gli elementi selezionati
+        // Itero su tutti gli elementi selezionati
         dateSpans.forEach(function(span) {
-            // Ottieni il valore della data dal data attribute
+            // Valore della data dal data attribute
             const date = span.textContent;
-            // Applica la funzione fixDate e aggiorna il testo del <span>
+            // Funzione fixDate e aggiorna il testo del <span>
             span.innerText = fixDate(date);
         });
 
-        const userId = {{ Auth::id() }}; // Sostituisci con l'ID dell'utente desiderato
+        const userId = {{ Auth::id() }}; // Sostituisco con l'ID dell'utente associato
         carousel(userId);
     });
 </script>
@@ -176,11 +174,9 @@
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    /* Dimensione dell'icona */
     cursor: pointer;
     transition: transform 0.3s ease;
     animation: moveRight 1s ease-in-out infinite;
-    /* Transizione fluida */
 }
 
 
@@ -202,25 +198,21 @@
     }
 }
 
-.icon-text.small{
+.icon-text.small {
     font-size: 12px;
 }
+
 .card-img-top {
     object-fit: cover;
-    /* Mantiene le proporzioni dell'immagine */
     width: 100%;
-    /* Assicura che l'immagine occupi tutta la larghezza del contenitore */
     height: auto;
-    /* Altezza automatica per mantenere le proporzioni */
     min-height: 10rem;
-    /* Altezza minima per evitare che l'immagine diventi troppo piccola */
 }
 
 /* Regole per schermi medi e superiori */
 @media (min-width: 768px) {
     .card-img-top {
         max-height: 10rem;
-        /* Altezza massima per schermi medi e superiori */
     }
 
     #calendar_row .col-1 {
@@ -243,7 +235,6 @@
 
     .card-img-top {
         max-height: 10rem;
-        /* Altezza massima per schermi medi e superiori */
     }
 
     .icon-container i {
@@ -254,15 +245,12 @@
 @media (min-width: 992px) {
     .card-img-top {
         max-height: 5rem;
-        /* Altezza massima per schermi grandi */
     }
 }
 
 @media (min-width: 1200px) {
     .card-img-top {
         max-height: 10rem;
-        /* Altezza massima per schermi extra-grandi */
-
     }
 }
 
@@ -300,23 +288,6 @@
     color: #ffffff !important;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
-
-/* .btn-white-custom:hover {
-animation: colorChange 0.6s forwards;
-box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-@keyframes colorChange {
-0% {
-background-color: #ffffff;
-color: #000000;
-}
-
-100% {
-background-color: #000000;
-color: #ffffff;
-}
-} */
 </style>
 <script>
     let trip_id = 0;

@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@section('welcome_message')
+    {{ auth()->user()->name }}
+@endsection
     {{-- Sezione dei viaggi --}}
     <h1>Nome viaggio: {{ $trip->nome }}</h1>
     <h1> Descrizione: {{ $trip->descrizione }}</h1>
@@ -16,7 +19,7 @@
 
     {{-- Sezione per gli Stages del Viaggio --}}
 
-    {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
+    {{-- ROTTA PER LA CREATE DELLA TAPPA --}}
     <a class="text-decoration-underline" onclick="submitForm()">Crea una nuova tappa</a>
 
     {{-- Form per passare il trip_id nascosto CREATE --}}
