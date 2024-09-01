@@ -1,0 +1,15 @@
+[build]
+command = "cd back-end && composer install && php artisan key:generate && php artisan migrate --force"
+
+[deploy]
+command = "cd back-end && php artisan serve --host=0.0.0.0 --port=8080"
+
+[build.env]
+APP_ENV = "production"
+APP_KEY = "base64:wENWHnuau2nd4EogMPFJAlq2208P+vdfZO5b4Nr1cOE="
+DB_CONNECTION = "mysql"
+DB_HOST = "mysql.railway.internal"
+DB_PORT = "3306"
+DB_DATABASE = "railway"
+DB_USERNAME = "root"
+DB_PASSWORD = "iCJYKTkIBROYNRrOoXmyCCLVIUMmlTnh"

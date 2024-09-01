@@ -14,7 +14,7 @@ class Trip extends Model
     }
     
     public function journeyStages(){
-        return $this->hasMany(JourneyStage::class);
+        return $this->hasMany(JourneyStage::class)->orderBy('ordine');
     }
     
 }

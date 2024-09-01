@@ -7,13 +7,107 @@
 
             <h2 class="">Viaggio a: {{ $trip->nome }}</h2 class="mx-auto">
         </div>
-        <a class="w-100" >
-            <div id="map-trip" style="height: 400px; width: 100%;position: relative;" class="mt-3 flex-fill">
-                <div id="searchBox" ></div>
+        <div class="row">
+
+            <div class="col-6 d-flex">
+                <div id="photo-container" class="mt-3 flex-fill  d-flex justify-content-center align-items-center">
+                    @if ($trip->immagine)
+                        <img src="{{ asset('storage/' . $trip->immagine) }}" class=" h-100 w-100" alt="{{ $trip->nome }}">
+                    @else
+                        <p id="no-photo-container" class="">Immagine della destinazione non disponibile!</p>
+                    @endif
+                </div>
             </div>
 
 
-        </a>
+            <div class="col-6 d-flex" onmouseover="noScrollPage()" onmouseout="scrollPage()">
+                <div id="map-trip" style="height: 400px; width: 100%;position: relative;" class="mt-3 flex-fill">
+                    <div id="searchBox"></div>
+                </div>
+
+            </div>
+            <h2 class="my-2">Tappe del Viaggio</h2>
+            @if ($trip->journeyStages->isEmpty())
+                <p>Nessun stage disponibile per questo viaggio.</p>
+            @else
+                <div class="col-8">
+                    <div class="accordion mt-4" id="accordionExample">
+                        @foreach ($trip->journeyStages as $stage)
+                            {{-- EDIT --}}
+                            <div class="d-flex gap-2">
+                                <div class="accordion-item flex-grow-1">
+                                    <div class="accordion-header" id="heading{{ $stage->id }}">
+                                        <a class="accordion-button text-decoration-none" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $stage->id }}"
+                                            aria-expanded="true" aria-controls="collapse{{ $stage->id }}">
+                                            <div class="d-flex justify-content-between flex-grow-1 gap-2">
+                                                <span class="card-title">Tappa Giorno {{ $stage->ordine }}</span>
+                                                <div class="d-flex gap-3 me-4 flex-grow-1 justify-content-between">
+                                                    <span>{{ $stage->posizione }}</span>
+                                                    <span class=""><i class="fa-solid fa-plane-departure "></i>
+                                                        {{ \Carbon\Carbon::parse($trip->data_inizio)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
+                                                    </span>
+                                                    <span class=""><i class="fa-solid fa-plane-arrival"></i>
+                                                        {{ \Carbon\Carbon::parse($trip->data_fine)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="collapse{{ $stage->id }}" class="accordion-collapse collapse show"
+                                        aria-labelledby="heading{{ $stage->id }}" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            {{ $stage->descrizione != null ? $stage->descrizione : 'Descrizione non disponibile' }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column gap-4 align-self-center">
+                                    <a onclick="submitEditForm({{ $stage->id }})" class="button text-decoration-none"
+                                        style="cursor:pointer;">
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </a>
+                                    {{-- Funct che al click mi passa gli Id --}}
+                                    <a onclick="receiveIds({{ $trip->id }}, {{ $stage->id }})" type="submit"
+                                        data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                            class="fa-solid fa-trash"></i></a>
+                                </div>
+                                {{-- DELETE --}}
+                                <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;"
+                                    id="DestroyForm{{ $trip->id }}_{{ $stage->id }}">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+                                    <input type="hidden" name="stage_id" value="{{ $stage->id }}">
+
+
+                                </form>
+                                {{-- Form per passare il trip_id nascosto EDIT --}}
+                                <form action="{{ route('journeyStages.edit') }}" method="POST"
+                                    id="EditStageForm{{ $stage->id }}">
+                                    @csrf
+                                    @method('POST')
+
+                                    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+                                    <input type="hidden" name="stage_id" value="{{ $stage->id }}">
+
+                                </form>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            @endif
+            @php
+                $class = !$trip->journeyStages->isEmpty() ? 'offset-1' : '';
+            @endphp
+            <div class="col-auto mt-2 {{ $class }}">
+
+                {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
+                <button type="button" class="btn btn-success rounded-pill" onclick="submitForm()">Aggiungi una nuova
+                    tappa</button>
+            </div>
+        </div>
         <div class="modal fade " id="exampleModal" tabindex="-1" data-bs-backdrop="static"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -32,21 +126,12 @@
             </div>
         </div>
     </div>
-    <h1> Descrizione: {{ $trip->descrizione }}</h1>
-    <h1> Destinazione: {{ $trip->destinazione }}</h1>
 
 
-    <p class="card-text">Data inizio:
-        {{ \Carbon\Carbon::parse($trip->data_inizio)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
-    </p>
-    <p class="card-text">Data fine:
-        {{ \Carbon\Carbon::parse($trip->data_fine)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
-    </p>
 
     {{-- Sezione per gli Stages del Viaggio --}}
 
-    {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
-    <a class="text-decoration-underline" onclick="submitForm()">Crea una nuova tappa</a>
+
 
     {{-- Form per passare il trip_id nascosto CREATE --}}
     <form action="{{ route('journeyStages.create') }}" method="POST" id="CreateStageForm">
@@ -57,75 +142,29 @@
 
     </form>
 
-    <h2>Stages del Viaggio</h2>
-    @if ($trip->journeyStages->isEmpty())
-        <p>Nessun stage disponibile per questo viaggio.</p>
-    @else
-        <ul>
-            @foreach ($trip->journeyStages as $stage)
-                <li>
-                    <strong>{{ $stage->nome }}</strong>: {{ $stage->descrizione }}
-                    <br>
-                    <h5>Posizione: {{ $stage->posizione }}</h5>
 
-                    <em>Data:
-                        {{ \Carbon\Carbon::parse($stage->data)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
-                    </em>
-
-                    {{-- EDIT --}}
-                    <a onclick="submitEditForm({{ $stage->id }})" class="button">MODIFICA</a>
-
-                    {{-- Form per passare il trip_id nascosto EDIT --}}
-                    <form action="{{ route('journeyStages.edit') }}" method="POST" id="EditStageForm{{ $stage->id }}">
-                        @csrf
-                        @method('POST')
-
-                        <input type="hidden" name="trip_id" value="{{ $trip->id }}">
-                        <input type="hidden" name="stage_id" value="{{ $stage->id }}">
-
-                    </form>
-
-                    {{-- DELETE --}}
-                    <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;"
-                        id="DestroyForm{{ $trip->id }}_{{ $stage->id }}">
-                        @csrf
-                        @method('DELETE')
-
-                        <input type="hidden" name="trip_id" value="{{ $trip->id }}">
-                        <input type="hidden" name="stage_id" value="{{ $stage->id }}">
-
-                        {{-- Funct che al click mi passa gli Id --}}
-                        <button onclick="receiveIds({{ $trip->id }}, {{ $stage->id }})" type="submit"
-                            data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Elimina</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
-
-        {{-- MODAL --}}
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-0 shadow-lg">
-                    <div class="modal-header bg-danger text-white text-center flex-column">
-                        <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/9326903-icona-aereo-proibito-su-sfondo-bianco-stile-piatto-cartello-di-divieto-rosso-non-volare-aerei-simbolo-zona-divieto-vettoriale.jpg"
-                            alt="Delete Icon" class="img-fluid mb-2 rounded-circle border border-white"
-                            style="width: 60px;">
-                        <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p class="lead">Sei sicuro di voler eliminare questo viaggio?</p>
-                        <p class="text-muted">Questa azione è irreversibile.</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-white-custom btn-lg rounded-pill px-4 shadow"
-                            data-bs-dismiss="modal">Annulla</button>
-                        <button type="button" class="btn btn-danger btn-lg rounded-pill px-4" onclick="submitDestroyForm()"
-                            id="confirmDeleteButton">Elimina</button>
-                    </div>
+    {{-- MODAL --}}
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-danger text-white text-center flex-column">
+                    <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/9326903-icona-aereo-proibito-su-sfondo-bianco-stile-piatto-cartello-di-divieto-rosso-non-volare-aerei-simbolo-zona-divieto-vettoriale.jpg"
+                        alt="Delete Icon" class="img-fluid mb-2 rounded-circle border border-white" style="width: 60px;">
+                    <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="lead">Sei sicuro di voler eliminare questo viaggio?</p>
+                    <p class="text-muted">Questa azione è irreversibile.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-white-custom btn-lg rounded-pill px-4 shadow"
+                        data-bs-dismiss="modal">Annulla</button>
+                    <button type="button" class="btn btn-danger btn-lg rounded-pill px-4" onclick="submitDestroyForm()"
+                        id="confirmDeleteButton">Elimina</button>
                 </div>
             </div>
         </div>
-    @endif
+    </div>
 @endsection
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
@@ -133,6 +172,7 @@
 
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
         const city = "{{ $trip->nome }}";
@@ -150,9 +190,28 @@
                 console.error("Errore nella richiesta:", error);
             });
     });
+    async function fetchCityPhotos(city) {
+        console.log(city);
+        const accessKey = "QngG7sfBVMWvG3kVsWuLqkCRWftkIHIqNHRRsI6fp0I"; // Sostituisci con la tua chiave API
+        const url = `https://api.unsplash.com/search/photos?query=${city}`;
+        try {
+            const response = await fetch(`${url}&client_id=${accessKey}`);
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            console.log(data.results);
+
+            displayPhotos(data.results, city);
+        } catch (error) {
+            console.error("Error fetching photos:", error);
+        }
+    }
+
     let map, map_modal, marker, marker_modal;
 
     function selectCity(city) {
+        fetchCityPhotos(city.address.freeformAddress);
         // Inizializza la mappa solo se non esiste già
         if (!map) {
             map = tt.map({
@@ -308,9 +367,80 @@
         document.getElementById('main-body').style.overflowY = 'auto';
 
     }
+
+    function displayPhotos(photos, city) {
+        // Recupera l'elemento contenitore per le foto
+        const container = document.getElementById("photo-container");
+
+        // Verifica se c'è già un'immagine e controlla il suo attributo 'alt'
+        const existingImg = container.querySelector('img');
+        if (existingImg && (existingImg.getAttribute('alt') == 'Photo' || existingImg.getAttribute('alt') == city)) {
+            return; // Se l'immagine esistente ha già l'attributo 'alt' uguale a 'Photo' o alla città, esce dalla funzione
+        } else {
+
+            const lastElement = container.lastElementChild;
+            container.innerHTML = "";
+            container.append(lastElement);
+
+            // Seleziona un indice casuale per l'immagine da mostrare
+            let numeroCasuale = Math.round(getRandomDecimal(0, photos.length - 1));
+            console.log(numeroCasuale);
+
+            // Controlla se la descrizione o i tag dell'immagine corrispondono alla città
+            if (
+                photos[numeroCasuale].description?.toLowerCase().includes("city") ||
+                (typeof city === 'string' &&
+                    photos[numeroCasuale].tags[0]?.title?.toLowerCase().includes(city.toLowerCase()))
+            ) {
+                // Nasconde il messaggio "nessuna foto" se viene trovata una foto valida
+                document.getElementById('no-photo-container').classList.add('d-none');
+                // Crea un nuovo elemento immagine
+                const img = document.createElement("img");
+                img.src = photos[numeroCasuale].urls.regular;
+                img.alt = "Photo";
+                img.style.height = "400px";
+                img.classList.add("drop-in-image", "w-100", "object-fit-cover", 'rounded-3');
+                // Aggiunge l'immagine al contenitore
+                container.appendChild(img);
+            } else {
+                document.getElementById('no-photo-container').classList.add('d-none');
+
+            }
+        }
+    }
+
+    function getRandomDecimal(min, max) {
+        return Math.random() * (max - min) + min;
+    }
 </script>
 
 <style>
+    div.mapboxgl-canvas-container:nth-child(3) > canvas:nth-child(1) {
+  width: 100%;
+  height: 100%;
+}
+
+    .accordion-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .accordion-button .card-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        margin-right: 15px;
+    }
+
+    .accordion-button .card-title {
+        flex: 1;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #f8f9fa;
+        /* Optional: Highlight the active card */
+    }
+
     #searchBox {
         position: absolute;
         /* Posizionamento sopra la mappa */
@@ -318,7 +448,7 @@
         /* Distanza dal bordo superiore della mappa */
         left: 10px;
         /* Distanza dal bordo sinistro della mappa */
-        width: 500px;
+        width: 20vw;
         /* Larghezza della barra di ricerca */
         z-index: 1000;
         /* Assicurati che sia sopra la mappa */
