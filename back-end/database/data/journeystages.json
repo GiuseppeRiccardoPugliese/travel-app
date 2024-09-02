@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "Scalata al Campo Base",
+        "descrizione": "Raggiungi il campo base e acclimatati all'altitudine.",
+        "posizione": "Campo Base",
+        "data": "2024-09-02",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 1,
+        "votazione": 5
+    },
+    {
+        "nome": "Osservazione della Fauna Selvatica",
+        "descrizione": "Safari mattutino per vedere i grandi felini.",
+        "posizione": "Parco Nazionale",
+        "data": "2024-10-03",
+        "ordine": 1,
+        "completata": false,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 2,
+        "votazione": 4
+    },
+    {
+        "nome": "Tour della Torre Eiffel",
+        "descrizione": "Visita guidata alla Torre Eiffel.",
+        "posizione": "Parigi",
+        "data": "2024-11-02",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 3,
+        "votazione": 3
+    },
+    {
+        "nome": "Navigazione sul Rio delle Amazzoni",
+        "descrizione": "Esplora la foresta pluviale in barca.",
+        "posizione": "Fiume Amazzoni",
+        "data": "2024-12-03",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 4,
+        "votazione": 5
+    },
+    {
+        "nome": "Visita alla Banchisa Polare",
+        "descrizione": "Esplora la banchisa polare con un esperto.",
+        "posizione": "Artico",
+        "data": "2025-01-02",
+        "ordine": 1,
+        "completata": false,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 5,
+        "votazione": 4
+    },
+    {
+        "nome": "Immersione nei Coralli",
+        "descrizione": "Esplora la barriera corallina.",
+        "posizione": "Fiji",
+        "data": "2025-02-02",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 6,
+        "votazione": 5
+    },
+    {
+        "nome": "Visita al Tempio di Fushimi Inari",
+        "descrizione": "Cammina attraverso i torii rossi.",
+        "posizione": "Kyoto",
+        "data": "2025-03-05",
+        "ordine": 2,
+        "completata": false,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 7,
+        "votazione": 4
+    },
+    {
+        "nome": "Trekking nel Deserto",
+        "descrizione": "Cammina tra le dune del deserto.",
+        "posizione": "Sahara",
+        "data": "2025-04-03",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 8,
+        "votazione": 3
+    },
+    {
+        "nome": "Escursione all'Ayers Rock",
+        "descrizione": "Scopri il monolito sacro agli aborigeni.",
+        "posizione": "Outback",
+        "data": "2025-05-03",
+        "ordine": 2,
+        "completata": false,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 9,
+        "votazione": 4
+    },
+    {
+        "nome": "Escursione al Matterhorn",
+        "descrizione": "Raggiungi uno dei simboli delle Alpi.",
+        "posizione": "Matterhorn",
+        "data": "2025-06-03",
+        "ordine": 1,
+        "completata": true,
+        "created_at": "2024-08-10T00:00:00",
+        "updated_at": "2024-08-10T00:00:00",
+        "trip_id": 10,
+        "votazione": 5
+    }
+]

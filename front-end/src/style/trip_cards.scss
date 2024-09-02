@@ -1,0 +1,137 @@
+//Title Sezioni
+.trips-heading,
+.stages-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #333;
+  text-align: center;
+}
+
+//******* VIAGGI ******//
+
+// Card del viaggio
+.trip-card {
+  border-radius: 0.5rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.trip-card:hover {
+  box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.2);
+}
+
+.trip-card-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.trip-card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.trip-name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.trip-destination {
+  font-size: 1.125rem;
+  color: #0366fa;
+}
+
+.trip-description {
+  font-size: 0.80rem;
+  color: #6c757d;
+  margin: 0.5rem 0;
+}
+
+.trip-details-button {
+  font-size: 0.875rem;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.trip-details-button:hover {
+  background-color: #0056b3;
+}
+
+//********** Pulsante per nascondere i dettagli
+
+.hide-details-button {
+  padding: 0.6rem 1.25rem;
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  transition: background-color 0.3s ease;
+}
+
+.hide-details-button:hover {
+  background-color: #5a6268;
+}
+
+//******* TAPPE ******//
+
+// Card della tappa
+.stage-card {
+  border-radius: 0.5rem;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 0.125rem rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
+.stage-description {
+  font-size: 0.80rem;
+  color: #6c757d;
+}
+
+.loading-message {
+  text-align: center;
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+//Icone delle stelle
+.stage-rating i {
+  color: #ffc107;
+  margin-right: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.responsive {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+
+  // Media query per schermi piccoli
+  @media (max-width: 767px) {
+    flex-direction: column;
+    text-align: center;
+
+    .hide-details-button {
+      margin-bottom: 1rem; // Aggiungi spazio sotto il bottone quando in colonna
+    }
+
+    .stages-heading {
+      margin: 0; // Rimuovi il margine automatico per centrare l'heading
+    }
+  }
+}

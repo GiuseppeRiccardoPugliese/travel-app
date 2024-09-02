@@ -1,1 +1,87 @@
-@import '~bootstrap/scss/bootstrap'
+@import "~bootstrap/scss/bootstrap";
+
+@font-face {
+    font-family: "Geist";
+    src: url("../../node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2") format("woff2"),
+        url("../../node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("../../node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2") format("woff2"),
+        url("../../node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf") format("ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    font-family: "Geist", sans-serif;
+}
+header{
+    height: 150px;
+}
+main{
+    padding: 20px 0px;
+    height: calc(100% - 150px);
+    overflow-y: auto;
+}
+/***************************************/
+// LOGO TRAVEL-APP
+@import "./logo_travel-app.scss";
+/***************************************/
+
+/***************************************/
+// NAV-BAR
+@import "./nav_bar.scss";
+/***************************************/
+
+/***************************************/
+// SEARCH-BAR
+@import "./search_bar.scss";
+/***************************************/
+
+/***************************************/
+// FORM DEI VIAGGI E TAPPE ( Create - Edit )
+@import "./forms.scss";
+/***************************************/
+
+/***************************************/
+// CAROUSEL - CAROUSEL CARD TRIP
+@import "./carousel_card_trips.scss";
+/***************************************/
+
+/***************************************/
+// EFFETTO TYPING INFINITO
+@import "./typing.scss";
+/***************************************/
+
+
+
+// BOOOH
+
+@keyframes dropIn-image-city {
+    from {
+        transform: translateY(-100vh);
+        /* Start sopra lo schermo */
+        opacity: 0;
+        /* Start invisibile */
+    }
+
+    to {
+        transform: translateY(0);
+        /* End nella posizione originale */
+        opacity: 1;
+        /* End visibile */
+    }
+}
+
+/* Applica l'animazione alle immagini */
+.drop-in-image {
+    opacity: 0;
+    /* Start invisibile */
+    animation: dropIn-image-city 1s ease-out forwards;
+    /* Durata di 1 secondo */
+}
+

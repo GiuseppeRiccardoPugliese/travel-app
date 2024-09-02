@@ -1,26 +1,21 @@
 @extends('layouts.app')
 
+@auth
+    @section('welcome_message')
+        {{ auth()->user()->sessualità == 'donna' ? 'Benvenuta' : 'Benvenuto' }}, {{ auth()->user()->name }}
+    @endsection
+@endauth
 @section('content')
-<div class="container">
-    <h2 class="fs-4 text-secondary my-4">
-        {{ __('Dashboard') }}
-    </h2>
-    <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">{{ __('User Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
+    @include('search_bar')
+    <div class="ps-4 typing-container">
+        <h4 class="fw-bold mb-0">Lasciati ispirare!</h4>
     </div>
-</div>
+    @include('carousel')
+    <div class="ps-4 typing-container2 my-4 d-flex flex-wrap">
+        <h4 class="fw-bold mb-0">Oppure guarda i nostri utenti dove sono andati...</h4>
+    </div>
+
+    @include('card_carousel')
+    
 @endsection
+

@@ -1,0 +1,83 @@
+.site-header {
+    background-color: #f8f9fa;
+    padding: 20px 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    padding: 0;
+}
+
+/* Stile per il logo */
+.logo {
+    display: inline-block;
+}
+
+.site-header .travel-app {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.site-header .travel-app span {
+    display: inline-block;
+    opacity: 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* Parti del testo con gradienti e animazioni */
+.site-header .part1 {
+    background: linear-gradient(90deg, #FFA500, #FF4500);
+    animation: slideUp 0.8s ease-out forwards;
+}
+
+.site-header .part2 {
+    background: linear-gradient(90deg, #32CD32, #228B22);
+    animation: slideUp 0.8s ease-out forwards 0.5s;
+}
+
+.site-header .part3 {
+    background: linear-gradient(90deg, #1E90FF, #0000FF);
+    animation: slideRight 0.8s ease-out forwards 1s;
+}
+
+.site-header .dash {
+    background: linear-gradient(90deg, #FF69B4, #FF1493);
+    animation: fadeIn 0.8s ease-out forwards 1.5s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

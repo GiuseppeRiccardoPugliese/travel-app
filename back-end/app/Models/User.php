@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sessualità',
+        'immagine_url',
     ];
 
     /**
@@ -44,6 +46,6 @@ class User extends Authenticatable
     ];
 
     public function trips(){
-        return $this->hasMany(Trip::class);
+        return $this->belongsToMany(Trip::class);
     }
 }

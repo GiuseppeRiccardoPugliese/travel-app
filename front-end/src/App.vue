@@ -1,30 +1,89 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
+
+export default {
+
+  components: {
+    Footer,
+    Header,
+  },
+  data() {
+    return {
+      showScrollTop: false,
+    }
+  },
+  methods: {
+    checkScroll() {
+      // Se la pagina e' stata scrollata di 100px allora:
+      this.showScrollTop = window.scrollY > 100;
+      //Log "true" di showScrollTop
+    },
+    scrollToTop() {
+      // Funzione per far scrollare la pagina verso l'alto
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth', //Scrolla top lentamente 'smooth' invece di essere istantaneo
+      });
+    },
+  },
+  mounted() {
+    window.addEventListener('scroll', this.checkScroll);
+  },
+  beforeDestroy() {
+    // Memory leaks
+    window.removeEventListener('scroll', this.checkScroll);
+  },
+}
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <!-- Rotte (Trips, NotFound) -->
+  <div class="app-container d-flex flex-column min-vh-100">
+
+    <!-- Header -->
+    <Header />
+
+    <main class="content flex-grow-1">
+      <router-view></router-view>
+    </main>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- Freccia che compare quando scrolli di 100px -->
+    <div v-if="showScrollTop" @click="scrollToTop" class="scroll-top-arrow show">
+      <i class="fa-solid fa-circle-up"></i>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<style lang="scss">
+@use './style/style.scss' as *;
+
+/* Stili per la freccia */
+.scroll-top-arrow {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  display: none;
+  transition: opacity 0.3s ease;
+
+  .fa-circle-up {
+    color: white;
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+/* Stili per la freccia quando visibile */
+.scroll-top-arrow.show {
+  display: block;
+  opacity: 1;
+  padding: 0px 12px;
+  background-color: #61aafd;
+  border-radius: 5px;
+  z-index: 1000;
 }
 </style>

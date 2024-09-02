@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('journeystages', function (Blueprint $table) {
+        Schema::create('journey_stages', function (Blueprint $table) {
             $table->id();
 
             $table->string('nome');                
             $table->text('descrizione')->nullable(); 
             $table->string('posizione');            
             $table->date('data')->nullable();      
-            $table->integer('ordine')->default(0); 
+            $table->integer('ordine')->default(1); //giorno
             $table->boolean('completata')->default(false);
+            $table->tinyInteger('votazione')->nullable();
 
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('journeystages');
+        Schema::dropIfExists('journey_stages');
     }
 };
