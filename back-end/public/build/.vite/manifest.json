@@ -1,0 +1,70 @@
+{
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BOrJxbIo.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-BtvjY1KL.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf": {
+    "file": "assets/Geist-Bold-BU7AlFNh.ttf",
+    "src": "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.ttf"
+  },
+  "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2": {
+    "file": "assets/Geist-Bold-DORQXWRF.woff2",
+    "src": "node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2"
+  },
+  "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf": {
+    "file": "assets/Geist-Regular-BI1mUWmY.ttf",
+    "src": "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.ttf"
+  },
+  "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2": {
+    "file": "assets/Geist-Regular-w2QFeScy.woff2",
+    "src": "node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-5mUN7utp.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-NBrYe3Dq.css",
+      "assets/app-xH7CVZoq.css"
+    ],
+    "assets": [
+      "assets/bootstrap-icons-BtvjY1KL.woff2",
+      "assets/bootstrap-icons-BOrJxbIo.woff",
+      "assets/Geist-Regular-w2QFeScy.woff2",
+      "assets/Geist-Regular-BI1mUWmY.ttf",
+      "assets/Geist-Bold-DORQXWRF.woff2",
+      "assets/Geist-Bold-BU7AlFNh.ttf"
+    ]
+  },
+  "resources/js/maps_scripts.js": {
+    "file": "assets/maps_scripts-B7JVyWsp.js",
+    "name": "maps_scripts",
+    "src": "resources/js/maps_scripts.js",
+    "isEntry": true,
+    "imports": [
+      "resources/js/search_city_image.js"
+    ]
+  },
+  "resources/js/search_city_image.js": {
+    "file": "assets/search_city_image-D3F_YGFw.js",
+    "name": "search_city_image",
+    "src": "resources/js/search_city_image.js",
+    "isEntry": true
+  },
+  "resources/js/stars.js": {
+    "file": "assets/stars-l0sNRNKZ.js",
+    "name": "stars",
+    "src": "resources/js/stars.js",
+    "isEntry": true
+  },
+  "resources/scss/app.scss": {
+    "file": "assets/app-xH7CVZoq.css",
+    "src": "resources/scss/app.scss",
+    "isEntry": true
+  }
+}

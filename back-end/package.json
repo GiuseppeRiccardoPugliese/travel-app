@@ -3,22 +3,22 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "autoprefixer": "^10.4.2",
-        "axios": "^1.6.4",
-        "laravel-vite-plugin": "^1.0.0",
-        "sass": "^1.71.0",
-        "vite": "^5.0.0"
+        "build": "vite build",
+        "start": "php artisan serve"
     },
     "dependencies": {
         "@geist-ui/core": "^2.3.8",
         "@popperjs/core": "^2.11.8",
+        "autoprefixer": "^10.4.2",
+        "axios": "^1.6.4",
         "bootstrap": "^5.3.3",
         "bootstrap-icons": "^1.11.3",
+        "dotenv": "^16.4.5",
         "font-awesome": "^4.7.0",
         "geist": "^1.3.1",
-        "slick-carousel": "^1.8.1"
+        "laravel-vite-plugin": "^1.0.0",
+        "sass": "^1.71.0",
+        "slick-carousel": "^1.8.1",
+        "vite": "^5.4.2"
     }
 }

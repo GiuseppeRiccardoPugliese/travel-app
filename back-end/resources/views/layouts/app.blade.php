@@ -9,15 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link
-
-      rel="stylesheet"
-
-      type="text/css"
-
-      href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css"
-
-    />
+    <link rel="stylesheet" type="text/css"
+        href="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css" />
     {{-- FiveIco --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
     {{-- FONT AWESOME --}}
@@ -43,7 +36,7 @@
 
 </head>
 <!-- Usando Vite -->
-@vite(['resources/js/app.js', 'resources/js/maps_scripts.js', 'resources/js/search_city_image.js', 'resources/js/scroll_page.js', 'resources/js/stars.js'])
+@vite('resources/scss/app.scss')
 </head>
 
 <body class="vh-100 slide-element">
