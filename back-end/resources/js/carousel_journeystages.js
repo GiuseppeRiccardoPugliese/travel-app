@@ -64,8 +64,8 @@ async function carousel(id) {
 
         //  Card html
         const cardHTML = `
-            <div class="item d-flex flex-column align-items-center px-3 py-3" style="height: 480px;">
-                <div class="card travel-card">
+            <div class="item d-flex flex-column align-items-center px-3 py-3" style="height: 480px;width:430px;">
+                <div class="card travel-card w-75">
                     <img src="/storage/${card.trip.immagine}" class="card-img-top travel-card-img" alt="${card.nome}">
                     <div class="card-body travel-card-body">
                         <h5 class="card-title">${card.nome}</h5>

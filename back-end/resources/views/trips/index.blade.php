@@ -128,7 +128,7 @@
 
             </div>
         </div>
-        {{-- @endif --}}    
+        {{-- @endif --}}
     @else
         <div class="ps-4 typing-container">
             <h4 class="fw-bold mb-0">Nessun viaggio trovato. Crea il tuo primo viaggio!</h4>
@@ -140,6 +140,31 @@
 <script src="http://www.localhost:5173/resources/js/carousel_journeystages.js"></script>
 
 <script>
+    let trip_id = 0;
+
+    function submitForm(id) {
+        document.getElementById(`${'ShowForm'}${id}`).submit();
+    };
+
+    function submitDestroyForm() {
+
+        event.preventDefault(); // Prevent default form submission
+
+        document.getElementById(`DestroyForm${trip_id}`)
+            .submit(); //Al submit prendo il form del destroy con l'id e submitto
+
+    }
+
+    function submitEditForm(id) {
+        event.preventDefault(); // Prevent default form submission
+        document.getElementById(`EditForm${id}`).submit();
+    }
+
+    function receiveTripId(id) {
+        event.preventDefault();
+        trip_id = id;
+    }
+
     function fixDate(date) {
         if (!date || isNaN(Date.parse(date))) {
             return "Data non valida";
@@ -209,7 +234,6 @@
     min-height: 10rem;
 }
 
-/* Regole per schermi medi e superiori */
 @media (min-width: 768px) {
     .card-img-top {
         max-height: 10rem;
@@ -288,35 +312,6 @@
     color: #ffffff !important;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
-</style>
-<script>
-    let trip_id = 0;
-
-    function submitForm(id) {
-        document.getElementById(`${'ShowForm'}${id}`).submit();
-    };
-
-    function submitDestroyForm() {
-
-        event.preventDefault(); // Prevent default form submission
-
-        document.getElementById(`DestroyForm${trip_id}`)
-            .submit(); //Al submit prendo il form del destroy con l'id e submitto
-
-    }
-
-    function submitEditForm(id) {
-        event.preventDefault(); // Prevent default form submission
-        document.getElementById(`EditForm${id}`).submit();
-    }
-
-    function receiveTripId(id) {
-        event.preventDefault();
-        trip_id = id;
-    }
-</script>
-
-<style>
 .modal-header {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;

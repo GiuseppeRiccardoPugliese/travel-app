@@ -179,7 +179,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
-        
+
         function getRandomColor() {
             const letters = '0123456789ABCDEF';
             let color = '#';
