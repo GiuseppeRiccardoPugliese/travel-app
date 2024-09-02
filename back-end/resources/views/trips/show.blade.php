@@ -4,51 +4,61 @@
 @section('welcome_message')
     {{ auth()->user()->name }}
 @endsection
-    {{-- Sezione dei viaggi --}}
-    <div class="container">
-        <div class="d-flex justify-content-center">
+{{-- Sezione dei viaggi --}}
+<div class="container">
+    <div class="d-flex justify-content-center">
 
-            <h2 class="">Viaggio a: {{ $trip->nome }}</h2 class="mx-auto">
+        <h2 class="">Viaggio a: {{ $trip->nome }}</h2 class="mx-auto">
+    </div>
+    <div class="row">
+
+        <div class="col-6 d-flex">
+            <div id="photo-container" class="mt-3 flex-fill  d-flex justify-content-center align-items-center">
+                @if ($trip->immagine)
+                    <img src="{{ asset('storage/' . $trip->immagine) }}" class=" h-100 w-100" alt="{{ $trip->nome }}">
+                @else
+                    <p id="no-photo-container" class="">Immagine della destinazione non disponibile!</p>
+                @endif
+            </div>
         </div>
-        <div class="row">
 
-            <div class="col-6 d-flex">
-                <div id="photo-container" class="mt-3 flex-fill  d-flex justify-content-center align-items-center">
-                    @if ($trip->immagine)
-                        <img src="{{ asset('storage/' . $trip->immagine) }}" class=" h-100 w-100" alt="{{ $trip->nome }}">
-                    @else
-                        <p id="no-photo-container" class="">Immagine della destinazione non disponibile!</p>
-                    @endif
-                </div>
+
+        <div class="col-6 d-flex" onmouseover="noScrollPage()" onmouseout="scrollPage()">
+            <div id="map-trip" style="height: 400px; width: 100%;position: relative;" class="mt-3 flex-fill">
+                <div id="searchBox"></div>
             </div>
 
+        </div>
+        @php
+            $class = !$trip->journeyStages->isEmpty() ? 'offset-lg-9' : '';
+        @endphp
+        <div class="col-auto mt-2 {{ $class }}">
 
-            <div class="col-6 d-flex" onmouseover="noScrollPage()" onmouseout="scrollPage()">
-                <div id="map-trip" style="height: 400px; width: 100%;position: relative;" class="mt-3 flex-fill">
-                    <div id="searchBox"></div>
-                </div>
-
-            </div>
-            <h2 class="my-2">Tappe del Viaggio</h2>
-            @if ($trip->journeyStages->isEmpty())
-                <p>Nessun stage disponibile per questo viaggio.</p>
-            @else
-                <div class="col-8">
-                    <div class="accordion mt-4" id="accordionExample">
-                        @foreach ($trip->journeyStages as $stage)
-                        <div class="d-flex gap-2 pb-2">
+            {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
+            <button type="button" class="btn btn-success rounded-pill" onclick="submitForm()">Aggiungi una nuova
+                tappa</button>
+        </div>
+        <h2 class="my-2">Tappe del Viaggio</h2>
+        @if ($trip->journeyStages->isEmpty())
+            <p>Nessun stage disponibile per questo viaggio.</p>
+        @else
+            <div class="col-12 col-md-8 col-lg-10">
+                <div class="accordion mt-4" id="accordionExample">
+                    @foreach ($trip->journeyStages as $stage)
+                        <div class="d-flex flex-column flex-md-row gap-2 pb-2">
                             <div class="accordion-item flex-grow-1">
-                                <div class="accordion-header"
-                                    id="heading{{ $stage->id }}">
+                                <div class="accordion-header" id="heading{{ $stage->id }}">
                                     <a class="accordion-button text-decoration-none" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#collapse{{ $stage->id }}"
-                                        aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="collapse{{ $stage->id }}" style="">
-                                        <div class="d-flex justify-content-between flex-grow-1 gap-2">
+                                        aria-expanded="{{ $loop->first ? 'true' : 'false' }}"
+                                        aria-controls="collapse{{ $stage->id }}" style="">
+                                        <div class="d-flex justify-content-between flex-grow-1 gap-2 flex-wrap">
                                             <span class="card-title">Tappa Giorno {{ $stage->ordine }}</span>
-                                            <div class="d-flex gap-3 me-4 flex-grow-1 justify-content-between">
+                                            <div
+                                                class="d-flex gap-3 me-4 flex-grow-1 justify-content-between flex-wrap">
                                                 <span class="flex-grow-1">{{ $stage->posizione }}</span>
-                                                <div class="d-flex gap-4 justify-content-center">
-                                                    <span class=""><i class="fa-solid fa-plane-departure "></i>
+                                                <div class="d-flex gap-4 justify-content-center flex-wrap">
+                                                    <span class=""><i class="fa-solid fa-plane-departure"></i>
                                                         {{ \Carbon\Carbon::parse($trip->data_inizio)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
                                                     </span>
                                                     <span class=""><i class="fa-solid fa-plane-arrival"></i>
@@ -59,30 +69,30 @@
                                         </div>
                                     </a>
                                 </div>
-                                <div id="collapse{{ $stage->id }}" class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
+                                <div id="collapse{{ $stage->id }}"
+                                    class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
                                     aria-labelledby="heading{{ $stage->id }}" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         {{ $stage->descrizione != null ? $stage->descrizione : 'Descrizione non disponibile' }}
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-column gap-4 align-self-center align-items-center">
+                            <div
+                                class="d-flex flex-md-column flex-sm-row gap-4 align-md-self-center align-items-center justify-content-center gap-5 mx-auto mx-md-0">
                                 <a onclick="submitEditForm({{ $stage->id }})"
                                     class="button text-decoration-none text-dark" style="cursor:pointer;">
                                     <i class="fa-solid fa-sliders"></i>
                                 </a>
-                                {{-- Funct che al click mi passa gli Id --}}
                                 <a onclick="receiveIds({{ $trip->id }}, {{ $stage->id }})" type="submit"
                                     data-bs-toggle="modal" data-bs-target="#deleteModal"><i
                                         class="fa-solid fa-trash"></i></a>
                             </div>
-                    
+
                             {{-- DELETE --}}
-                            <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;"
+                            <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: none;"
                                 id="DestroyForm{{ $trip->id }}_{{ $stage->id }}">
                                 @csrf
                                 @method('DELETE')
-                    
                                 <input type="hidden" name="trip_id" value="{{ $trip->id }}">
                                 <input type="hidden" name="stage_id" value="{{ $stage->id }}">
                             </form>
@@ -91,83 +101,74 @@
                                 id="EditStageForm{{ $stage->id }}">
                                 @csrf
                                 @method('POST')
-                    
                                 <input type="hidden" name="trip_id" value="{{ $trip->id }}">
                                 <input type="hidden" name="stage_id" value="{{ $stage->id }}">
                             </form>
                         </div>
                     @endforeach
-                    
-                    </div>
                 </div>
-            @endif
-            @php
-                $class = !$trip->journeyStages->isEmpty() ? 'offset-1' : '';
-            @endphp
-            <div class="col-auto mt-2 {{ $class }}">
-
-                {{-- //ROTTA PER LA CREATE DELLA TAPPA --}}
-                <button type="button" class="btn btn-success rounded-pill" onclick="submitForm()">Aggiungi una nuova
-                    tappa</button>
             </div>
-        </div>
-        <div class="modal fade " id="exampleModal" tabindex="-1" data-bs-backdrop="static"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalSearchedCity">{{ $trip->nome }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                            onclick="scrollPage()"></button>
-                    </div>
-                    <div class="modal-body p-0">
-                        <!-- Mappa che riempie la larghezza e altezza del modale -->
-                        <div id="map_modal" class="w-100" style="height: 600px;"></div>
-                    </div>
+        @endif
 
+
+    </div>
+    <div class="modal fade " id="exampleModal" tabindex="-1" data-bs-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalSearchedCity">{{ $trip->nome }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        onclick="scrollPage()"></button>
                 </div>
+                <div class="modal-body p-0">
+                    <!-- Mappa che riempie la larghezza e altezza del modale -->
+                    <div id="map_modal" class="w-100" style="height: 600px;"></div>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 
 
 
-    {{-- Sezione per gli Stages del Viaggio --}}
+{{-- Sezione per gli Stages del Viaggio --}}
 
 
 
-    {{-- Form per passare il trip_id nascosto CREATE --}}
-    <form action="{{ route('journeyStages.create') }}" method="POST" id="CreateStageForm">
-        @csrf
-        @method('POST')
+{{-- Form per passare il trip_id nascosto CREATE --}}
+<form action="{{ route('journeyStages.create') }}" method="POST" id="CreateStageForm">
+    @csrf
+    @method('POST')
 
-        <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
 
-    </form>
+</form>
 
 
-    {{-- MODAL --}}
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow-lg">
-                <div class="modal-header bg-danger text-white text-center flex-column">
-                    <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/9326903-icona-aereo-proibito-su-sfondo-bianco-stile-piatto-cartello-di-divieto-rosso-non-volare-aerei-simbolo-zona-divieto-vettoriale.jpg"
-                        alt="Delete Icon" class="img-fluid mb-2 rounded-circle border border-white" style="width: 60px;">
-                    <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <p class="lead">Sei sicuro di voler eliminare questo viaggio?</p>
-                    <p class="text-muted">Questa azione è irreversibile.</p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-white-custom btn-lg rounded-pill px-4 shadow"
-                        data-bs-dismiss="modal">Annulla</button>
-                    <button type="button" class="btn btn-danger btn-lg rounded-pill px-4" onclick="submitDestroyForm()"
-                        id="confirmDeleteButton">Elimina</button>
-                </div>
+{{-- MODAL --}}
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-danger text-white text-center flex-column">
+                <img src="https://static.vecteezy.com/ti/vettori-gratis/p1/9326903-icona-aereo-proibito-su-sfondo-bianco-stile-piatto-cartello-di-divieto-rosso-non-volare-aerei-simbolo-zona-divieto-vettoriale.jpg"
+                    alt="Delete Icon" class="img-fluid mb-2 rounded-circle border border-white" style="width: 60px;">
+                <h5 class="modal-title" id="deleteModalLabel">Conferma Eliminazione</h5>
+            </div>
+            <div class="modal-body text-center">
+                <p class="lead">Sei sicuro di voler eliminare questo viaggio?</p>
+                <p class="text-muted">Questa azione è irreversibile.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-white-custom btn-lg rounded-pill px-4 shadow"
+                    data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-danger btn-lg rounded-pill px-4" onclick="submitDestroyForm()"
+                    id="confirmDeleteButton">Elimina</button>
             </div>
         </div>
     </div>
+</div>
 @endsection
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js"></script>
 <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
@@ -178,44 +179,45 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
-        function getRandomColor() {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-            color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
-    }
-
-    
-    function lightenColor(color, percent) {
-        const num = parseInt(color.slice(1), 16);
-        const r = Math.min(255, Math.max(0, (num >> 16) + percent));
-        const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + percent));
-        const b = Math.min(255, Math.max(0, (num & 0x0000FF) + percent));
-        return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase()}`;
-    }
-
-    
-    function getGradientFromBaseColor(baseColor) {
-        const lightColor = lightenColor(baseColor, 30); 
-        return `linear-gradient(to right, ${baseColor}, ${lightColor})`;
-    }
-
-    
-    const baseColor = getRandomColor();
-
-    document.querySelectorAll('.accordion-item').forEach((item, index) => {
-        const baseColor = getRandomColor(); 
-        const gradient = getGradientFromBaseColor(baseColor);
         
-        const button = item.querySelector('.accordion-button');
-        if (button) {
-            button.style.background = gradient;
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
 
-  
-    });
+
+        function lightenColor(color, percent) {
+            const num = parseInt(color.slice(1), 16);
+            const r = Math.min(255, Math.max(0, (num >> 16) + percent));
+            const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + percent));
+            const b = Math.min(255, Math.max(0, (num & 0x0000FF) + percent));
+            return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase()}`;
+        }
+
+
+        function getGradientFromBaseColor(baseColor) {
+            const lightColor = lightenColor(baseColor, 30);
+            return `linear-gradient(to right, ${baseColor}, ${lightColor})`;
+        }
+
+
+        const baseColor = getRandomColor();
+
+        document.querySelectorAll('.accordion-item').forEach((item, index) => {
+            const baseColor = getRandomColor();
+            const gradient = getGradientFromBaseColor(baseColor);
+
+            const button = item.querySelector('.accordion-button');
+            if (button) {
+                button.style.background = gradient;
+            }
+
+
+        });
         const city = "{{ $trip->nome }}";
         const url =
             `https://api.tomtom.com/search/2/search/${city}.json?key=JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96&typeahead=true&limit=5&entityTypeSet=Municipality`;
@@ -455,102 +457,110 @@
 </script>
 
 <style>
-    div.mapboxgl-canvas-container:nth-child(3)>canvas:nth-child(1) {
-        width: 100%;
-        height: 100%;
+div.mapboxgl-canvas-container:nth-child(3)>canvas:nth-child(1) {
+    width: 100%;
+    height: 100%;
+}
+
+
+@media (max-width: 767.98px) {
+    .accordion-button::after {
+        display: none;
     }
 
-
-
-
-    .accordion-button {
-        display: flex;
-        align-items: center;
+    .col-12 {
+        padding: 0px;
     }
+}
 
-    .accordion-button .card-img {
-        width: 50px;
-        height: 50px;
-        object-fit: cover;
-        margin-right: 15px;
-    }
+.accordion-button {
+    display: flex;
+    align-items: center;
+}
 
-
-    .accordion-button:not(.collapsed) {
-        background-color: #f8f9fa;
-        /* Optional: Highlight the active card */
-    }
-
-    #searchBox {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        /* Distanza dal bordo sinistro della mappa */
-        width: 500px;
-        /* Larghezza della barra di ricerca */
-        z-index: 1000;
-    }
-
-    /* Stile del campo di input della SearchBox */
-    .tt-search-box input {
-        width: 100%;
-        padding: 10px;
-        border: 2px solid #007bff;
-        border-radius: 4px;
-        font-size: 16px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: border-color 0.3s ease;
-    }
-
-    /* Stile del campo di input al focus */
-    .tt-search-box input:focus {
-        border-color: #0056b3; 
-        outline: none;
-    }
-
-    /* Stile del pulsante di ricerca (se presente) */
-    .tt-search-box button {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-    }
-
-    /* Stile del pulsante di ricerca al hover */
-    .tt-search-box button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Stile dei suggerimenti della ricerca (dropdown) */
-    .tt-suggestion {
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-top: none;
-        background-color: #fff;
-        max-height: 200px;
-        overflow-y: auto;
-    }
-
-    /* Stile di un suggerimento della ricerca */
-    .tt-suggestion:hover {
-        background-color: #f8f9fa;
-    }
+.accordion-button .card-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+}
 
 
-    .btn-white-custom {
-        background-color: #ffffff;
-        color: #000000;
-        border: 1px solid #ced4da;
-        transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.3s ease;
-    }
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+    /* Optional: Highlight the active card */
+}
 
-    .btn-white-custom:hover {
-        background-color: #000000 !important;
-        color: #ffffff !important;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    }
+#searchBox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    /* Distanza dal bordo sinistro della mappa */
+    width: 500px;
+    /* Larghezza della barra di ricerca */
+    z-index: 1000;
+}
+
+/* Stile del campo di input della SearchBox */
+.tt-search-box input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+/* Stile del campo di input al focus */
+.tt-search-box input:focus {
+    border-color: #0056b3;
+    outline: none;
+}
+
+/* Stile del pulsante di ricerca (se presente) */
+.tt-search-box button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Stile del pulsante di ricerca al hover */
+.tt-search-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Stile dei suggerimenti della ricerca (dropdown) */
+.tt-suggestion {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-top: none;
+    background-color: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* Stile di un suggerimento della ricerca */
+.tt-suggestion:hover {
+    background-color: #f8f9fa;
+}
+
+
+.btn-white-custom {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #ced4da;
+    transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.3s ease;
+}
+
+.btn-white-custom:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
 </style>

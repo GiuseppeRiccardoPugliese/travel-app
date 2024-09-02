@@ -6,9 +6,9 @@
     <div class="row w-75 mx-auto multi-colored-border justify-content-center">
         <div class="col-md-4 p-0 border border-0 ">
             <div class="input-group flex-nowrap h-100">
-                <span class="input-group-text  bg-transparent " id="addon-wrapping"><i
+                <span class="input-group-text  bg-transparent " id="addon-wrapping"  style="width:40px; "><i
                         class="fa-solid fa-location-arrow"></i></span>
-                <input class="form-control p-2 border border-top-0 border-end-0 rounded-3 me-2" type="search"
+                <input class="form-control p-2 border border-top-0 border-end-0 rounded-3 me-md-2" type="search"
                     placeholder="Destinazione" aria-label="Search" id="search_city" name="search_city">
             </div>
         </div>
