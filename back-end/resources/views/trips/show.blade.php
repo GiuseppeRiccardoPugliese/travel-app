@@ -33,17 +33,18 @@
                 <div class="col-8">
                     <div class="accordion mt-4" id="accordionExample">
                         @foreach ($trip->journeyStages as $stage)
-                            {{-- EDIT --}}
-                            <div class="d-flex gap-2">
-                                <div class="accordion-item flex-grow-1">
-                                    <div class="accordion-header" id="heading{{ $stage->id }}">
-                                        <a class="accordion-button text-decoration-none" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapse{{ $stage->id }}"
-                                            aria-expanded="true" aria-controls="collapse{{ $stage->id }}">
-                                            <div class="d-flex justify-content-between flex-grow-1 gap-2">
-                                                <span class="card-title">Tappa Giorno {{ $stage->ordine }}</span>
-                                                <div class="d-flex gap-3 me-4 flex-grow-1 justify-content-between">
-                                                    <span>{{ $stage->posizione }}</span>
+                        <div class="d-flex gap-2 pb-2">
+                            <div class="accordion-item flex-grow-1">
+                                <div class="accordion-header"
+                                    id="heading{{ $stage->id }}">
+                                    <a class="accordion-button text-decoration-none" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse{{ $stage->id }}"
+                                        aria-expanded="{{ $loop->first ? 'true' : 'false' }}" aria-controls="collapse{{ $stage->id }}" style="">
+                                        <div class="d-flex justify-content-between flex-grow-1 gap-2">
+                                            <span class="card-title">Tappa Giorno {{ $stage->ordine }}</span>
+                                            <div class="d-flex gap-3 me-4 flex-grow-1 justify-content-between">
+                                                <span class="flex-grow-1">{{ $stage->posizione }}</span>
+                                                <div class="d-flex gap-4 justify-content-center">
                                                     <span class=""><i class="fa-solid fa-plane-departure "></i>
                                                         {{ \Carbon\Carbon::parse($trip->data_inizio)->setTimezone('Europe/Rome')->locale('it')->isoFormat('DD-MM-YYYY') }}
                                                     </span>
@@ -52,49 +53,48 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </a>
-                                    </div>
-                                    <div id="collapse{{ $stage->id }}" class="accordion-collapse collapse show"
-                                        aria-labelledby="heading{{ $stage->id }}" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            {{ $stage->descrizione != null ? $stage->descrizione : 'Descrizione non disponibile' }}
                                         </div>
+                                    </a>
+                                </div>
+                                <div id="collapse{{ $stage->id }}" class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}"
+                                    aria-labelledby="heading{{ $stage->id }}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        {{ $stage->descrizione != null ? $stage->descrizione : 'Descrizione non disponibile' }}
                                     </div>
                                 </div>
-                                <div class="d-flex flex-column gap-4 align-self-center">
-                                    <a onclick="submitEditForm({{ $stage->id }})" class="button text-decoration-none"
-                                        style="cursor:pointer;">
-                                        <i class="fa-solid fa-sliders"></i>
-                                    </a>
-                                    {{-- Funct che al click mi passa gli Id --}}
-                                    <a onclick="receiveIds({{ $trip->id }}, {{ $stage->id }})" type="submit"
-                                        data-bs-toggle="modal" data-bs-target="#deleteModal"><i
-                                            class="fa-solid fa-trash"></i></a>
-                                </div>
-                                {{-- DELETE --}}
-                                <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;"
-                                    id="DestroyForm{{ $trip->id }}_{{ $stage->id }}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
-                                    <input type="hidden" name="stage_id" value="{{ $stage->id }}">
-
-
-                                </form>
-                                {{-- Form per passare il trip_id nascosto EDIT --}}
-                                <form action="{{ route('journeyStages.edit') }}" method="POST"
-                                    id="EditStageForm{{ $stage->id }}">
-                                    @csrf
-                                    @method('POST')
-
-                                    <input type="hidden" name="trip_id" value="{{ $trip->id }}">
-                                    <input type="hidden" name="stage_id" value="{{ $stage->id }}">
-
-                                </form>
                             </div>
-                        @endforeach
-
+                            <div class="d-flex flex-column gap-4 align-self-center align-items-center">
+                                <a onclick="submitEditForm({{ $stage->id }})"
+                                    class="button text-decoration-none text-dark" style="cursor:pointer;">
+                                    <i class="fa-solid fa-sliders"></i>
+                                </a>
+                                {{-- Funct che al click mi passa gli Id --}}
+                                <a onclick="receiveIds({{ $trip->id }}, {{ $stage->id }})" type="submit"
+                                    data-bs-toggle="modal" data-bs-target="#deleteModal"><i
+                                        class="fa-solid fa-trash"></i></a>
+                            </div>
+                    
+                            {{-- DELETE --}}
+                            <form action="{{ route('journeyStages.destroy') }}" method="POST" style="display: inline;"
+                                id="DestroyForm{{ $trip->id }}_{{ $stage->id }}">
+                                @csrf
+                                @method('DELETE')
+                    
+                                <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+                                <input type="hidden" name="stage_id" value="{{ $stage->id }}">
+                            </form>
+                            {{-- Form per passare il trip_id nascosto EDIT --}}
+                            <form action="{{ route('journeyStages.edit') }}" method="POST"
+                                id="EditStageForm{{ $stage->id }}">
+                                @csrf
+                                @method('POST')
+                    
+                                <input type="hidden" name="trip_id" value="{{ $trip->id }}">
+                                <input type="hidden" name="stage_id" value="{{ $stage->id }}">
+                            </form>
+                        </div>
+                    @endforeach
+                    
                     </div>
                 </div>
             @endif
@@ -175,6 +175,44 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', async function() {
+        function getRandomColor() {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    
+    function lightenColor(color, percent) {
+        const num = parseInt(color.slice(1), 16);
+        const r = Math.min(255, Math.max(0, (num >> 16) + percent));
+        const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + percent));
+        const b = Math.min(255, Math.max(0, (num & 0x0000FF) + percent));
+        return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1).toUpperCase()}`;
+    }
+
+    
+    function getGradientFromBaseColor(baseColor) {
+        const lightColor = lightenColor(baseColor, 30); 
+        return `linear-gradient(to right, ${baseColor}, ${lightColor})`;
+    }
+
+    
+    const baseColor = getRandomColor();
+
+    document.querySelectorAll('.accordion-item').forEach((item, index) => {
+        const baseColor = getRandomColor(); 
+        const gradient = getGradientFromBaseColor(baseColor);
+        
+        const button = item.querySelector('.accordion-button');
+        if (button) {
+            button.style.background = gradient;
+        }
+
+  
+    });
         const city = "{{ $trip->nome }}";
         const url =
             `https://api.tomtom.com/search/2/search/${city}.json?key=JaJJHJ6GGLUhADXt9Iuu4C5oaRT5Ah96&typeahead=true&limit=5&entityTypeSet=Municipality`;
@@ -415,10 +453,13 @@
 </script>
 
 <style>
-    div.mapboxgl-canvas-container:nth-child(3) > canvas:nth-child(1) {
-  width: 100%;
-  height: 100%;
-}
+    div.mapboxgl-canvas-container:nth-child(3)>canvas:nth-child(1) {
+        width: 100%;
+        height: 100%;
+    }
+
+
+
 
     .accordion-button {
         display: flex;
@@ -432,9 +473,6 @@
         margin-right: 15px;
     }
 
-    .accordion-button .card-title {
-        flex: 1;
-    }
 
     .accordion-button:not(.collapsed) {
         background-color: #f8f9fa;
