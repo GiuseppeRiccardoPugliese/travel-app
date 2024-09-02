@@ -95,6 +95,9 @@ async function carousel() {
                 items: 2 // 2 elementi per schermi medi
             },
             1000: {
+                items: 3 // 4 elementi per schermi grandi
+            },
+            1190: {
                 items: 4 // 4 elementi per schermi grandi
             }
         }
