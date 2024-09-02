@@ -38,7 +38,7 @@
                                     <h5 class="card-title mb-4 text-center">{{ $trip->nome }}</h5>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <a onclick="submitEditForm({{ $trip->id }})" style="cursor: pointer;"
-                                            class="flex-grow-1">
+                                            class="me-auto">
                                             <div class="rounded-circle bg-info p-2" style="width: fit-content;">
 
                                                 <i class="fa-solid fa-pen text-white"></i>
